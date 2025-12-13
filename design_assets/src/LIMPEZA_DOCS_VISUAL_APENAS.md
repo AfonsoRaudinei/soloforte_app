@@ -1,0 +1,398 @@
+# 🎨 LIMPEZA: Manter Apenas Design/Visual
+
+**Objetivo**: Manter SOMENTE documentação de estilo visual, design e UI/UX  
+**Remover**: Toda documentação técnica de código, fixes, correções, auditorias técnicas
+
+---
+
+## 📋 ARQUIVOS A MANTER (Design/Visual)
+
+### Design e UI/UX
+- [x] ANALISE_ERGONOMICA_COMPLETA_APP.md
+- [x] ANALISE_SIMPLIFICACAO_UI.md
+- [x] COMPARACAO_UI_ANTES_DEPOIS.md
+- [x] DESIGN_CLEAN_FINAL.md
+- [x] GUIA_PROTOTIPO_VISUAL.md
+- [x] GUIA_TESTE_VISUAL_RESPONSIVIDADE.md
+- [x] GUIA_VISUAL_CORRECOES.md
+- [x] IMPLEMENTACAO_BOTOES_EXPANSIVEIS_SEPARADOS.md
+- [x] MELHORIAS_UI_LIGHT_IMPLEMENTADAS.md
+- [x] OTIMIZACAO_MOBILE_FIRST.md
+- [x] PINS_MARKETING_VISUAL.md
+- [x] PROTOTIPO_COMPLETO.md
+- [x] PROTOTIPO_VISUAL_README.md
+- [x] SISTEMA_VISUAL_MELHORADO.md
+- [x] TELA_ENTRADA_MAPA_FULLSCREEN.md
+- [x] SIMPLIFICACAO_INTERFACE_MAPA.md
+- [x] REORGANIZACAO_MENU_SIMPLIFICADO.md
+
+### Responsividade e Mobile
+- [x] AUDITORIA_RESPONSIVIDADE_MOBILE.md
+- [x] CONFIRMACAO_100_MOBILE.md
+- [x] CORRECOES_MOBILE_RESPONSIVIDADE.md
+- [x] INDICE_RESPONSIVIDADE_MOBILE.md
+- [x] MOBILE_ONLY_IMPLEMENTADO.md
+- [x] RESPOSTA_PERFORMANCE_MOBILE.md
+- [x] RESUMO_AUDITORIA_REFINAMENTO_MOBILE.md
+
+### Guidelines e Guias de Usuário
+- [x] COMO_USAR.md
+- [x] README.md
+- [x] Attributions.md
+- [x] guidelines/Guidelines.md
+- [x] docs/ANTES_DEPOIS.md
+- [x] docs/README.md
+
+### Módulos Específicos (Aspectos Visuais)
+- [x] GUIA_CASES_DE_SUCESSO.md
+- [x] GUIA_CHAT_SUPORTE.md
+- [x] GUIA_CHECKIN.md
+- [x] GUIA_COMPARACAO.md
+- [x] GUIA_DASHBOARD_EXECUTIVO.md
+- [x] GUIA_DESENHO.md
+- [x] GUIA_EXPORTACAO_VISUAL.md
+- [x] GUIA_FAB_DINAMICO.md
+- [x] GUIA_MARKETING.md
+- [x] GUIA_ALERTAS.md
+- [x] INTERPRETACAO_GRAFICOS.md
+- [x] NDVI_GUIDE.md
+
+### Melhorias Visuais
+- [x] BUSSOLA_IMPLEMENTADA_RESUMO.md
+- [x] BUSSOLA_PREMIUM_IMPLEMENTADA.md
+- [x] MELHORIA_BOTAO_FECHAR_NDVI.md
+- [x] MELHORIAS_DESENHO_TALHAO.md
+- [x] ZOOM_PIN_OCORRENCIA_IMPLEMENTADO.md
+- [x] RADAR_CLIMA_CAMADA_IMPLEMENTADO.md
+
+---
+
+## 🗑️ ARQUIVOS A REMOVER (Código/Técnico)
+
+### Correções e Fixes
+- [ ] CORRECAO_ERRO_APPENDCHILD.md
+- [ ] CORRECAO_ERRO_APPENDCHILD_FINAL.md
+- [ ] CORRECAO_ERRO_APPENDCHILD_PUBLICACAO.md
+- [ ] CORRECAO_ERRO_COMPLETESHAPE.md
+- [ ] CORRECAO_ERRO_MAPA_MARKETING.md
+- [ ] CORRECAO_FINAL_LOADING_INFINITO.md
+- [ ] CORRECAO_LOADING_INFINITO_MAPA.md
+- [ ] CORRECAO_MAPAS_CAMADAS.md
+- [ ] CORRECAO_PERMISSOES_CAMERA.md
+- [ ] CORRECAO_TIMEOUT_LEAFLET.md
+- [ ] CORRECOES_MAPDRAWING.md
+- [ ] CORRECOES_P0_APLICADAS.md
+- [ ] CORRECOES_V3300_COMPLETAS.md
+- [ ] RESUMO_CORRECAO_APPENDCHILD.md
+- [ ] RESUMO_CORRECAO_FINAL.md
+- [ ] RESUMO_CORRECAO_ISDEMO_FINAL.md
+- [ ] RESUMO_CORRECAO_URGENTE.md
+- [ ] RESUMO_CORRECOES_CAMERA.md
+- [ ] RESUMO_CORRECOES_MAPAS_29_OUT_2025.md
+- [ ] RESUMO_FINAL_CORRECOES.md
+
+### Erros e Debugging
+- [ ] DEBUG_LOADING_INFINITO.md
+- [ ] DEBUG_ZOOM_PIN.md
+- [ ] ERRO_CORRIGIDO_AGORA.md
+- [ ] ERRO_ENV_CORRIGIDO.md
+- [ ] ERRO_ENV_CORRIGIDO_AGORA.md
+- [ ] ERRO_RESOLVIDO_FALLBACK.md
+- [ ] FIX_APLICADO.txt
+- [ ] FIX_ENV_COMPLETO.md
+- [ ] FIX_ERRO_AUTENTICACAO.md
+- [ ] FIX_ERRO_CLIMA_SETCIDADE.md
+- [ ] FIX_ERRO_ENV_IMPORT_META.md
+- [ ] FIX_ERRO_MAPA_PANES.md
+- [ ] FIX_IMPORT_META_ENV_APLICADO.md
+- [ ] FIX_INTEGRACOES_MODULOS.md
+- [ ] FIX_ISDEMO_DASHBOARD_APLICADO.md
+- [ ] FIX_ISDEMO_DASHBOARD_V3300_FINAL.md
+- [ ] FIX_ISDEMO_REFERENCIAS.md
+- [ ] FIX_ISDEMO_TODAS_REFERENCIAS_CORRIGIDAS.md
+- [ ] FIX_LOADING_INFINITO.md
+- [ ] FIX_LOADING_INFINITO_v2.md
+- [ ] FIX_TELA_BRANCA_URGENTE.md
+- [ ] FIX_USEDEMO_IMPORT_CORRIGIDO.md
+- [ ] LEIA_PRIMEIRO_ERRO_ENV.md
+- [ ] README_ERRO_ENV.md
+- [ ] SOLUCAO_AVISO_FALLBACK.md
+- [ ] SOLUCAO_EMERGENCIAL_LOADING.md
+- [ ] SOLUCAO_RAPIDA_ERRO_ENV.md
+
+### Auditorias Técnicas
+- [ ] AUDITORIA_COMPLETA_SISTEMA_2025.md
+- [ ] AUDITORIA_COMPLETA_TECNICA_2025.md
+- [ ] AUDITORIA_COMPLETA_TOP_0_1_PERCENT.md
+- [ ] AUDITORIA_FINAL_POS_REVISAO.md
+- [ ] AUDITORIA_SEGURANCA_PENETRATION_TEST.md
+- [ ] AUDITORIA_SISTEMA_MAPAS_COMPLETA.md
+- [ ] AUDITORIA_SISTEMA_MAPAS_DIAGNOSTICO_COMPLETO.md
+- [ ] AUDITORIA_TECNICA_COMPLETA_REVISAO.md
+- [ ] CHANGELOG_AUDITORIA_2025.md
+- [ ] LEIA_PRIMEIRO_AUDITORIA.md
+- [ ] MELHORIAS_APLICADAS_AUDITORIA.md
+- [ ] RESUMO_EXECUTIVO_AUDITORIA.md
+- [ ] RESUMO_REVISAO_COMPLETA.md
+- [ ] SUMARIO_AUDITORIA_EXECUTIVO.md
+
+### Segurança e Infraestrutura
+- [ ] API_SETUP.md
+- [ ] CHECKLIST_CAPACITOR.md
+- [ ] CHECKLIST_HTTPONLY_COOKIES.md
+- [ ] CHECKLIST_P0.md
+- [ ] CHECKLIST_ROTACAO_CREDENCIAIS.md
+- [ ] COMANDOS_CAPACITOR.md
+- [ ] CREDENCIAIS_MIGRADAS_ENV.md
+- [ ] EXECUTAR_MIGRACAO_COOKIES.md
+- [ ] EXECUTAR_P0_CREDENCIAIS.sh
+- [ ] EXECUTAR_PROTECAO_XSS.md
+- [ ] EXECUTAR_RATE_LIMITING.md
+- [ ] FASE_P0_COMPLETA.md
+- [ ] FASE_P1_COMPLETA.md
+- [ ] GEOLOCALIZACAO_TROUBLESHOOTING.md
+- [ ] GUIA_ARMAZENAMENTO_SEGURO_MOBILE.md
+- [ ] GUIA_ERROR_BOUNDARY.md
+- [ ] GUIA_LIGHTHOUSE_MONITORING.md
+- [ ] GUIA_MIGRACAO_CAPACITOR.md
+- [ ] IMPLEMENTACAO_RATE_LIMITING.md
+- [ ] IMPLEMENTACAO_XSS_SANITIZACAO.md
+- [ ] INDICE_SEGURANCA.md
+- [ ] INSTALL_CAPACITOR.md
+- [ ] LIGHTHOUSE_TRACKING.md
+- [ ] LIMITACOES_TECNICAS_AMBIENTE.md
+- [ ] MIGRACAO_HTTPONLY_COOKIES.md
+- [ ] P0_CREDENCIAIS_MIGRADAS.md
+- [ ] P1_EXECUTADO.md
+- [ ] PATCHES_BUGS_CRITICOS.md
+- [ ] PERFORMANCE_DASHBOARD.md
+- [ ] PLANO_ACAO_EXECUTIVO_P0.md
+- [ ] PLANO_ACAO_IMEDIATO.md
+- [ ] QUICK_START_CAPACITOR.md
+- [ ] QUICK_START_PERFORMANCE.md
+- [ ] RESUMO_COMPLETO_SEGURANCA_P0.md
+- [ ] RESUMO_HTTPONLY_COOKIES.md
+- [ ] RESUMO_P0_CREDENCIAIS.md
+- [ ] ROTACIONAR_AGORA.md
+- [ ] ROTACIONAR_CREDENCIAIS_SUPABASE.md
+- [ ] SCRIPT_LIMPEZA_PROJETO.md
+- [ ] SCRIPT_SCAN_SECRETS.sh
+- [ ] SECURITY_CHECKLIST_RLS_SUPABASE.md
+- [ ] START_AQUI_CREDENCIAIS.md
+- [ ] START_P0.md
+
+### Implementações Técnicas
+- [ ] IMPLEMENTACAO_CHAT_SUPORTE_COMPLETA.md
+- [ ] IMPLEMENTACAO_CLIMA_PREMIUM.md
+- [ ] IMPLEMENTACAO_GEOLOCALIZACAO_CLIMA.md
+- [ ] IMPLEMENTACAO_INTEGRACAO_MODULOS.md
+- [ ] IMPLEMENTACAO_NDVI_CLIPPED.md
+- [ ] IMPLEMENTACAO_PREFETCH_HOVER.md
+- [ ] IMPLEMENTACAO_RAPIDA.md
+- [ ] IMPLEMENTACAO_SALVAR_ANALISE_RELATORIO.md
+- [ ] IMPLEMENTACAO_VISUALIZAR_EDITAR_RELATORIOS.md
+- [ ] GUIA_COMPLETAR_CORRECOES.md
+- [ ] GUIA_IMPLEMENTACAO_ERGONOMIA_FASE2.md
+- [ ] GUIA_INTEGRACAO_PRODUTORES.md
+- [ ] GUIA_MAPAS_OFFLINE.md
+- [ ] GUIA_PREFETCH_HOVER.md
+- [ ] GUIA_RAPIDO_MAPAS_OFFLINE.md
+- [ ] GUIA_RAPIDO_SCANNER_PRAGAS.md
+- [ ] GUIA_RAPIDO_VER_EDITAR_RELATORIO.md
+- [ ] GUIA_REACT_MEMO.md
+- [ ] GUIA_SKELETONS.md
+- [ ] MAPAS_OFFLINE_IMPLEMENTADO.md
+
+### Restaurações e Versões
+- [ ] RESTAURACAO_V3200_APLICANDO.md
+- [ ] RESTAURACAO_V3200_COMPLETA.md
+- [ ] RESTAURACAO_V3300_APLICADA.md
+- [ ] RESTAURACAO_VERSAO_3300_COMPLETA.md
+- [ ] RESTAURACAO_VERSAO_ESTAVEL.md
+- [ ] REVERSAO_VERSAO_ESTAVEL_ANTERIOR.md
+
+### Testes e Validação
+- [ ] TESTE_AGORA_LOADING.md
+- [ ] TESTE_ERRO_CORRIGIDO.js
+- [ ] TESTE_FINAL_RESTAURACAO.md
+- [ ] TESTE_ISDEMO_CORRIGIDO.js
+- [ ] TESTE_LOOP_INFINITO.md
+- [ ] TESTE_RAPIDO_CORRECOES.md
+- [ ] TESTE_RAPIDO_FIX.md
+- [ ] TESTE_RASTREAMENTO_CRONOLOGICO.md
+- [ ] TESTE_RESTAURACAO_AGORA.md
+- [ ] TESTE_SALVAMENTO_AREA_AGORA.md
+- [ ] TESTE_V3300_AGORA.md
+- [ ] TESTES_VALIDACAO_MAPAS.md
+- [ ] TESTAR_CORRECOES_P0.md
+- [ ] TESTAR_FIX_AGORA.md
+- [ ] VALIDACAO_AREAS.md
+- [ ] VALIDACAO_COMPLETA_V3300.md
+
+### Migrações e Arquitetura
+- [ ] ANALISE_ESTADO_ATUAL_FLUTTER.md
+- [ ] ARQUITETURA_FLUTTER_CLEAN.md
+- [ ] ARQUITETURA_INTEGRACAO_MODULOS.md
+- [ ] COMPARACAO_TECNICA_REACT_FLUTTER.md
+- [ ] DECISAO_GO_NO_GO_1_PAGINA.md
+- [ ] DECISAO_GO_NO_GO_EXECUTIVA.md
+- [ ] DIAGRAMA_FLUXO_INTEGRACAO_COMPLETO.md
+- [ ] DIAGRAMA_FLUXO_RELATORIOS.md
+- [ ] EQUIVALENCIA_FLUTTER_GARANTIDA.md
+- [ ] ESTRUTURA_FINAL_PROJETO.md
+- [ ] EXEMPLO_CODIGO_REFATORADO.md
+- [ ] GUIA_EXECUCAO_FASES_2_3_4.md
+- [ ] INVENTARIO_COMPLETO_SISTEMA_ATUAL.md
+- [ ] MAPEAMENTO_1_1_SISTEMAS.md
+- [ ] PRD_CONCLUIDO_README.md
+- [ ] PRD_MIGRACAO_FLUTTER_SEGURA.md
+- [ ] PRD_MODULO_PUBLICAR_REPLICAVEL.md
+- [ ] RESUMO_EXECUTIVO_PRD_FLUTTER.md
+- [ ] RESUMO_INTEGRACAO_MODULOS.md
+- [ ] STACK_TECNOLOGICO_COMPLETO.md
+- [ ] STATUS_FINAL_PRD_COMPLETO.md
+- [ ] TIMELINE_COMPLETA_22_SEMANAS.md
+
+### Scripts e Executáveis
+- [ ] diagnostico-env.sh
+- [ ] fix-env-agora.sh
+- [ ] EXECUTAR_AGORA.md
+- [ ] INICIAR_AGORA.sh
+- [ ] INICIAR_TESTES_RESPONSIVIDADE.sh
+- [ ] INSTRUCOES_REINICIO.md
+- [ ] INSTRUCOES_REORGANIZACAO.md
+- [ ] LIMPEZA_EXECUTADA_SUCESSO.md
+- [ ] reorganize-docs.py
+- [ ] reorganize-docs.sh
+- [ ] REINICIAR_AGORA.md
+- [ ] REINICIAR_SERVIDOR.sh
+- [ ] RESOLVER_AGORA.sh
+- [ ] scripts-cleanup-docs.sh
+- [ ] TORNAR_EXECUTAVEL.sh
+- [ ] verificar-env.sh
+- [ ] verificar-rotacao.sh
+- [ ] VERIFICAR_CREDENCIAIS_ROTACIONADAS.sh
+
+### Outros Técnicos
+- [ ] ACAO_IMEDIATA.md
+- [ ] App_BACKUP_ATUAL.tsx
+- [ ] Dashboard_BACKUP_ATUAL.tsx
+- [ ] DIFF_VISUAL_CORRECAO.md
+- [ ] INDICE_CORRECAO_ISDEMO.md
+- [ ] LEIA_ISTO_AGORA.md
+- [ ] OTIMIZACOES_CONCLUIDAS.md
+- [ ] PROGRESSO_OTIMIZACAO.md
+- [ ] PROXIMOS_PASSOS_UI_SIMPLIFICACAO.md
+- [ ] PULL_REQUEST_TEMPLATE.md
+- [ ] QUICK_TEST_PREFETCH.md
+- [ ] QUICK_WINS_ADICIONAIS.md
+- [ ] RESUMO_MELHORIAS_PROTOTIPO.md
+- [ ] RESUMO_SESSAO_27_OUT_2025.md
+- [ ] RESUMO_VISUAL_FIX.md
+- [ ] SISTEMA_RASTREAMENTO_CRONOLOGICO.md
+- [ ] SPRINT_BACKLOG_PRIORIZADO.md
+- [ ] START_HERE.md
+- [ ] START_HERE_FIX_ISDEMO.md
+- [ ] START_TESTE_AGORA.md
+- [ ] UNIFICACAO_SCANNER_PRAGAS.md
+- [ ] VERIFICACOES_CONDICIONAIS_FINALIZADAS.md
+- [ ] dependabot.yml
+- [ ] workflows/ci-security-performance.yml
+
+### Scripts no /scripts
+- [ ] scripts/migrate-to-cookies.sh
+- [ ] scripts/migrate-xss-protection.sh
+- [ ] scripts/refinar-responsividade.sh
+- [ ] scripts/security-audit.sh
+- [ ] scripts/validate-env.js
+
+---
+
+## 📊 RESUMO
+
+### Total de Arquivos
+- **Raiz**: ~280 arquivos .md
+- **A Manter**: ~40 arquivos (Design/Visual/UX)
+- **A Remover**: ~240 arquivos (Código/Técnico)
+
+### Categorias a Manter
+1. ✅ Design e UI/UX (~16 arquivos)
+2. ✅ Responsividade Mobile (~7 arquivos)
+3. ✅ Guidelines e Documentação Usuário (~6 arquivos)
+4. ✅ Guias de Módulos (Aspecto Visual) (~11 arquivos)
+5. ✅ Melhorias Visuais (~6 arquivos)
+
+### Categorias a Remover
+1. ❌ Correções e Fixes (~20 arquivos)
+2. ❌ Erros e Debugging (~20 arquivos)
+3. ❌ Auditorias Técnicas (~12 arquivos)
+4. ❌ Segurança e Infraestrutura (~40 arquivos)
+5. ❌ Implementações Técnicas (~15 arquivos)
+6. ❌ Restaurações e Versões (~6 arquivos)
+7. ❌ Testes (~15 arquivos)
+8. ❌ Migrações (~20 arquivos)
+9. ❌ Scripts (~15 arquivos)
+10. ❌ Outros (~80 arquivos)
+
+---
+
+## 🎯 ESTRUTURA FINAL IDEAL
+
+```
+/
+├── README.md
+├── Attributions.md
+│
+├── design/
+│   ├── DESIGN_CLEAN_FINAL.md
+│   ├── SISTEMA_VISUAL_MELHORADO.md
+│   ├── COMPARACAO_UI_ANTES_DEPOIS.md
+│   ├── PROTOTIPO_COMPLETO.md
+│   ├── PROTOTIPO_VISUAL_README.md
+│   └── GUIA_PROTOTIPO_VISUAL.md
+│
+├── ui-ux/
+│   ├── ANALISE_ERGONOMICA_COMPLETA_APP.md
+│   ├── ANALISE_SIMPLIFICACAO_UI.md
+│   ├── SIMPLIFICACAO_INTERFACE_MAPA.md
+│   ��── REORGANIZACAO_MENU_SIMPLIFICADO.md
+│   └── GUIA_VISUAL_CORRECOES.md
+│
+├── mobile/
+│   ├── AUDITORIA_RESPONSIVIDADE_MOBILE.md
+│   ├── CONFIRMACAO_100_MOBILE.md
+│   ├── MOBILE_ONLY_IMPLEMENTADO.md
+│   ├── OTIMIZACAO_MOBILE_FIRST.md
+│   └── INDICE_RESPONSIVIDADE_MOBILE.md
+│
+├── componentes/
+│   ├── IMPLEMENTACAO_BOTOES_EXPANSIVEIS_SEPARADOS.md
+│   ├── MELHORIAS_UI_LIGHT_IMPLEMENTADAS.md
+│   ├── GUIA_FAB_DINAMICO.md
+│   ├── BUSSOLA_PREMIUM_IMPLEMENTADA.md
+│   └── ZOOM_PIN_OCORRENCIA_IMPLEMENTADO.md
+│
+├── modulos/
+│   ├── GUIA_DASHBOARD_EXECUTIVO.md
+│   ├── GUIA_CHAT_SUPORTE.md
+│   ├── GUIA_MARKETING.md
+│   ├── GUIA_CHECKIN.md
+│   ├── GUIA_DESENHO.md
+│   ├── GUIA_ALERTAS.md
+│   ├── NDVI_GUIDE.md
+│   └── INTERPRETACAO_GRAFICOS.md
+│
+├── guidelines/
+│   ├── COMO_USAR.md
+│   └── Guidelines.md
+│
+└── docs/
+    ├── ANTES_DEPOIS.md
+    └── README.md
+```
+
+---
+
+## 🚀 EXECUTAR LIMPEZA
+
+Ver próximo arquivo: `EXECUTAR_LIMPEZA_VISUAL.sh`

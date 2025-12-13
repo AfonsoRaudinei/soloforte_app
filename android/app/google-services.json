@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398774255712",
+    "project_id": "soloforte-106c8",
+    "storage_bucket": "soloforte-106c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398774255712:android:145b1506475a68552cc305",
+        "android_client_info": {
+          "package_name": "com.example.soloforte_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEGS4A_T8cMBl_dzVK-etwr3RDN2TDgtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,717 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Safe Area Insets for iOS/Android notches */
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: oklch(0.145 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Screen reader only - Acessibilidade */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* ============================================
+   ADAPTAÇÃO MOBILE - DIVERSOS TAMANHOS
+   Previne sobreposição de texto em celulares
+   ============================================ */
+
+/* Celulares muito pequenos (< 360px) - iPhone SE, Galaxy Fold fechado */
+@media (max-width: 359px) {
+  html {
+    font-size: 14px; /* Reduz tamanho base */
+  }
+  
+  /* Reduz padding em cards pequenos */
+  .card-compact {
+    padding: 0.5rem !important;
+  }
+}
+
+/* Celulares pequenos (360px - 374px) - iPhone SE 2020, Galaxy S8 */
+@media (min-width: 360px) and (max-width: 374px) {
+  html {
+    font-size: 14.5px;
+  }
+}
+
+/* Celulares médios (375px - 389px) - iPhone 12/13 mini, iPhone 6/7/8 */
+@media (min-width: 375px) and (max-width: 389px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Celulares padrão (390px - 428px) - iPhone 12/13/14, Galaxy S21 */
+@media (min-width: 390px) and (max-width: 428px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Celulares grandes (> 428px) - iPhone 14 Plus/Pro Max, Galaxy S21 Ultra */
+@media (min-width: 429px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Utilitários globais para prevenir overflow de texto */
+.text-safe {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Truncate helpers para diferentes contextos */
+.truncate-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   CORREÇÕES DE LAYOUT RESPONSIVO
+   Previne overflow em containers comuns
+   ============================================ */
+
+/* Prevenir overflow em cards */
+[data-slot="card"],
+.card {
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Flex containers devem ter min-width: 0 para permitir shrink */
+.flex > * {
+  min-width: 0;
+}
+
+/* Grid items devem ter min-width: 0 */
+.grid > * {
+  min-width: 0;
+}
+
+/* Buttons não devem ter texto que vaza */
+button {
+  min-width: 0;
+}
+
+button > span,
+button > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Labels e inputs em forms */
+label {
+  overflow-wrap: break-word;
+}
+
+/* Dialogs e sheets - prevenir overflow de conteúdo */
+[data-slot="dialog-content"],
+[data-slot="sheet-content"] {
+  overflow-x: hidden;
+}
+
+/* Toasts e notificações */
+[data-slot="toast"],
+.toast {
+  max-width: calc(100vw - 2rem);
+  word-break: break-word;
+}
+
+/* ============================================
+   CORREÇÕES ESPECÍFICAS MOBILE
+   ============================================ */
+
+@media (max-width: 640px) {
+  /* Reduzir padding em telas muito pequenas */
+  .px-6 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .px-8 {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  /* Ajustar gap em flex containers */
+  .gap-6 {
+    gap: 1rem !important;
+  }
+  
+  .gap-8 {
+    gap: 1.25rem !important;
+  }
+}
+
+/* iPhone SE e telas muito pequenas */
+@media (max-width: 375px) {
+  .px-4 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  .gap-4 {
+    gap: 0.75rem !important;
+  }
+  
+  /* Reduzir tamanho de ícones grandes */
+  .h-16 {
+    height: 3.5rem !important;
+  }
+  
+  .w-16 {
+    width: 3.5rem !important;
+  }
+}
+
+/* ============================================
+   SAFE AREA UTILITIES (iOS/Android Notches)
+   ============================================ */
+.pt-safe {
+  padding-top: var(--safe-area-inset-top);
+}
+
+.pr-safe {
+  padding-right: var(--safe-area-inset-right);
+}
+
+.pb-safe {
+  padding-bottom: var(--safe-area-inset-bottom);
+}
+
+.pl-safe {
+  padding-left: var(--safe-area-inset-left);
+}
+
+.p-safe {
+  padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);
+}
+
+/* Estilos específicos para diferentes visual styles */
+[data-visual-style="ios"] {
+  /* Glassmorphism para iOS */
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-visual-style="ios"].dark {
+  --glass-bg: rgba(30, 41, 59, 0.9);
+  --glass-border: rgba(71, 85, 105, 0.5);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-visual-style="microsoft"] {
+  /* Acrylic para Microsoft */
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(229, 231, 235, 1);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-visual-style="microsoft"].dark {
+  --glass-bg: rgba(31, 41, 55, 0.95);
+  --glass-border: rgba(55, 65, 81, 1);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   ANIMAÇÕES CUSTOMIZADAS
+   ============================================ */
+
+/* Shimmer Effect (para skeletons) */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Pulse Effect (para marcador de localização) */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Pulse com delay */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+/* ============================================
+   LEAFLET MAP STYLES
+   ============================================ */
+
+/* Garantir que os containers do Leaflet tenham dimensões corretas */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  background: #e5e3df;
+  font-family: inherit;
+}
+
+/* Garantir que os tiles sejam carregados corretamente */
+.leaflet-tile-container {
+  pointer-events: none;
+}
+
+.leaflet-tile {
+  pointer-events: none;
+  /* Garantir renderização suave */
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ✅ FIX: Garantir que apenas uma camada de tiles seja visível por vez */
+.leaflet-tile-pane {
+  z-index: 200 !important;
+}
+
+/* ✅ Transição suave entre camadas */
+.leaflet-layer {
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* ✅ Otimização de renderização para tiles */
+.leaflet-tile-loaded {
+  opacity: 1 !important;
+}
+
+.leaflet-tile-loading {
+  opacity: 0 !important;
+}
+
+/* Marcadores customizados */
+.custom-marker,
+.custom-marker-ocorrencia {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Marketing Pin Marker */
+.marketing-pin-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Animação de pulso para pins */
+@keyframes pinPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(0,87,255,0.5);
+  }
+}
+
+/* ============================================
+   FAB MENU ANIMATIONS
+   ============================================ */
+
+/* Slide in from bottom com fade */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in.slide-in-from-bottom {
+  animation: slideInFromBottom 0.3s ease-out;
+}
+
+/* Animação sequencial para cada item do menu */
+.fab-menu-item-0 {
+  animation-delay: 0ms;
+}
+
+.fab-menu-item-1 {
+  animation-delay: 50ms;
+}
+
+.fab-menu-item-2 {
+  animation-delay: 100ms;
+}
+
+.fab-menu-item-3 {
+  animation-delay: 150ms;
+}
+
+.fab-menu-item-4 {
+  animation-delay: 200ms;
+}
+
+.fab-menu-item-5 {
+  animation-delay: 250ms;
+}
+
+.fab-menu-item-6 {
+  animation-delay: 300ms;
+}
+
+.fab-menu-item-7 {
+  animation-delay: 350ms;
+}
+
+/* ============================================
+   POSICIONAMENTO CUSTOMIZADO CONTROLES ZOOM
+   ============================================ */
+
+/* Mover controles de zoom para abaixo do card de localização */
+.leaflet-top.leaflet-left {
+  top: 88px !important; /* Posiciona abaixo do card (top-4 + altura do card) */
+  left: 16px !important; /* Alinha com left-4 do card */
+}
+
+/* Estilizar botões de zoom para combinar com o design */
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 20px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  color: #374151 !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #0057FF !important;
+  transform: scale(1.05);
+}
+
+.leaflet-control-zoom a:first-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .leaflet-control-zoom a {
+  background: rgba(31, 41, 55, 0.85) !important;
+  color: #E5E7EB !important;
+}
+
+.dark .leaflet-control-zoom a:hover {
+  background: rgba(31, 41, 55, 0.95) !important;
+  color: #60A5FA !important;
+}
+
+/* ========================================
+   PINS DE MARKETING - CASES DE SUCESSO
+   ======================================== */
+
+/* Remover background padrão do Leaflet */
+.case-pin-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Animação hover nos pins */
+.case-pin-marker:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Animação de "pulso" nos pins quando carregam */
+@keyframes pin-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+  }
+  50% {
+    transform: translateY(0) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.case-pin-marker {
+  animation: pin-appear 0.4s ease-out;
+}
+
+/* Garantir que imagens nos pins não sejam arrastáveis */
+.case-pin-marker img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ============================================
+   CLASSES CUSTOMIZADAS BOTÕES EXPANSÍVEIS
+   ============================================ */
+
+/* Bottom 84 (336px) - Para Layers Button */
+.bottom-84 {
+  bottom: 21rem; /* 336px = 84 * 4px */
+}
+
+/* Bottom 60 (240px) - Para Draw Button */
+.bottom-60 {
+  bottom: 15rem; /* 240px = 60 * 4px */
+}
+
+/* Bottom 44 (176px) - Para Check-In Button */
+.bottom-44 {
+  bottom: 11rem; /* 176px = 44 * 4px */
+}
+
+/* Bottom 28 (112px) - Para Location Button */
+.bottom-28 {
+  bottom: 7rem; /* 112px = 28 * 4px */
+}

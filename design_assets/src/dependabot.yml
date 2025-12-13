@@ -1,0 +1,54 @@
+# 🤖 Dependabot Configuration - SoloForte
+# Mantém dependências atualizadas e seguras automaticamente
+
+version: 2
+updates:
+  # NPM Dependencies (Frontend)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "seu-time-aqui" # Substituir pelo time responsável
+    assignees:
+      - "seu-lead-aqui" # Substituir pelo tech lead
+    labels:
+      - "dependencies"
+      - "security"
+    commit-message:
+      prefix: "chore(deps):"
+      include: "scope"
+    # Agrupar updates não-críticos
+    groups:
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "patch"
+    # Ignorar updates específicos (se necessário)
+    ignore:
+      # Exemplo: ignorar major updates de bibliotecas específicas
+      # - dependency-name: "react"
+      #   update-types: ["version-update:semver-major"]
+    
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci:"
