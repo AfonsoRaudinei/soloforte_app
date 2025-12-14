@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Production API -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.soloforte.com</domain>
+        <pin-set expiration="2026-12-31">
+            <!-- Primary certificate SHA-256 -->
+            <pin digest="SHA-256">YOUR_PRIMARY_CERT_BASE64_HASH</pin>
+            <!-- Backup certificate SHA-256 -->
+            <pin digest="SHA-256">YOUR_BACKUP_CERT_BASE64_HASH</pin>
+        </pin-set>
+    </domain-config>
+
+    <!-- Staging API (optional) -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">staging-api.soloforte.com</domain>
+        <pin-set expiration="2026-12-31">
+            <pin digest="SHA-256">YOUR_STAGING_CERT_BASE64_HASH</pin>
+        </pin-set>
+    </domain-config>
+
+    <!-- Development - Allow localhost (HTTP) -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain> <!-- Android emulator -->
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+
+    <!-- Block all other cleartext traffic -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
