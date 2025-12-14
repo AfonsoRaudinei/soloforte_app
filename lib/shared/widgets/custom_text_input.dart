@@ -13,6 +13,7 @@ class CustomTextInput extends StatelessWidget {
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final void Function(String)? onFieldSubmitted;
+  final void Function(String)? onChanged;
   final AutovalidateMode autovalidateMode;
   final int maxLines;
 
@@ -28,6 +29,7 @@ class CustomTextInput extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.onFieldSubmitted,
+    this.onChanged,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.maxLines = 1,
   });
@@ -55,6 +57,7 @@ class CustomTextInput extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           onFieldSubmitted: onFieldSubmitted,
+          onChanged: onChanged,
           maxLines: maxLines,
           style: AppTypography.bodyMedium,
           decoration: InputDecoration(

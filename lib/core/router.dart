@@ -25,10 +25,13 @@ import '../features/marketing/presentation/feed_screen.dart';
 import '../features/scanner/presentation/scanner_screen.dart';
 import '../features/occurrences/presentation/occurrence_list_screen.dart';
 import '../features/occurrences/presentation/occurrence_detail_screen.dart';
+import '../features/occurrences/presentation/new_occurrence_screen.dart';
 import '../features/reports/presentation/reports_screen.dart';
 import '../features/reports/presentation/visit_report_screen.dart';
 import '../features/clients/presentation/client_list_screen.dart';
 import '../features/agenda/presentation/agenda_screen.dart';
+import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:latlong2/latlong.dart';
 
 // Keys
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -89,19 +92,34 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/dashboard/map',
-            builder: (context, state) => const MapScreen(),
+            builder: (context, state) {
+              final LatLng? location = state.extra as LatLng?;
+              return MapScreen(initialLocation: location);
+            },
           ),
           GoRoute(
             path: '/dashboard/occurrences',
             builder: (context, state) => const OccurrenceListScreen(),
-            routes: [
-              GoRoute(
-                path: ':id',
-                builder: (context, state) => OccurrenceDetailScreen(
-                  occurrenceId: state.pathParameters['id']!,
-                ),
-              ),
-            ],
+          ),
+          GoRoute(
+            path: '/occurrences/detail/:id',
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) => OccurrenceDetailScreen(
+              occurrenceId: state.pathParameters['id']!,
+            ),
+          ),
+          GoRoute(
+            path: '/occurrences/new',
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) => const NewOccurrenceScreen(),
+          ),
+          GoRoute(
+            path: '/occurrences/edit',
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) {
+              final occurrence = state.extra as Occurrence?;
+              return NewOccurrenceScreen(initialOccurrence: occurrence);
+            },
           ),
           GoRoute(
             path: '/dashboard/reports',

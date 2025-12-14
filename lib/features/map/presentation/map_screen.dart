@@ -15,7 +15,9 @@ import 'widgets/saved_areas_list_sheet.dart';
 import 'package:soloforte_app/features/ndvi/presentation/ndvi_detail_screen.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
-  const MapScreen({super.key});
+  final LatLng? initialLocation;
+
+  const MapScreen({super.key, this.initialLocation});
 
   @override
   ConsumerState<MapScreen> createState() => _MapScreenState();
@@ -24,6 +26,13 @@ class MapScreen extends ConsumerStatefulWidget {
 class _MapScreenState extends ConsumerState<MapScreen> {
   final MapController _mapController = MapController();
   final KmlService _kmlService = KmlService();
+
+  @override
+  void initState() {
+    super.initState();
+    // If initial location provided, we might need to wait for map readiness or set option
+    // MapOptions has initialCenter, so we can pass it there.
+  }
 
   void _showSaveDialog(BuildContext context, DrawingController controller) {
     showDialog(
@@ -64,8 +73,10 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: const LatLng(-14.2350, -51.9253), // Brazil Center
-              initialZoom: 4.0,
+              initialCenter:
+                  widget.initialLocation ??
+                  const LatLng(-14.2350, -51.9253), // Brazil Center or provided
+              initialZoom: widget.initialLocation != null ? 16.0 : 4.0,
               onTap: (tapPosition, point) {
                 if (drawingState.isDrawing) {
                   if (drawingState.activeTool == 'circle') {

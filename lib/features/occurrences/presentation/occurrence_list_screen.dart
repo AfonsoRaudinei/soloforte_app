@@ -1,69 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_provider.dart';
 import 'package:soloforte_app/shared/widgets/app_card.dart';
 import 'package:soloforte_app/shared/widgets/custom_text_input.dart';
 
-class OccurrenceListScreen extends StatefulWidget {
+class OccurrenceListScreen extends ConsumerStatefulWidget {
   const OccurrenceListScreen({super.key});
 
   @override
-  State<OccurrenceListScreen> createState() => _OccurrenceListScreenState();
+  ConsumerState<OccurrenceListScreen> createState() =>
+      _OccurrenceListScreenState();
 }
 
-class _OccurrenceListScreenState extends State<OccurrenceListScreen> {
+class _OccurrenceListScreenState extends ConsumerState<OccurrenceListScreen> {
   final TextEditingController _searchController = TextEditingController();
+  String _selectedFilter = 'Todos';
 
-  // Mock Data
-  final List<Occurrence> _occurrences = [
-    Occurrence(
-      id: '1',
-      title: 'Lagarta na Soja',
-      description: 'Infestação severa na borda leste.',
-      type: 'pest',
-      severity: 0.85,
-      areaName: 'Talhão Norte',
-      date: DateTime.now().subtract(const Duration(hours: 2)),
-      status: 'active',
-      imageUrl:
-          'https://images.unsplash.com/photo-1628151015968-3a4429e9ef04?q=80&w=200&auto=format&fit=crop',
-      latitude: -23.5505,
-      longitude: -46.6333,
-    ),
-    Occurrence(
-      id: '2',
-      title: 'Ferrugem Asiática',
-      description: 'Primeiros sinais detectados.',
-      type: 'disease',
-      severity: 0.60,
-      areaName: 'Lavoura Sul',
-      date: DateTime.now().subtract(const Duration(days: 1)),
-      status: 'monitoring',
-      imageUrl:
-          'https://plus.unsplash.com/premium_photo-1661962360809-548de84dfb50?q=80&w=200&auto=format&fit=crop',
-      latitude: -23.5505,
-      longitude: -46.6333,
-    ),
-    Occurrence(
-      id: '3',
-      title: 'Falta de Nitrogênio',
-      description: 'Folhas amareladas no centro da área.',
-      type: 'deficiency',
-      severity: 0.40,
-      areaName: 'Área Teste',
-      date: DateTime.now().subtract(const Duration(days: 3)),
-      status: 'resolved',
-      imageUrl:
-          'https://images.unsplash.com/photo-1592864696472-3c139db08c3e?q=80&w=200&auto=format&fit=crop',
-      latitude: -23.5505,
-      longitude: -46.6333,
-    ),
-  ];
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Watch provider
+    final occurrencesAsync = ref.watch(occurrencesProvider);
+
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -73,10 +41,7 @@ class _OccurrenceListScreenState extends State<OccurrenceListScreen> {
             icon: const Icon(Icons.add),
             onPressed: () {
               // Navigate to New Occurrence
-              // context.go('/dashboard/occurrences/new');
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Nova Ocorrência (Mock)')),
-              );
+              context.push('/occurrences/new');
             },
           ),
         ],
@@ -90,13 +55,33 @@ class _OccurrenceListScreenState extends State<OccurrenceListScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _FilterChip(label: 'Todas', isSelected: true),
+                  _FilterChip(
+                    label: 'Todos',
+                    isSelected: _selectedFilter == 'Todos',
+                    onSelected: (val) =>
+                        setState(() => _selectedFilter = 'Todos'),
+                  ),
                   const SizedBox(width: 8),
-                  _FilterChip(label: 'Ativas', isSelected: false),
+                  _FilterChip(
+                    label: 'Ativas',
+                    isSelected: _selectedFilter == 'Ativas',
+                    onSelected: (val) =>
+                        setState(() => _selectedFilter = 'Ativas'),
+                  ),
                   const SizedBox(width: 8),
-                  _FilterChip(label: 'Monitorando', isSelected: false),
+                  _FilterChip(
+                    label: 'Monitorando',
+                    isSelected: _selectedFilter == 'Monitorando',
+                    onSelected: (val) =>
+                        setState(() => _selectedFilter = 'Monitorando'),
+                  ),
                   const SizedBox(width: 8),
-                  _FilterChip(label: 'Resolvidas', isSelected: false),
+                  _FilterChip(
+                    label: 'Resolvidas',
+                    isSelected: _selectedFilter == 'Resolvidas',
+                    onSelected: (val) =>
+                        setState(() => _selectedFilter = 'Resolvidas'),
+                  ),
                 ],
               ),
             ),
@@ -108,17 +93,102 @@ class _OccurrenceListScreenState extends State<OccurrenceListScreen> {
               label: '',
               hint: 'Buscar ocorrências...',
               prefixIcon: Icons.search,
+              onChanged: (value) {
+                setState(() {}); // Trigger rebuild to filter list
+              },
             ),
             const SizedBox(height: 16),
 
-            // List
+            // List Content
             Expanded(
-              child: ListView.builder(
-                itemCount: _occurrences.length,
-                itemBuilder: (context, index) {
-                  final occurrence = _occurrences[index];
-                  return _OccurrenceCard(occurrence: occurrence);
+              child: occurrencesAsync.when(
+                data: (occurrences) {
+                  // Apply Filters
+                  var filteredList = occurrences;
+
+                  // 1. Status Filter
+                  if (_selectedFilter == 'Ativas') {
+                    filteredList = filteredList
+                        .where((o) => o.status == 'active')
+                        .toList();
+                  } else if (_selectedFilter == 'Monitorando') {
+                    filteredList = filteredList
+                        .where((o) => o.status == 'monitoring')
+                        .toList();
+                  } else if (_selectedFilter == 'Resolvidas') {
+                    filteredList = filteredList
+                        .where((o) => o.status == 'resolved')
+                        .toList();
+                  }
+
+                  // 2. Search Filter
+                  final query = _searchController.text.toLowerCase();
+                  if (query.isNotEmpty) {
+                    filteredList = filteredList.where((o) {
+                      return o.title.toLowerCase().contains(query) ||
+                          o.description.toLowerCase().contains(query) ||
+                          o.areaName.toLowerCase().contains(query);
+                    }).toList();
+                  }
+
+                  if (filteredList.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search_off,
+                            size: 64,
+                            color: Colors.grey[300],
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Nenhuma ocorrência encontrada',
+                            style: AppTypography.bodyMedium.copyWith(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      await ref.read(occurrencesProvider.notifier).refresh();
+                    },
+                    child: ListView.builder(
+                      itemCount: filteredList.length,
+                      itemBuilder: (context, index) {
+                        final occurrence = filteredList[index];
+                        return _OccurrenceCard(occurrence: occurrence);
+                      },
+                    ),
+                  );
                 },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, stack) => Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.error_outline,
+                        size: 48,
+                        color: AppColors.error,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Erro ao carregar ocorrências',
+                        style: AppTypography.bodyLarge,
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            ref.read(occurrencesProvider.notifier).refresh(),
+                        child: const Text('Tentar Novamente'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -131,20 +201,35 @@ class _OccurrenceListScreenState extends State<OccurrenceListScreen> {
 class _FilterChip extends StatelessWidget {
   final String label;
   final bool isSelected;
+  final Function(bool) onSelected;
 
-  const _FilterChip({required this.label, required this.isSelected});
+  const _FilterChip({
+    required this.label,
+    required this.isSelected,
+    required this.onSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
+    return ChoiceChip(
       label: Text(
         label,
         style: TextStyle(
           color: isSelected ? Colors.white : AppColors.textPrimary,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         ),
       ),
-      backgroundColor: isSelected ? AppColors.primary : Colors.white,
-      side: isSelected ? BorderSide.none : const BorderSide(color: Colors.grey),
+      selected: isSelected,
+      onSelected: onSelected,
+      selectedColor: AppColors.primary,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: isSelected ? Colors.transparent : Colors.grey.shade300,
+        ),
+      ),
+      showCheckmark: false,
     );
   }
 }
@@ -198,11 +283,7 @@ class _OccurrenceCard extends StatelessWidget {
     return AppCard(
       margin: const EdgeInsets.only(bottom: 16),
       onTap: () {
-        // Navigate to details
-        // context.go('/dashboard/occurrences/${occurrence.id}');
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Detalhes (Mock)')));
+        context.push('/occurrences/detail/${occurrence.id}');
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -41,7 +41,7 @@ final class NdviControllerProvider
   }
 }
 
-String _$ndviControllerHash() => r'5848cedac7e5fe6dc0ca5107602d1ca7d47db351';
+String _$ndviControllerHash() => r'a2a5158bd8937605e94046e152c372f1e9b8fa5b';
 
 abstract class _$NdviController extends $Notifier<NdviState> {
   NdviState build();
