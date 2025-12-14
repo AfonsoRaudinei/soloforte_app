@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/map/application/drawing_controller.dart';
+import 'package:soloforte_app/features/map/presentation/widgets/premium_glass_container.dart';
+import 'package:soloforte_app/core/presentation/widgets/premium_dialog.dart';
+import 'package:soloforte_app/features/map/presentation/widgets/save_area_dialog.dart';
 
 class DrawingToolbar extends ConsumerWidget {
   const DrawingToolbar({super.key});
@@ -18,7 +22,10 @@ class DrawingToolbar extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 24),
           child: FloatingActionButton.extended(
-            onPressed: controller.startDrawing,
+            onPressed: () {
+              HapticFeedback.lightImpact();
+              controller.startDrawing();
+            },
             icon: const Icon(Icons.edit_location_alt_outlined),
             label: const Text('Desenhar Área'),
             backgroundColor: AppColors.primary,
@@ -46,20 +53,9 @@ class DrawingToolbar extends ConsumerWidget {
 
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Container(
+      child: PremiumGlassContainer(
         margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -73,7 +69,7 @@ class DrawingToolbar extends ConsumerWidget {
             // Tool Switcher
             Container(
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: Colors.grey[100]?.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -83,7 +79,10 @@ class DrawingToolbar extends ConsumerWidget {
                       label: 'Polígono',
                       icon: Icons.polyline,
                       isSelected: isPolygon,
-                      onTap: () => controller.setTool('polygon'),
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        controller.setTool('polygon');
+                      },
                     ),
                   ),
                   Expanded(
@@ -91,7 +90,10 @@ class DrawingToolbar extends ConsumerWidget {
                       label: 'Círculo',
                       icon: Icons.radio_button_unchecked,
                       isSelected: isCircle,
-                      onTap: () => controller.setTool('circle'),
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        controller.setTool('circle');
+                      },
                     ),
                   ),
                   Expanded(
@@ -99,7 +101,10 @@ class DrawingToolbar extends ConsumerWidget {
                       label: 'Retângulo',
                       icon: Icons.crop_square,
                       isSelected: state.activeTool == 'rectangle',
-                      onTap: () => controller.setTool('rectangle'),
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        controller.setTool('rectangle');
+                      },
                     ),
                   ),
                 ],
@@ -119,14 +124,20 @@ class DrawingToolbar extends ConsumerWidget {
                   _ToolButton(
                     icon: Icons.undo,
                     label: 'Desfazer',
-                    onTap: controller.undoLastPoint,
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      controller.undoLastPoint();
+                    },
                     isEnabled: state.history.isNotEmpty,
                   ),
                 ],
                 _ToolButton(
                   icon: Icons.close,
                   label: 'Cancelar',
-                  onTap: controller.stopDrawing,
+                  onTap: () {
+                    HapticFeedback.mediumImpact();
+                    controller.stopDrawing();
+                  },
                   color: AppColors.error,
                   isEnabled: true,
                 ),
@@ -134,9 +145,10 @@ class DrawingToolbar extends ConsumerWidget {
                   icon: Icons.check,
                   label: 'Salvar',
                   onTap: () {
-                    showDialog(
+                    HapticFeedback.heavyImpact();
+                    PremiumDialog.show(
                       context: context,
-                      builder: (context) => _SaveAreaDialog(
+                      builder: (context) => SaveAreaDialog(
                         onSave: (name) => controller.saveArea(name),
                       ),
                     );
@@ -170,7 +182,9 @@ class _ToolSegment extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
         padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? Colors.white : Colors.transparent,
@@ -178,7 +192,7 @@ class _ToolSegment extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 4,
                   ),
                 ]
@@ -250,51 +264,4 @@ class _ToolButton extends StatelessWidget {
   }
 }
 
-class _SaveAreaDialog extends StatefulWidget {
-  final Function(String) onSave;
-
-  const _SaveAreaDialog({required this.onSave});
-
-  @override
-  State<_SaveAreaDialog> createState() => _SaveAreaDialogState();
-}
-
-class _SaveAreaDialogState extends State<_SaveAreaDialog> {
-  final _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Salvar Área'),
-      content: TextField(
-        controller: _controller,
-        decoration: const InputDecoration(
-          labelText: 'Nome da Área',
-          hintText: 'Ex: Talhão 1 - Soja',
-        ),
-        autofocus: true,
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancelar'),
-        ),
-        FilledButton(
-          onPressed: () {
-            if (_controller.text.isNotEmpty) {
-              widget.onSave(_controller.text);
-              Navigator.pop(context);
-            }
-          },
-          child: const Text('Salvar'),
-        ),
-      ],
-    );
-  }
-}
+// Internal _SaveAreaDialog class removed.

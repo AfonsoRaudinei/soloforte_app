@@ -11,25 +11,33 @@ class HarvestListScreen extends StatefulWidget {
 }
 
 class _HarvestListScreenState extends State<HarvestListScreen> {
-  // Mock Data
+  // Mock Data aligned with new Harvest model
   final List<Harvest> _harvests = [
     Harvest(
       id: '1',
-      clientId: '1',
-      clientName: 'Fazenda Santa Rita',
-      date: DateTime.now().subtract(const Duration(days: 2)),
+      areaId: '1',
+      areaName: 'Talhão Norte',
+      plantedDate: DateTime.now().subtract(const Duration(days: 120)),
+      harvestDate: DateTime.now().subtract(const Duration(days: 2)),
       cropType: 'Soja',
-      quantityTon: 150.5,
-      storageLocation: 'Silo A',
+      plantedAreaHa: 50.0,
+      totalProductionBags: 3000.0,
+      totalCost: 150000.0,
+      status: 'harvested',
+      notes: ['Armazenado no Silo A'],
     ),
     Harvest(
       id: '2',
-      clientId: '2',
-      clientName: 'AgroTec Ltda',
-      date: DateTime.now().subtract(const Duration(days: 5)),
+      areaId: '2',
+      areaName: 'Lavoura Sul',
+      plantedDate: DateTime.now().subtract(const Duration(days: 100)),
+      harvestDate: null,
       cropType: 'Milho',
-      quantityTon: 89.0,
-      storageLocation: 'Silo B',
+      plantedAreaHa: 80.0,
+      totalProductionBags: 0.0,
+      totalCost: 200000.0,
+      status: 'active',
+      notes: [],
     ),
   ];
 
@@ -54,20 +62,29 @@ class _HarvestListScreenState extends State<HarvestListScreen> {
                     backgroundColor: Colors.orange.shade100,
                     child: const Icon(Icons.agriculture, color: Colors.orange),
                   ),
-                  title: Text(harvest.clientName),
+                  title: Text(harvest.areaName),
                   subtitle: Text(
-                    '${harvest.cropType} • ${DateFormat('dd/MM/yyyy').format(harvest.date)}',
+                    '${harvest.cropType} • ${harvest.status == 'active' ? 'Em andamento' : 'Colhido em ${DateFormat('dd/MM').format(harvest.harvestDate ?? DateTime.now())}'}',
                   ),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      if (harvest.totalProductionBags > 0)
+                        Text(
+                          '${harvest.totalProductionBags.toStringAsFixed(0)} sc',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      else
+                        const Text(
+                          '-- sc',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
                       Text(
-                        '${harvest.quantityTon.toStringAsFixed(1)} ton',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        harvest.storageLocation,
+                        '${harvest.plantedAreaHa} ha',
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.grey,

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/foundation.dart';
 import 'package:soloforte_app/core/config/sentinel_config.dart';
 import 'package:soloforte_app/features/ndvi/data/models/sentinel_token.dart';
@@ -279,3 +280,5 @@ class SentinelService {
     }
   }
 }
+
+final sentinelServiceProvider = Provider((ref) => SentinelService());

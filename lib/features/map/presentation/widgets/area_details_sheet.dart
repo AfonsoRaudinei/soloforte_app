@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../../domain/geo_area.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
+import 'package:flutter/services.dart';
+import 'package:soloforte_app/core/presentation/widgets/premium_dialog.dart';
+import 'package:soloforte_app/features/map/presentation/widgets/premium_glass_container.dart';
 import 'package:intl/intl.dart';
 
 class AreaDetailsSheet extends StatelessWidget {
@@ -20,19 +23,10 @@ class AreaDetailsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return PremiumGlassContainer(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 32),
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-            offset: Offset(0, -2),
-          ),
-        ],
-      ),
+      borderRadius: 24,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -93,25 +87,36 @@ class AreaDetailsSheet extends StatelessWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () {
+                    HapticFeedback.lightImpact();
                     // Confirm delete
-                    showDialog(
+                    PremiumDialog.show(
                       context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Excluir Área?'),
-                        content: const Text('Esta ação não pode ser desfeita.'),
+                      builder: (context) => PremiumDialog(
+                        title: 'Excluir Área?',
+                        content: const Text(
+                          'Esta ação não pode ser desfeita e removerá todos os dados associados.',
+                          textAlign: TextAlign.center,
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
+                            style: TextButton.styleFrom(
+                              foregroundColor: AppColors.textSecondary,
+                            ),
                             child: const Text('Cancelar'),
                           ),
                           FilledButton(
                             onPressed: () {
+                              HapticFeedback.mediumImpact();
                               Navigator.pop(context); // Close dialog
                               onDelete();
                               Navigator.pop(context); // Close sheet
                             },
                             style: FilledButton.styleFrom(
                               backgroundColor: AppColors.error,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                             child: const Text('Excluir'),
                           ),
@@ -129,17 +134,28 @@ class AreaDetailsSheet extends StatelessWidget {
                   ),
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: AppColors.error),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: FilledButton.icon(
-                  onPressed: onEdit,
+                  onPressed: () {
+                    HapticFeedback.selectionClick();
+                    onEdit();
+                  },
                   icon: const Icon(Icons.edit),
                   label: const Text('Editar'),
                   style: FilledButton.styleFrom(
                     backgroundColor: AppColors.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
               ),
@@ -147,12 +163,18 @@ class AreaDetailsSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           FilledButton.icon(
-            onPressed: onAnalyze,
+            onPressed: () {
+              HapticFeedback.selectionClick();
+              onAnalyze();
+            },
             icon: const Icon(Icons.satellite_alt),
             label: const Text('Análise NDVI & Satélite'),
             style: FilledButton.styleFrom(
               backgroundColor: AppColors.secondary,
               padding: const EdgeInsets.all(16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
           const SizedBox(height: 16),

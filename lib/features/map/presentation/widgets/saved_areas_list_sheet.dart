@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/map/application/drawing_controller.dart';
+import 'package:soloforte_app/features/map/presentation/widgets/premium_glass_container.dart';
 import 'package:soloforte_app/features/ndvi/presentation/ndvi_comparison_screen.dart';
 import 'package:soloforte_app/features/map/domain/geo_area.dart';
 
@@ -77,12 +79,10 @@ class _SavedAreasListSheetState extends ConsumerState<SavedAreasListSheet> {
       return area.name.toLowerCase().contains(_searchQuery.toLowerCase());
     }).toList();
 
-    return Container(
+    return PremiumGlassContainer(
       height: MediaQuery.of(context).size.height * 0.6,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
+      borderRadius: 24,
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 32),
       child: Column(
         children: [
           // Handle bar
@@ -109,13 +109,17 @@ class _SavedAreasListSheetState extends ConsumerState<SavedAreasListSheet> {
                 if (_isSelectionMode) ...[
                   TextButton(
                     onPressed: () {
+                      HapticFeedback.selectionClick();
                       _compareSelected();
                     },
                     child: Text('Comparar (${_selectedAreaIds.length})'),
                   ),
                 ],
                 IconButton(
-                  onPressed: _toggleSelectionMode,
+                  onPressed: () {
+                    HapticFeedback.selectionClick();
+                    _toggleSelectionMode();
+                  },
                   icon: Icon(
                     _isSelectionMode ? Icons.close : Icons.compare_arrows,
                   ),
@@ -184,9 +188,6 @@ class _SavedAreasListSheetState extends ConsumerState<SavedAreasListSheet> {
                         const SizedBox(height: 12),
                     itemBuilder: (context, index) {
                       final area = filteredAreas[index];
-                      // Reverse order to show newest first? Logic in where/toList might preserve order.
-                      // Usually savedAreas are appended, so last is newest.
-                      // Let's rely on list order.
 
                       return _AreaListItem(
                         area: area,
@@ -195,6 +196,7 @@ class _SavedAreasListSheetState extends ConsumerState<SavedAreasListSheet> {
                             _selectedAreaIds.contains(area.id),
                         isSelectionMode: _isSelectionMode,
                         onTap: () {
+                          HapticFeedback.lightImpact();
                           _onAreaTap(area);
                         },
                       );

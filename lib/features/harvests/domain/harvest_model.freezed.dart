@@ -15,8 +15,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Harvest {
 
- String get id; String get clientId; String get clientName; DateTime get date; String get cropType;// e.g., 'Soja', 'Milho', 'Algodão'
- double get quantityTon; String get storageLocation;
+ String get id; String get areaId; String get areaName; String get cropType;// e.g. "Soybean", "Corn"
+ DateTime get plantedDate; DateTime? get harvestDate; double get plantedAreaHa; double get totalProductionBags;// Sacas
+ double get totalCost; String get status;// 'planned', 'active', 'harvested'
+ List<String> get notes;
 /// Create a copy of Harvest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +31,16 @@ $HarvestCopyWith<Harvest> get copyWith => _$HarvestCopyWithImpl<Harvest>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Harvest&&(identical(other.id, id) || other.id == id)&&(identical(other.clientId, clientId) || other.clientId == clientId)&&(identical(other.clientName, clientName) || other.clientName == clientName)&&(identical(other.date, date) || other.date == date)&&(identical(other.cropType, cropType) || other.cropType == cropType)&&(identical(other.quantityTon, quantityTon) || other.quantityTon == quantityTon)&&(identical(other.storageLocation, storageLocation) || other.storageLocation == storageLocation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Harvest&&(identical(other.id, id) || other.id == id)&&(identical(other.areaId, areaId) || other.areaId == areaId)&&(identical(other.areaName, areaName) || other.areaName == areaName)&&(identical(other.cropType, cropType) || other.cropType == cropType)&&(identical(other.plantedDate, plantedDate) || other.plantedDate == plantedDate)&&(identical(other.harvestDate, harvestDate) || other.harvestDate == harvestDate)&&(identical(other.plantedAreaHa, plantedAreaHa) || other.plantedAreaHa == plantedAreaHa)&&(identical(other.totalProductionBags, totalProductionBags) || other.totalProductionBags == totalProductionBags)&&(identical(other.totalCost, totalCost) || other.totalCost == totalCost)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.notes, notes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,clientId,clientName,date,cropType,quantityTon,storageLocation);
+int get hashCode => Object.hash(runtimeType,id,areaId,areaName,cropType,plantedDate,harvestDate,plantedAreaHa,totalProductionBags,totalCost,status,const DeepCollectionEquality().hash(notes));
 
 @override
 String toString() {
-  return 'Harvest(id: $id, clientId: $clientId, clientName: $clientName, date: $date, cropType: $cropType, quantityTon: $quantityTon, storageLocation: $storageLocation)';
+  return 'Harvest(id: $id, areaId: $areaId, areaName: $areaName, cropType: $cropType, plantedDate: $plantedDate, harvestDate: $harvestDate, plantedAreaHa: $plantedAreaHa, totalProductionBags: $totalProductionBags, totalCost: $totalCost, status: $status, notes: $notes)';
 }
 
 
@@ -49,7 +51,7 @@ abstract mixin class $HarvestCopyWith<$Res>  {
   factory $HarvestCopyWith(Harvest value, $Res Function(Harvest) _then) = _$HarvestCopyWithImpl;
 @useResult
 $Res call({
- String id, String clientId, String clientName, DateTime date, String cropType, double quantityTon, String storageLocation
+ String id, String areaId, String areaName, String cropType, DateTime plantedDate, DateTime? harvestDate, double plantedAreaHa, double totalProductionBags, double totalCost, String status, List<String> notes
 });
 
 
@@ -66,16 +68,20 @@ class _$HarvestCopyWithImpl<$Res>
 
 /// Create a copy of Harvest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? clientId = null,Object? clientName = null,Object? date = null,Object? cropType = null,Object? quantityTon = null,Object? storageLocation = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? areaId = null,Object? areaName = null,Object? cropType = null,Object? plantedDate = null,Object? harvestDate = freezed,Object? plantedAreaHa = null,Object? totalProductionBags = null,Object? totalCost = null,Object? status = null,Object? notes = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,clientId: null == clientId ? _self.clientId : clientId // ignore: cast_nullable_to_non_nullable
-as String,clientName: null == clientName ? _self.clientName : clientName // ignore: cast_nullable_to_non_nullable
-as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
-as DateTime,cropType: null == cropType ? _self.cropType : cropType // ignore: cast_nullable_to_non_nullable
-as String,quantityTon: null == quantityTon ? _self.quantityTon : quantityTon // ignore: cast_nullable_to_non_nullable
-as double,storageLocation: null == storageLocation ? _self.storageLocation : storageLocation // ignore: cast_nullable_to_non_nullable
-as String,
+as String,areaId: null == areaId ? _self.areaId : areaId // ignore: cast_nullable_to_non_nullable
+as String,areaName: null == areaName ? _self.areaName : areaName // ignore: cast_nullable_to_non_nullable
+as String,cropType: null == cropType ? _self.cropType : cropType // ignore: cast_nullable_to_non_nullable
+as String,plantedDate: null == plantedDate ? _self.plantedDate : plantedDate // ignore: cast_nullable_to_non_nullable
+as DateTime,harvestDate: freezed == harvestDate ? _self.harvestDate : harvestDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,plantedAreaHa: null == plantedAreaHa ? _self.plantedAreaHa : plantedAreaHa // ignore: cast_nullable_to_non_nullable
+as double,totalProductionBags: null == totalProductionBags ? _self.totalProductionBags : totalProductionBags // ignore: cast_nullable_to_non_nullable
+as double,totalCost: null == totalCost ? _self.totalCost : totalCost // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -160,10 +166,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String clientId,  String clientName,  DateTime date,  String cropType,  double quantityTon,  String storageLocation)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String areaId,  String areaName,  String cropType,  DateTime plantedDate,  DateTime? harvestDate,  double plantedAreaHa,  double totalProductionBags,  double totalCost,  String status,  List<String> notes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Harvest() when $default != null:
-return $default(_that.id,_that.clientId,_that.clientName,_that.date,_that.cropType,_that.quantityTon,_that.storageLocation);case _:
+return $default(_that.id,_that.areaId,_that.areaName,_that.cropType,_that.plantedDate,_that.harvestDate,_that.plantedAreaHa,_that.totalProductionBags,_that.totalCost,_that.status,_that.notes);case _:
   return orElse();
 
 }
@@ -181,10 +187,10 @@ return $default(_that.id,_that.clientId,_that.clientName,_that.date,_that.cropTy
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String clientId,  String clientName,  DateTime date,  String cropType,  double quantityTon,  String storageLocation)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String areaId,  String areaName,  String cropType,  DateTime plantedDate,  DateTime? harvestDate,  double plantedAreaHa,  double totalProductionBags,  double totalCost,  String status,  List<String> notes)  $default,) {final _that = this;
 switch (_that) {
 case _Harvest():
-return $default(_that.id,_that.clientId,_that.clientName,_that.date,_that.cropType,_that.quantityTon,_that.storageLocation);case _:
+return $default(_that.id,_that.areaId,_that.areaName,_that.cropType,_that.plantedDate,_that.harvestDate,_that.plantedAreaHa,_that.totalProductionBags,_that.totalCost,_that.status,_that.notes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +207,10 @@ return $default(_that.id,_that.clientId,_that.clientName,_that.date,_that.cropTy
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String clientId,  String clientName,  DateTime date,  String cropType,  double quantityTon,  String storageLocation)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String areaId,  String areaName,  String cropType,  DateTime plantedDate,  DateTime? harvestDate,  double plantedAreaHa,  double totalProductionBags,  double totalCost,  String status,  List<String> notes)?  $default,) {final _that = this;
 switch (_that) {
 case _Harvest() when $default != null:
-return $default(_that.id,_that.clientId,_that.clientName,_that.date,_that.cropType,_that.quantityTon,_that.storageLocation);case _:
+return $default(_that.id,_that.areaId,_that.areaName,_that.cropType,_that.plantedDate,_that.harvestDate,_that.plantedAreaHa,_that.totalProductionBags,_that.totalCost,_that.status,_that.notes);case _:
   return null;
 
 }
@@ -216,17 +222,30 @@ return $default(_that.id,_that.clientId,_that.clientName,_that.date,_that.cropTy
 @JsonSerializable()
 
 class _Harvest implements Harvest {
-  const _Harvest({required this.id, required this.clientId, required this.clientName, required this.date, required this.cropType, required this.quantityTon, required this.storageLocation});
+  const _Harvest({required this.id, required this.areaId, required this.areaName, required this.cropType, required this.plantedDate, required this.harvestDate, required this.plantedAreaHa, required this.totalProductionBags, required this.totalCost, required this.status, final  List<String> notes = const []}): _notes = notes;
   factory _Harvest.fromJson(Map<String, dynamic> json) => _$HarvestFromJson(json);
 
 @override final  String id;
-@override final  String clientId;
-@override final  String clientName;
-@override final  DateTime date;
+@override final  String areaId;
+@override final  String areaName;
 @override final  String cropType;
-// e.g., 'Soja', 'Milho', 'Algodão'
-@override final  double quantityTon;
-@override final  String storageLocation;
+// e.g. "Soybean", "Corn"
+@override final  DateTime plantedDate;
+@override final  DateTime? harvestDate;
+@override final  double plantedAreaHa;
+@override final  double totalProductionBags;
+// Sacas
+@override final  double totalCost;
+@override final  String status;
+// 'planned', 'active', 'harvested'
+ final  List<String> _notes;
+// 'planned', 'active', 'harvested'
+@override@JsonKey() List<String> get notes {
+  if (_notes is EqualUnmodifiableListView) return _notes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_notes);
+}
+
 
 /// Create a copy of Harvest
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +260,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Harvest&&(identical(other.id, id) || other.id == id)&&(identical(other.clientId, clientId) || other.clientId == clientId)&&(identical(other.clientName, clientName) || other.clientName == clientName)&&(identical(other.date, date) || other.date == date)&&(identical(other.cropType, cropType) || other.cropType == cropType)&&(identical(other.quantityTon, quantityTon) || other.quantityTon == quantityTon)&&(identical(other.storageLocation, storageLocation) || other.storageLocation == storageLocation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Harvest&&(identical(other.id, id) || other.id == id)&&(identical(other.areaId, areaId) || other.areaId == areaId)&&(identical(other.areaName, areaName) || other.areaName == areaName)&&(identical(other.cropType, cropType) || other.cropType == cropType)&&(identical(other.plantedDate, plantedDate) || other.plantedDate == plantedDate)&&(identical(other.harvestDate, harvestDate) || other.harvestDate == harvestDate)&&(identical(other.plantedAreaHa, plantedAreaHa) || other.plantedAreaHa == plantedAreaHa)&&(identical(other.totalProductionBags, totalProductionBags) || other.totalProductionBags == totalProductionBags)&&(identical(other.totalCost, totalCost) || other.totalCost == totalCost)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._notes, _notes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,clientId,clientName,date,cropType,quantityTon,storageLocation);
+int get hashCode => Object.hash(runtimeType,id,areaId,areaName,cropType,plantedDate,harvestDate,plantedAreaHa,totalProductionBags,totalCost,status,const DeepCollectionEquality().hash(_notes));
 
 @override
 String toString() {
-  return 'Harvest(id: $id, clientId: $clientId, clientName: $clientName, date: $date, cropType: $cropType, quantityTon: $quantityTon, storageLocation: $storageLocation)';
+  return 'Harvest(id: $id, areaId: $areaId, areaName: $areaName, cropType: $cropType, plantedDate: $plantedDate, harvestDate: $harvestDate, plantedAreaHa: $plantedAreaHa, totalProductionBags: $totalProductionBags, totalCost: $totalCost, status: $status, notes: $notes)';
 }
 
 
@@ -261,7 +280,7 @@ abstract mixin class _$HarvestCopyWith<$Res> implements $HarvestCopyWith<$Res> {
   factory _$HarvestCopyWith(_Harvest value, $Res Function(_Harvest) _then) = __$HarvestCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String clientId, String clientName, DateTime date, String cropType, double quantityTon, String storageLocation
+ String id, String areaId, String areaName, String cropType, DateTime plantedDate, DateTime? harvestDate, double plantedAreaHa, double totalProductionBags, double totalCost, String status, List<String> notes
 });
 
 
@@ -278,16 +297,20 @@ class __$HarvestCopyWithImpl<$Res>
 
 /// Create a copy of Harvest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? clientId = null,Object? clientName = null,Object? date = null,Object? cropType = null,Object? quantityTon = null,Object? storageLocation = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? areaId = null,Object? areaName = null,Object? cropType = null,Object? plantedDate = null,Object? harvestDate = freezed,Object? plantedAreaHa = null,Object? totalProductionBags = null,Object? totalCost = null,Object? status = null,Object? notes = null,}) {
   return _then(_Harvest(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,clientId: null == clientId ? _self.clientId : clientId // ignore: cast_nullable_to_non_nullable
-as String,clientName: null == clientName ? _self.clientName : clientName // ignore: cast_nullable_to_non_nullable
-as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
-as DateTime,cropType: null == cropType ? _self.cropType : cropType // ignore: cast_nullable_to_non_nullable
-as String,quantityTon: null == quantityTon ? _self.quantityTon : quantityTon // ignore: cast_nullable_to_non_nullable
-as double,storageLocation: null == storageLocation ? _self.storageLocation : storageLocation // ignore: cast_nullable_to_non_nullable
-as String,
+as String,areaId: null == areaId ? _self.areaId : areaId // ignore: cast_nullable_to_non_nullable
+as String,areaName: null == areaName ? _self.areaName : areaName // ignore: cast_nullable_to_non_nullable
+as String,cropType: null == cropType ? _self.cropType : cropType // ignore: cast_nullable_to_non_nullable
+as String,plantedDate: null == plantedDate ? _self.plantedDate : plantedDate // ignore: cast_nullable_to_non_nullable
+as DateTime,harvestDate: freezed == harvestDate ? _self.harvestDate : harvestDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,plantedAreaHa: null == plantedAreaHa ? _self.plantedAreaHa : plantedAreaHa // ignore: cast_nullable_to_non_nullable
+as double,totalProductionBags: null == totalProductionBags ? _self.totalProductionBags : totalProductionBags // ignore: cast_nullable_to_non_nullable
+as double,totalCost: null == totalCost ? _self.totalCost : totalCost // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,notes: null == notes ? _self._notes : notes // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

@@ -33,6 +33,8 @@ import '../features/agenda/presentation/agenda_screen.dart';
 import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../features/settings/presentation/settings_screen.dart';
+
 // Keys
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -164,9 +166,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/dashboard/settings',
-            builder: (context, state) => const Scaffold(
-              body: Center(child: Text('Settings Placeholder')),
-            ),
+            builder: (context, state) => const SettingsScreen(),
           ),
           GoRoute(
             path: '/dashboard/executive',

@@ -8,20 +8,32 @@ part of 'harvest_model.dart';
 
 _Harvest _$HarvestFromJson(Map<String, dynamic> json) => _Harvest(
   id: json['id'] as String,
-  clientId: json['clientId'] as String,
-  clientName: json['clientName'] as String,
-  date: DateTime.parse(json['date'] as String),
+  areaId: json['areaId'] as String,
+  areaName: json['areaName'] as String,
   cropType: json['cropType'] as String,
-  quantityTon: (json['quantityTon'] as num).toDouble(),
-  storageLocation: json['storageLocation'] as String,
+  plantedDate: DateTime.parse(json['plantedDate'] as String),
+  harvestDate: json['harvestDate'] == null
+      ? null
+      : DateTime.parse(json['harvestDate'] as String),
+  plantedAreaHa: (json['plantedAreaHa'] as num).toDouble(),
+  totalProductionBags: (json['totalProductionBags'] as num).toDouble(),
+  totalCost: (json['totalCost'] as num).toDouble(),
+  status: json['status'] as String,
+  notes:
+      (json['notes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$HarvestToJson(_Harvest instance) => <String, dynamic>{
   'id': instance.id,
-  'clientId': instance.clientId,
-  'clientName': instance.clientName,
-  'date': instance.date.toIso8601String(),
+  'areaId': instance.areaId,
+  'areaName': instance.areaName,
   'cropType': instance.cropType,
-  'quantityTon': instance.quantityTon,
-  'storageLocation': instance.storageLocation,
+  'plantedDate': instance.plantedDate.toIso8601String(),
+  'harvestDate': instance.harvestDate?.toIso8601String(),
+  'plantedAreaHa': instance.plantedAreaHa,
+  'totalProductionBags': instance.totalProductionBags,
+  'totalCost': instance.totalCost,
+  'status': instance.status,
+  'notes': instance.notes,
 };

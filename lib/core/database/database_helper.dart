@@ -20,7 +20,26 @@ class DatabaseHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'soloforte.db');
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(
+      path,
+      version: 2,
+      onCreate: _createDB,
+      onUpgrade: _onUpgrade,
+    );
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute('''
+        CREATE TABLE weather_cache (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          latitude REAL NOT NULL,
+          longitude REAL NOT NULL,
+          data TEXT NOT NULL,
+          timestamp INTEGER NOT NULL
+        )
+      ''');
+    }
   }
 
   Future<void> _createDB(Database db, int version) async {
@@ -40,6 +59,17 @@ class DatabaseHelper {
     await db.execute(
       'CREATE INDEX idx_ndvi_area_date ON ndvi_cache (area_id, date)',
     );
+
+    // Weather Cache
+    await db.execute('''
+      CREATE TABLE weather_cache (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        data TEXT NOT NULL,
+        timestamp INTEGER NOT NULL
+      )
+    ''');
   }
 
   Future<void> close() async {

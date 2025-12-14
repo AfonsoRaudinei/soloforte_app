@@ -57,12 +57,14 @@ class _NDVIDetailScreenState extends ConsumerState<NDVIDetailScreen> {
     ).showSnackBar(const SnackBar(content: Text('Gerando relatório...')));
 
     try {
-      await ReportService().generateAndShareNDVIReport(
-        area: widget.area,
-        date: state.selectedDate!,
-        ndviImageBytes: state.currentImageBytes,
-        stats: state.currentStats,
-      );
+      await ref
+          .read(reportServiceProvider)
+          .generateAndShareNDVIReport(
+            area: widget.area,
+            date: state.selectedDate!,
+            ndviImageBytes: state.currentImageBytes,
+            stats: state.currentStats,
+          );
     } catch (e) {
       if (mounted)
         ScaffoldMessenger.of(
