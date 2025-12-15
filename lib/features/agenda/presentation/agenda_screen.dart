@@ -1,61 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/agenda/domain/event_model.dart';
-import 'package:soloforte_app/shared/widgets/app_card.dart';
-import 'package:intl/intl.dart';
+import 'package:soloforte_app/features/agenda/presentation/agenda_controller.dart';
 
-class AgendaScreen extends StatefulWidget {
+import 'package:soloforte_app/features/agenda/presentation/widgets/daily_timeline.dart';
+import 'package:soloforte_app/features/agenda/presentation/widgets/event_card.dart';
+import 'package:soloforte_app/features/agenda/presentation/extensions/event_type_extension.dart';
+
+class AgendaScreen extends ConsumerStatefulWidget {
   const AgendaScreen({super.key});
 
   @override
-  State<AgendaScreen> createState() => _AgendaScreenState();
+  ConsumerState<AgendaScreen> createState() => _AgendaScreenState();
 }
 
-class _AgendaScreenState extends State<AgendaScreen> {
+class _AgendaScreenState extends ConsumerState<AgendaScreen> {
   DateTime _selectedDay = DateTime.now();
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  bool _isTimelineView = false;
+  // Note: Local _events state is replaced by Riverpod Provider
 
-  // Mock Data
-  final List<Event> _events = [
-    Event(
-      id: '1',
-      title: 'Visita Técnica - Fazenda Santa Rita',
-      description: 'Análise de solo e recomendação de adubação.',
-      startTime: DateTime.now().add(const Duration(hours: 2)),
-      endTime: DateTime.now().add(const Duration(hours: 4)),
-      type: 'visit',
-      location: 'Fazenda Santa Rita',
-      status: 'scheduled',
-      participants: ['João Silva', 'Maria Souza'],
-    ),
-    Event(
-      id: '2',
-      title: 'Aplicação de Defensivos',
-      description: 'Supervisão de aplicação no Talhão 05.',
-      startTime: DateTime.now().add(const Duration(days: 1, hours: 9)),
-      endTime: DateTime.now().add(const Duration(days: 1, hours: 12)),
-      type: 'application',
-      location: 'Talhão 05',
-      status: 'scheduled',
-    ),
-    Event(
-      id: '3',
-      title: 'Reunião Semanal',
-      description: 'Alignamento da equipe.',
-      startTime: DateTime.now().subtract(const Duration(hours: 3)),
-      endTime: DateTime.now().subtract(const Duration(hours: 1)),
-      type: 'meeting',
-      location: 'Escritório Central',
-      status: 'completed',
-    ),
-  ];
+  Widget _buildViewToggleButton({
+    required IconData icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : null,
+        ),
+        child: Icon(
+          icon,
+          size: 20,
+          color: isSelected ? AppColors.primary : Colors.grey,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Filter events for selected day (ignoring time for simplicity in this mock filter)
-    final dailyEvents = _events
-        .where((e) => isSameDay(e.startTime, _selectedDay))
-        .toList();
+    final eventsState = ref.watch(agendaControllerProvider);
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -74,214 +79,154 @@ class _AgendaScreenState extends State<AgendaScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Novo Evento (Mock)')));
+          context.push('/dashboard/calendar/new', extra: _selectedDay);
+          // Provider automatically updates UI when event is added
         },
         backgroundColor: AppColors.primary,
         child: const Icon(Icons.add, color: Colors.white),
       ),
-      body: Column(
-        children: [
-          // Weekly Calendar Strip (Mock)
-          Container(
-            height: 100,
-            color: Colors.white,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 14, // 2 weeks
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              itemBuilder: (context, index) {
-                final date = DateTime.now()
-                    .subtract(const Duration(days: 3))
-                    .add(Duration(days: index));
-                final isSelected = isSameDay(date, _selectedDay);
-                return GestureDetector(
-                  onTap: () {
+      body: eventsState.when(
+        data: (allEvents) {
+          final dailyEvents = allEvents
+              .where((e) => isSameDay(e.startTime, _selectedDay))
+              .toList();
+          // Sort by start time
+          dailyEvents.sort((a, b) => a.startTime.compareTo(b.startTime));
+
+          return Column(
+            children: [
+              // Month Calendar
+              TableCalendar<Event>(
+                firstDay: DateTime.now().subtract(const Duration(days: 365)),
+                lastDay: DateTime.now().add(const Duration(days: 365)),
+                focusedDay: _selectedDay,
+                currentDay: DateTime.now(),
+                calendarFormat: _calendarFormat,
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                onDaySelected: (selectedDay, focusedDay) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                  });
+                },
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
                     setState(() {
-                      _selectedDay = date;
+                      _calendarFormat = format;
                     });
-                  },
-                  child: Container(
-                    width: 60,
-                    margin: const EdgeInsets.only(right: 12),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppColors.primary
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(12),
-                      border: isSelected
-                          ? null
-                          : Border.all(color: Colors.grey.shade300),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateFormat(
-                            'E',
-                            'pt_BR',
-                          ).format(date).toUpperCase(), // Weekday
-                          style: AppTypography.caption.copyWith(
-                            color: isSelected ? Colors.white : Colors.grey,
-                            fontWeight: AppTypography.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          date.day.toString(),
-                          style: AppTypography.h2.copyWith(
-                            color: isSelected
-                                ? Colors.white
-                                : AppColors.textPrimary,
-                          ),
-                        ),
-                      ],
-                    ),
+                  }
+                },
+                eventLoader: (day) {
+                  return allEvents
+                      .where((e) => isSameDay(e.startTime, day))
+                      .toList();
+                },
+
+                // Styles & Builders
+                headerStyle: HeaderStyle(
+                  formatButtonVisible: true,
+                  titleCentered: true,
+                  formatButtonShowsNext: false,
+                  formatButtonDecoration: BoxDecoration(
+                    border: Border.all(color: AppColors.primary),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                );
-              },
-            ),
-          ),
-          const Divider(height: 1),
-
-          // Events List
-          Expanded(
-            child: dailyEvents.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.event_busy,
-                          size: 64,
-                          color: Colors.grey[300],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Nenhum evento para este dia.',
-                          style: AppTypography.bodyLarge.copyWith(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: dailyEvents.length,
-                    itemBuilder: (context, index) {
-                      return _EventCard(event: dailyEvents[index]);
-                    },
-                  ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  bool isSameDay(DateTime a, DateTime b) {
-    return a.year == b.year && a.month == b.month && a.day == b.day;
-  }
-}
-
-class _EventCard extends StatelessWidget {
-  final Event event;
-
-  const _EventCard({required this.event});
-
-  Color _getTypeColor(String type) {
-    switch (type) {
-      case 'visit':
-        return AppColors.primary;
-      case 'application':
-        return AppColors.alert; // Warning/Alert color for caution
-      case 'harvest':
-        return AppColors.secondary;
-      case 'meeting':
-        return Colors.purple;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Time Column
-          SizedBox(
-            width: 60,
-            child: Column(
-              children: [
-                Text(
-                  DateFormat('HH:mm').format(event.startTime),
-                  style: AppTypography.bodyMedium.copyWith(
+                  formatButtonTextStyle: AppTypography.caption.copyWith(
+                    color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
+                  titleTextStyle: AppTypography.h3,
                 ),
-                Text(
-                  DateFormat('HH:mm').format(event.endTime),
-                  style: AppTypography.caption,
+                calendarStyle: CalendarStyle(
+                  selectedDecoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  todayDecoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.3),
+                    shape: BoxShape.circle,
+                  ),
+                  markersMaxCount: 4,
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
 
-          // Card
-          Expanded(
-            child: AppCard(
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Detalhes do Evento (Mock)')),
-                );
-              },
-              child: IntrinsicHeight(
+                // Custom Marker Builder for Colored Dots
+                calendarBuilders: CalendarBuilders(
+                  markerBuilder: (context, day, events) {
+                    if (events.isEmpty) return null;
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: events.take(4).map((event) {
+                        return Container(
+                          width: 6,
+                          height: 6,
+                          margin: const EdgeInsets.symmetric(horizontal: 1.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: event.type.color,
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
+              ),
+
+              const Divider(height: 1),
+
+              // Events List Header & View Toggle
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: Row(
                   children: [
-                    Container(
-                      width: 4,
-                      decoration: BoxDecoration(
-                        color: _getTypeColor(event.type),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            event.title,
-                            style: AppTypography.h4.copyWith(fontSize: 16),
+                            DateFormat(
+                              "d 'de' MMMM",
+                              'pt_BR',
+                            ).format(_selectedDay),
+                            style: AppTypography.h3,
                           ),
-                          const SizedBox(height: 4),
                           Text(
-                            event.description,
-                            style: AppTypography.bodySmall,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                size: 14,
-                                color: Colors.grey[600],
-                              ),
-                              const SizedBox(width: 4),
-                              Expanded(
-                                child: Text(
-                                  event.location,
-                                  style: AppTypography.caption,
+                            DateFormat("EEEE", 'pt_BR')
+                                .format(_selectedDay)
+                                .replaceFirst(
+                                  DateFormat(
+                                    "EEEE",
+                                    'pt_BR',
+                                  ).format(_selectedDay)[0],
+                                  DateFormat(
+                                    "EEEE",
+                                    'pt_BR',
+                                  ).format(_selectedDay)[0].toUpperCase(),
                                 ),
-                              ),
-                            ],
+                            style: AppTypography.bodyMedium.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _buildViewToggleButton(
+                            icon: Icons.list,
+                            isSelected: !_isTimelineView,
+                            onTap: () =>
+                                setState(() => _isTimelineView = false),
+                          ),
+                          _buildViewToggleButton(
+                            icon: Icons.schedule,
+                            isSelected: _isTimelineView,
+                            onTap: () => setState(() => _isTimelineView = true),
                           ),
                         ],
                       ),
@@ -289,9 +234,142 @@ class _EventCard extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ),
-        ],
+
+              // Events Content
+              Expanded(
+                child: dailyEvents.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.event_note,
+                              size: 64,
+                              color: Colors.grey[300],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'Nenhum evento agendado',
+                              style: AppTypography.bodyLarge.copyWith(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Toque no + para adicionar',
+                              style: AppTypography.caption,
+                            ),
+                          ],
+                        ),
+                      )
+                    : _isTimelineView
+                    ? DailyTimeline(
+                        events: dailyEvents,
+                        date: _selectedDay,
+                        onEventTap: (event) {
+                          context.go(
+                            '/dashboard/calendar/detail',
+                            extra: event,
+                          );
+                        },
+                        onEventRescheduled: (event, newStartTime) {
+                          final duration = event.endTime.difference(
+                            event.startTime,
+                          );
+                          final newEndTime = newStartTime.add(duration);
+
+                          final updatedEvent = event.copyWith(
+                            startTime: newStartTime,
+                            endTime: newEndTime,
+                            status: EventStatus.rescheduled,
+                          );
+
+                          ref
+                              .read(agendaControllerProvider.notifier)
+                              .updateEvent(updatedEvent);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Evento reagendado com sucesso!'),
+                            ),
+                          );
+                        },
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        itemCount: dailyEvents.length,
+                        itemBuilder: (context, index) {
+                          final event = dailyEvents[index];
+                          return Slidable(
+                            key: ValueKey(event.id),
+                            startActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Adiar/Reagendar: ${event.title}',
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  backgroundColor: Colors.orange,
+                                  foregroundColor: Colors.white,
+                                  icon: Icons.access_time,
+                                  label: 'Adiar',
+                                  borderRadius: const BorderRadius.horizontal(
+                                    left: Radius.circular(12),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    ref
+                                        .read(agendaControllerProvider.notifier)
+                                        .deleteEvent(event.id);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Cancelado: ${event.title}',
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  backgroundColor: Colors.red,
+                                  foregroundColor: Colors.white,
+                                  icon: Icons.cancel,
+                                  label: 'Cancelar',
+                                  borderRadius: const BorderRadius.horizontal(
+                                    right: Radius.circular(12),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            child: EventCard(
+                              event: event,
+                              onTap: () => context.go(
+                                '/dashboard/calendar/detail',
+                                extra: event,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('Erro: $error')),
       ),
     );
   }

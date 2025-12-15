@@ -33,6 +33,10 @@ import '../features/clients/presentation/screens/client_detail_screen.dart';
 import '../features/clients/presentation/screens/client_form_screen.dart';
 import '../features/agenda/presentation/agenda_screen.dart';
 import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:soloforte_app/features/agenda/presentation/event_detail_screen.dart';
+
+import 'package:soloforte_app/features/agenda/presentation/event_form_screen.dart';
+import 'package:soloforte_app/features/agenda/domain/event_model.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../features/settings/presentation/settings_screen.dart';
@@ -157,6 +161,24 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/dashboard/calendar',
             builder: (context, state) => const AgendaScreen(),
+            routes: [
+              GoRoute(
+                path: 'detail',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  final event = state.extra as Event;
+                  return EventDetailScreen(event: event);
+                },
+              ),
+              GoRoute(
+                path: 'new',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  final initialDate = state.extra as DateTime?;
+                  return EventFormScreen(initialDate: initialDate);
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: '/dashboard/ndvi',
