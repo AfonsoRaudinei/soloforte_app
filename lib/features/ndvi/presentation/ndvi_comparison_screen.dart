@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:intl/intl.dart';
-import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/features/map/domain/geo_area.dart';
 import 'package:soloforte_app/features/map/application/geometry_utils.dart';
 import 'package:soloforte_app/features/ndvi/application/ndvi_comparison_controller.dart';

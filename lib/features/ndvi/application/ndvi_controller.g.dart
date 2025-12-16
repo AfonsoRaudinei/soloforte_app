@@ -6,58 +6,21 @@ part of 'ndvi_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, type=warning
-
-@ProviderFor(NdviController)
-const ndviControllerProvider = NdviControllerProvider._();
-
-final class NdviControllerProvider
-    extends $NotifierProvider<NdviController, NdviState> {
-  const NdviControllerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'ndviControllerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$ndviControllerHash();
-
-  @$internal
-  @override
-  NdviController create() => NdviController();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(NdviState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<NdviState>(value),
-    );
-  }
-}
-
 String _$ndviControllerHash() => r'a2a5158bd8937605e94046e152c372f1e9b8fa5b';
 
-abstract class _$NdviController extends $Notifier<NdviState> {
-  NdviState build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<NdviState, NdviState>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<NdviState, NdviState>,
-              NdviState,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
+/// See also [NdviController].
+@ProviderFor(NdviController)
+final ndviControllerProvider =
+    AutoDisposeNotifierProvider<NdviController, NdviState>.internal(
+      NdviController.new,
+      name: r'ndviControllerProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$ndviControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$NdviController = AutoDisposeNotifier<NdviState>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -40,8 +40,9 @@ class DrawingToolbar extends ConsumerWidget {
 
     bool canSave = false;
     if (isPolygon) canSave = state.currentPoints.length >= 3;
-    if (isCircle)
+    if (isCircle) {
       canSave = state.circleCenter != null && state.circleRadius > 0;
+    }
     if (isRectangle) canSave = state.currentPoints.length >= 4;
 
     String instructionText = 'Toque no mapa para adicionar vértices';

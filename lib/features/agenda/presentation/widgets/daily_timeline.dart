@@ -35,8 +35,8 @@ class DailyTimeline extends StatelessWidget {
               final hour = startHour + index;
 
               return DragTarget<Event>(
-                onWillAccept: (data) => true,
-                onAccept: (event) {
+                onWillAcceptWithDetails: (data) => true,
+                onAcceptWithDetails: (event) {
                   // Calcular nova hora de início
                   final newStartTime = DateTime(
                     date.year,

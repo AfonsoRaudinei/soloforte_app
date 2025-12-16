@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,305 +9,511 @@ part of 'visit_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+Visit _$VisitFromJson(Map<String, dynamic> json) {
+  return _Visit.fromJson(json);
+}
 
 /// @nodoc
 mixin _$Visit {
-
- String get id; Client get client; DateTime get checkInTime; DateTime? get checkOutTime; double get latitude; double get longitude; String? get checkOutNotes;
-/// Create a copy of Visit
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$VisitCopyWith<Visit> get copyWith => _$VisitCopyWithImpl<Visit>(this as Visit, _$identity);
+  String get id => throw _privateConstructorUsedError;
+  Client get client => throw _privateConstructorUsedError;
+  DateTime get checkInTime => throw _privateConstructorUsedError;
+  DateTime? get checkOutTime => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+  String? get checkOutNotes => throw _privateConstructorUsedError;
+  List<String> get photos => throw _privateConstructorUsedError;
+  List<String> get occurrenceIds => throw _privateConstructorUsedError;
+  Map<String, bool> get checklist => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  List<LatLng> get routePoints => throw _privateConstructorUsedError;
+  double get distanceTraveled => throw _privateConstructorUsedError;
+  String? get eventId => throw _privateConstructorUsedError;
+  VisitStatus get status => throw _privateConstructorUsedError;
 
   /// Serializes this Visit to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Visit&&(identical(other.id, id) || other.id == id)&&(identical(other.client, client) || other.client == client)&&(identical(other.checkInTime, checkInTime) || other.checkInTime == checkInTime)&&(identical(other.checkOutTime, checkOutTime) || other.checkOutTime == checkOutTime)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.checkOutNotes, checkOutNotes) || other.checkOutNotes == checkOutNotes));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,client,checkInTime,checkOutTime,latitude,longitude,checkOutNotes);
-
-@override
-String toString() {
-  return 'Visit(id: $id, client: $client, checkInTime: $checkInTime, checkOutTime: $checkOutTime, latitude: $latitude, longitude: $longitude, checkOutNotes: $checkOutNotes)';
-}
-
-
+  /// Create a copy of Visit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $VisitCopyWith<Visit> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $VisitCopyWith<$Res>  {
-  factory $VisitCopyWith(Visit value, $Res Function(Visit) _then) = _$VisitCopyWithImpl;
-@useResult
-$Res call({
- String id, Client client, DateTime checkInTime, DateTime? checkOutTime, double latitude, double longitude, String? checkOutNotes
-});
-
-
-$ClientCopyWith<$Res> get client;
-
-}
-/// @nodoc
-class _$VisitCopyWithImpl<$Res>
-    implements $VisitCopyWith<$Res> {
-  _$VisitCopyWithImpl(this._self, this._then);
-
-  final Visit _self;
-  final $Res Function(Visit) _then;
-
-/// Create a copy of Visit
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? client = null,Object? checkInTime = null,Object? checkOutTime = freezed,Object? latitude = null,Object? longitude = null,Object? checkOutNotes = freezed,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,client: null == client ? _self.client : client // ignore: cast_nullable_to_non_nullable
-as Client,checkInTime: null == checkInTime ? _self.checkInTime : checkInTime // ignore: cast_nullable_to_non_nullable
-as DateTime,checkOutTime: freezed == checkOutTime ? _self.checkOutTime : checkOutTime // ignore: cast_nullable_to_non_nullable
-as DateTime?,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
-as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
-as double,checkOutNotes: freezed == checkOutNotes ? _self.checkOutNotes : checkOutNotes // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-/// Create a copy of Visit
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ClientCopyWith<$Res> get client {
-  
-  return $ClientCopyWith<$Res>(_self.client, (value) {
-    return _then(_self.copyWith(client: value));
+abstract class $VisitCopyWith<$Res> {
+  factory $VisitCopyWith(Visit value, $Res Function(Visit) then) =
+      _$VisitCopyWithImpl<$Res, Visit>;
+  @useResult
+  $Res call({
+    String id,
+    Client client,
+    DateTime checkInTime,
+    DateTime? checkOutTime,
+    double latitude,
+    double longitude,
+    String? checkOutNotes,
+    List<String> photos,
+    List<String> occurrenceIds,
+    Map<String, bool> checklist,
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    List<LatLng> routePoints,
+    double distanceTraveled,
+    String? eventId,
+    VisitStatus status,
   });
-}
-}
 
-
-/// Adds pattern-matching-related methods to [Visit].
-extension VisitPatterns on Visit {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Visit value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _Visit() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Visit value)  $default,){
-final _that = this;
-switch (_that) {
-case _Visit():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Visit value)?  $default,){
-final _that = this;
-switch (_that) {
-case _Visit() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Client client,  DateTime checkInTime,  DateTime? checkOutTime,  double latitude,  double longitude,  String? checkOutNotes)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _Visit() when $default != null:
-return $default(_that.id,_that.client,_that.checkInTime,_that.checkOutTime,_that.latitude,_that.longitude,_that.checkOutNotes);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Client client,  DateTime checkInTime,  DateTime? checkOutTime,  double latitude,  double longitude,  String? checkOutNotes)  $default,) {final _that = this;
-switch (_that) {
-case _Visit():
-return $default(_that.id,_that.client,_that.checkInTime,_that.checkOutTime,_that.latitude,_that.longitude,_that.checkOutNotes);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Client client,  DateTime checkInTime,  DateTime? checkOutTime,  double latitude,  double longitude,  String? checkOutNotes)?  $default,) {final _that = this;
-switch (_that) {
-case _Visit() when $default != null:
-return $default(_that.id,_that.client,_that.checkInTime,_that.checkOutTime,_that.latitude,_that.longitude,_that.checkOutNotes);case _:
-  return null;
-
-}
+  $ClientCopyWith<$Res> get client;
 }
 
+/// @nodoc
+class _$VisitCopyWithImpl<$Res, $Val extends Visit>
+    implements $VisitCopyWith<$Res> {
+  _$VisitCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Visit
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? client = null,
+    Object? checkInTime = null,
+    Object? checkOutTime = freezed,
+    Object? latitude = null,
+    Object? longitude = null,
+    Object? checkOutNotes = freezed,
+    Object? photos = null,
+    Object? occurrenceIds = null,
+    Object? checklist = null,
+    Object? routePoints = null,
+    Object? distanceTraveled = null,
+    Object? eventId = freezed,
+    Object? status = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            client: null == client
+                ? _value.client
+                : client // ignore: cast_nullable_to_non_nullable
+                      as Client,
+            checkInTime: null == checkInTime
+                ? _value.checkInTime
+                : checkInTime // ignore: cast_nullable_to_non_nullable
+                      as DateTime,
+            checkOutTime: freezed == checkOutTime
+                ? _value.checkOutTime
+                : checkOutTime // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            latitude: null == latitude
+                ? _value.latitude
+                : latitude // ignore: cast_nullable_to_non_nullable
+                      as double,
+            longitude: null == longitude
+                ? _value.longitude
+                : longitude // ignore: cast_nullable_to_non_nullable
+                      as double,
+            checkOutNotes: freezed == checkOutNotes
+                ? _value.checkOutNotes
+                : checkOutNotes // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            photos: null == photos
+                ? _value.photos
+                : photos // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            occurrenceIds: null == occurrenceIds
+                ? _value.occurrenceIds
+                : occurrenceIds // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            checklist: null == checklist
+                ? _value.checklist
+                : checklist // ignore: cast_nullable_to_non_nullable
+                      as Map<String, bool>,
+            routePoints: null == routePoints
+                ? _value.routePoints
+                : routePoints // ignore: cast_nullable_to_non_nullable
+                      as List<LatLng>,
+            distanceTraveled: null == distanceTraveled
+                ? _value.distanceTraveled
+                : distanceTraveled // ignore: cast_nullable_to_non_nullable
+                      as double,
+            eventId: freezed == eventId
+                ? _value.eventId
+                : eventId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as VisitStatus,
+          )
+          as $Val,
+    );
+  }
+
+  /// Create a copy of Visit
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ClientCopyWith<$Res> get client {
+    return $ClientCopyWith<$Res>(_value.client, (value) {
+      return _then(_value.copyWith(client: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$VisitImplCopyWith<$Res> implements $VisitCopyWith<$Res> {
+  factory _$$VisitImplCopyWith(
+    _$VisitImpl value,
+    $Res Function(_$VisitImpl) then,
+  ) = __$$VisitImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String id,
+    Client client,
+    DateTime checkInTime,
+    DateTime? checkOutTime,
+    double latitude,
+    double longitude,
+    String? checkOutNotes,
+    List<String> photos,
+    List<String> occurrenceIds,
+    Map<String, bool> checklist,
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    List<LatLng> routePoints,
+    double distanceTraveled,
+    String? eventId,
+    VisitStatus status,
+  });
+
+  @override
+  $ClientCopyWith<$Res> get client;
+}
+
+/// @nodoc
+class __$$VisitImplCopyWithImpl<$Res>
+    extends _$VisitCopyWithImpl<$Res, _$VisitImpl>
+    implements _$$VisitImplCopyWith<$Res> {
+  __$$VisitImplCopyWithImpl(
+    _$VisitImpl _value,
+    $Res Function(_$VisitImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of Visit
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? client = null,
+    Object? checkInTime = null,
+    Object? checkOutTime = freezed,
+    Object? latitude = null,
+    Object? longitude = null,
+    Object? checkOutNotes = freezed,
+    Object? photos = null,
+    Object? occurrenceIds = null,
+    Object? checklist = null,
+    Object? routePoints = null,
+    Object? distanceTraveled = null,
+    Object? eventId = freezed,
+    Object? status = null,
+  }) {
+    return _then(
+      _$VisitImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        client: null == client
+            ? _value.client
+            : client // ignore: cast_nullable_to_non_nullable
+                  as Client,
+        checkInTime: null == checkInTime
+            ? _value.checkInTime
+            : checkInTime // ignore: cast_nullable_to_non_nullable
+                  as DateTime,
+        checkOutTime: freezed == checkOutTime
+            ? _value.checkOutTime
+            : checkOutTime // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        latitude: null == latitude
+            ? _value.latitude
+            : latitude // ignore: cast_nullable_to_non_nullable
+                  as double,
+        longitude: null == longitude
+            ? _value.longitude
+            : longitude // ignore: cast_nullable_to_non_nullable
+                  as double,
+        checkOutNotes: freezed == checkOutNotes
+            ? _value.checkOutNotes
+            : checkOutNotes // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        photos: null == photos
+            ? _value._photos
+            : photos // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        occurrenceIds: null == occurrenceIds
+            ? _value._occurrenceIds
+            : occurrenceIds // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        checklist: null == checklist
+            ? _value._checklist
+            : checklist // ignore: cast_nullable_to_non_nullable
+                  as Map<String, bool>,
+        routePoints: null == routePoints
+            ? _value._routePoints
+            : routePoints // ignore: cast_nullable_to_non_nullable
+                  as List<LatLng>,
+        distanceTraveled: null == distanceTraveled
+            ? _value.distanceTraveled
+            : distanceTraveled // ignore: cast_nullable_to_non_nullable
+                  as double,
+        eventId: freezed == eventId
+            ? _value.eventId
+            : eventId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as VisitStatus,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$VisitImpl implements _Visit {
+  const _$VisitImpl({
+    required this.id,
+    required this.client,
+    required this.checkInTime,
+    this.checkOutTime,
+    required this.latitude,
+    required this.longitude,
+    this.checkOutNotes,
+    final List<String> photos = const [],
+    final List<String> occurrenceIds = const [],
+    final Map<String, bool> checklist = const {},
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    final List<LatLng> routePoints = const [],
+    this.distanceTraveled = 0.0,
+    this.eventId,
+    this.status = VisitStatus.ongoing,
+  }) : _photos = photos,
+       _occurrenceIds = occurrenceIds,
+       _checklist = checklist,
+       _routePoints = routePoints;
 
-class _Visit implements Visit {
-  const _Visit({required this.id, required this.client, required this.checkInTime, this.checkOutTime, required this.latitude, required this.longitude, this.checkOutNotes});
-  factory _Visit.fromJson(Map<String, dynamic> json) => _$VisitFromJson(json);
+  factory _$VisitImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VisitImplFromJson(json);
 
-@override final  String id;
-@override final  Client client;
-@override final  DateTime checkInTime;
-@override final  DateTime? checkOutTime;
-@override final  double latitude;
-@override final  double longitude;
-@override final  String? checkOutNotes;
+  @override
+  final String id;
+  @override
+  final Client client;
+  @override
+  final DateTime checkInTime;
+  @override
+  final DateTime? checkOutTime;
+  @override
+  final double latitude;
+  @override
+  final double longitude;
+  @override
+  final String? checkOutNotes;
+  final List<String> _photos;
+  @override
+  @JsonKey()
+  List<String> get photos {
+    if (_photos is EqualUnmodifiableListView) return _photos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_photos);
+  }
 
-/// Create a copy of Visit
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$VisitCopyWith<_Visit> get copyWith => __$VisitCopyWithImpl<_Visit>(this, _$identity);
+  final List<String> _occurrenceIds;
+  @override
+  @JsonKey()
+  List<String> get occurrenceIds {
+    if (_occurrenceIds is EqualUnmodifiableListView) return _occurrenceIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_occurrenceIds);
+  }
 
-@override
-Map<String, dynamic> toJson() {
-  return _$VisitToJson(this, );
+  final Map<String, bool> _checklist;
+  @override
+  @JsonKey()
+  Map<String, bool> get checklist {
+    if (_checklist is EqualUnmodifiableMapView) return _checklist;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_checklist);
+  }
+
+  final List<LatLng> _routePoints;
+  @override
+  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  List<LatLng> get routePoints {
+    if (_routePoints is EqualUnmodifiableListView) return _routePoints;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_routePoints);
+  }
+
+  @override
+  @JsonKey()
+  final double distanceTraveled;
+  @override
+  final String? eventId;
+  @override
+  @JsonKey()
+  final VisitStatus status;
+
+  @override
+  String toString() {
+    return 'Visit(id: $id, client: $client, checkInTime: $checkInTime, checkOutTime: $checkOutTime, latitude: $latitude, longitude: $longitude, checkOutNotes: $checkOutNotes, photos: $photos, occurrenceIds: $occurrenceIds, checklist: $checklist, routePoints: $routePoints, distanceTraveled: $distanceTraveled, eventId: $eventId, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VisitImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.client, client) || other.client == client) &&
+            (identical(other.checkInTime, checkInTime) ||
+                other.checkInTime == checkInTime) &&
+            (identical(other.checkOutTime, checkOutTime) ||
+                other.checkOutTime == checkOutTime) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.checkOutNotes, checkOutNotes) ||
+                other.checkOutNotes == checkOutNotes) &&
+            const DeepCollectionEquality().equals(other._photos, _photos) &&
+            const DeepCollectionEquality().equals(
+              other._occurrenceIds,
+              _occurrenceIds,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._checklist,
+              _checklist,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._routePoints,
+              _routePoints,
+            ) &&
+            (identical(other.distanceTraveled, distanceTraveled) ||
+                other.distanceTraveled == distanceTraveled) &&
+            (identical(other.eventId, eventId) || other.eventId == eventId) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    client,
+    checkInTime,
+    checkOutTime,
+    latitude,
+    longitude,
+    checkOutNotes,
+    const DeepCollectionEquality().hash(_photos),
+    const DeepCollectionEquality().hash(_occurrenceIds),
+    const DeepCollectionEquality().hash(_checklist),
+    const DeepCollectionEquality().hash(_routePoints),
+    distanceTraveled,
+    eventId,
+    status,
+  );
+
+  /// Create a copy of Visit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VisitImplCopyWith<_$VisitImpl> get copyWith =>
+      __$$VisitImplCopyWithImpl<_$VisitImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$VisitImplToJson(this);
+  }
 }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Visit&&(identical(other.id, id) || other.id == id)&&(identical(other.client, client) || other.client == client)&&(identical(other.checkInTime, checkInTime) || other.checkInTime == checkInTime)&&(identical(other.checkOutTime, checkOutTime) || other.checkOutTime == checkOutTime)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.checkOutNotes, checkOutNotes) || other.checkOutNotes == checkOutNotes));
+abstract class _Visit implements Visit {
+  const factory _Visit({
+    required final String id,
+    required final Client client,
+    required final DateTime checkInTime,
+    final DateTime? checkOutTime,
+    required final double latitude,
+    required final double longitude,
+    final String? checkOutNotes,
+    final List<String> photos,
+    final List<String> occurrenceIds,
+    final Map<String, bool> checklist,
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    final List<LatLng> routePoints,
+    final double distanceTraveled,
+    final String? eventId,
+    final VisitStatus status,
+  }) = _$VisitImpl;
+
+  factory _Visit.fromJson(Map<String, dynamic> json) = _$VisitImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  Client get client;
+  @override
+  DateTime get checkInTime;
+  @override
+  DateTime? get checkOutTime;
+  @override
+  double get latitude;
+  @override
+  double get longitude;
+  @override
+  String? get checkOutNotes;
+  @override
+  List<String> get photos;
+  @override
+  List<String> get occurrenceIds;
+  @override
+  Map<String, bool> get checklist;
+  @override
+  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  List<LatLng> get routePoints;
+  @override
+  double get distanceTraveled;
+  @override
+  String? get eventId;
+  @override
+  VisitStatus get status;
+
+  /// Create a copy of Visit
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VisitImplCopyWith<_$VisitImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,client,checkInTime,checkOutTime,latitude,longitude,checkOutNotes);
-
-@override
-String toString() {
-  return 'Visit(id: $id, client: $client, checkInTime: $checkInTime, checkOutTime: $checkOutTime, latitude: $latitude, longitude: $longitude, checkOutNotes: $checkOutNotes)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$VisitCopyWith<$Res> implements $VisitCopyWith<$Res> {
-  factory _$VisitCopyWith(_Visit value, $Res Function(_Visit) _then) = __$VisitCopyWithImpl;
-@override @useResult
-$Res call({
- String id, Client client, DateTime checkInTime, DateTime? checkOutTime, double latitude, double longitude, String? checkOutNotes
-});
-
-
-@override $ClientCopyWith<$Res> get client;
-
-}
-/// @nodoc
-class __$VisitCopyWithImpl<$Res>
-    implements _$VisitCopyWith<$Res> {
-  __$VisitCopyWithImpl(this._self, this._then);
-
-  final _Visit _self;
-  final $Res Function(_Visit) _then;
-
-/// Create a copy of Visit
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? client = null,Object? checkInTime = null,Object? checkOutTime = freezed,Object? latitude = null,Object? longitude = null,Object? checkOutNotes = freezed,}) {
-  return _then(_Visit(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,client: null == client ? _self.client : client // ignore: cast_nullable_to_non_nullable
-as Client,checkInTime: null == checkInTime ? _self.checkInTime : checkInTime // ignore: cast_nullable_to_non_nullable
-as DateTime,checkOutTime: freezed == checkOutTime ? _self.checkOutTime : checkOutTime // ignore: cast_nullable_to_non_nullable
-as DateTime?,latitude: null == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
-as double,longitude: null == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
-as double,checkOutNotes: freezed == checkOutNotes ? _self.checkOutNotes : checkOutNotes // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-
-/// Create a copy of Visit
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ClientCopyWith<$Res> get client {
-  
-  return $ClientCopyWith<$Res>(_self.client, (value) {
-    return _then(_self.copyWith(client: value));
-  });
-}
-}
-
-// dart format on

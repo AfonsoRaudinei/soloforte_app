@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'post_model.freezed.dart';
 part 'post_model.g.dart';
 
+enum PostStatus { draft, scheduled, published }
+
 @freezed
 class Post with _$Post {
   const factory Post({
@@ -16,8 +18,9 @@ class Post with _$Post {
     @Default([]) List<String> tags,
     @Default(0) int likes,
     @Default(0) int comments,
-    @Default(false) bool isPublished,
+    @Default(PostStatus.draft) PostStatus status,
     DateTime? publishedAt,
+    DateTime? scheduledTo,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

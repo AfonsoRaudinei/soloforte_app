@@ -247,7 +247,7 @@ class _CustomReportTabState extends ConsumerState<CustomReportTab> {
               onChanged: (val) {
                 notifier.toggleVisibility(section.id);
               },
-              activeColor: AppColors.primary,
+              activeThumbColor: AppColors.primary,
             ),
           ),
         );

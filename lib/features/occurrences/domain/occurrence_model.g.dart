@@ -6,32 +6,35 @@ part of 'occurrence_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Occurrence _$OccurrenceFromJson(Map<String, dynamic> json) => _Occurrence(
-  id: json['id'] as String,
-  title: json['title'] as String,
-  description: json['description'] as String,
-  type: json['type'] as String,
-  severity: (json['severity'] as num).toDouble(),
-  areaName: json['areaName'] as String,
-  date: DateTime.parse(json['date'] as String),
-  status: json['status'] as String,
-  images: (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-  latitude: (json['latitude'] as num).toDouble(),
-  longitude: (json['longitude'] as num).toDouble(),
-  timeline:
-      (json['timeline'] as List<dynamic>?)
-          ?.map((e) => TimelineEvent.fromJson(e as Map<String, dynamic>))
-          .toList() ??
-      const [],
-  assignedTo: json['assignedTo'] as String?,
-  recommendations:
-      (json['recommendations'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList() ??
-      const [],
-);
+_$OccurrenceImpl _$$OccurrenceImplFromJson(Map<String, dynamic> json) =>
+    _$OccurrenceImpl(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      type: json['type'] as String,
+      severity: (json['severity'] as num).toDouble(),
+      areaName: json['areaName'] as String,
+      date: DateTime.parse(json['date'] as String),
+      status: json['status'] as String,
+      images: (json['images'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      timeline:
+          (json['timeline'] as List<dynamic>?)
+              ?.map((e) => TimelineEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      assignedTo: json['assignedTo'] as String?,
+      recommendations:
+          (json['recommendations'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+    );
 
-Map<String, dynamic> _$OccurrenceToJson(_Occurrence instance) =>
+Map<String, dynamic> _$$OccurrenceImplToJson(_$OccurrenceImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -49,8 +52,8 @@ Map<String, dynamic> _$OccurrenceToJson(_Occurrence instance) =>
       'recommendations': instance.recommendations,
     };
 
-_TimelineEvent _$TimelineEventFromJson(Map<String, dynamic> json) =>
-    _TimelineEvent(
+_$TimelineEventImpl _$$TimelineEventImplFromJson(Map<String, dynamic> json) =>
+    _$TimelineEventImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -59,7 +62,7 @@ _TimelineEvent _$TimelineEventFromJson(Map<String, dynamic> json) =>
       authorName: json['authorName'] as String,
     );
 
-Map<String, dynamic> _$TimelineEventToJson(_TimelineEvent instance) =>
+Map<String, dynamic> _$$TimelineEventImplToJson(_$TimelineEventImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

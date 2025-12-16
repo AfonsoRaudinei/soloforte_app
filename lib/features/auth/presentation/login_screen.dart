@@ -247,10 +247,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              if (value == null || value.isEmpty)
+                              if (value == null || value.isEmpty) {
                                 return 'Senha é obrigatória';
-                              if (value.length < 8)
+                              }
+                              if (value.length < 8) {
                                 return 'A senha deve ter pelo menos 8 caracteres';
+                              }
                               return null;
                             },
                           ),
@@ -373,8 +375,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     );
                                   }
                                 } finally {
-                                  if (mounted)
+                                  if (mounted) {
                                     setState(() => _isLoading = false);
+                                  }
                                 }
                               },
                               style: OutlinedButton.styleFrom(
@@ -431,8 +434,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     );
                                   }
                                 } finally {
-                                  if (mounted)
+                                  if (mounted) {
                                     setState(() => _isLoading = false);
+                                  }
                                 }
                               },
                               style: OutlinedButton.styleFrom(

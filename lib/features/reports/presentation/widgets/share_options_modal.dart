@@ -5,7 +5,6 @@ import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/reports/application/report_sharing_service.dart';
 import 'package:soloforte_app/shared/widgets/primary_button.dart';
-import 'dart:typed_data';
 
 /// Modal com opções de compartilhamento de relatório
 class ShareOptionsModal extends ConsumerStatefulWidget {

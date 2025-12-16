@@ -6,47 +6,22 @@ part of 'visit_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, type=warning
+String _$visitRepositoryHash() => r'd47adfd5d0c0caf6568d0adde44751060fccec66';
 
+/// See also [visitRepository].
 @ProviderFor(visitRepository)
-const visitRepositoryProvider = VisitRepositoryProvider._();
+final visitRepositoryProvider = Provider<VisitRepository>.internal(
+  visitRepository,
+  name: r'visitRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$visitRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-final class VisitRepositoryProvider
-    extends
-        $FunctionalProvider<VisitRepository, VisitRepository, VisitRepository>
-    with $Provider<VisitRepository> {
-  const VisitRepositoryProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'visitRepositoryProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$visitRepositoryHash();
-
-  @$internal
-  @override
-  $ProviderElement<VisitRepository> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  VisitRepository create(Ref ref) {
-    return visitRepository(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(VisitRepository value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<VisitRepository>(value),
-    );
-  }
-}
-
-String _$visitRepositoryHash() => r'a021408226cafce945fe3eb8ed5865566afae3df';
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef VisitRepositoryRef = ProviderRef<VisitRepository>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

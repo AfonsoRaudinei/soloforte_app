@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
-import 'dart:typed_data';
 
 /// Visualizador de PDF com pinch to zoom e controles avançados
 class PdfViewerScreen extends StatefulWidget {

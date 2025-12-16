@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soloforte_app/features/agenda/domain/event_model.dart';
-import 'package:uuid/uuid.dart';
 
 part 'agenda_controller.g.dart';
 

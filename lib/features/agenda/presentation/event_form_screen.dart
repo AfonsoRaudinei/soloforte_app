@@ -230,7 +230,7 @@ class _EventFormScreenState extends ConsumerState<EventFormScreen> {
             const SizedBox(height: 16),
 
             DropdownButtonFormField<EventType>(
-              value: _selectedType,
+              initialValue: _selectedType,
               decoration: const InputDecoration(
                 labelText: 'Tipo de Evento',
                 border: OutlineInputBorder(),

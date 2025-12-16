@@ -1377,9 +1377,9 @@ class ReportService {
       String severityLabel = 'Baixa';
       if (pestOccurrences.isNotEmpty) {
         final avgSev = severitySum / pestOccurrences.length;
-        if (avgSev > 0.7)
+        if (avgSev > 0.7) {
           severityLabel = 'Alta';
-        else if (avgSev > 0.4)
+        } else if (avgSev > 0.4)
           severityLabel = 'Moderada';
       }
 

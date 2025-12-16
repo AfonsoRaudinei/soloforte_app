@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,299 +9,391 @@ part of 'offline_map_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+OfflineMap _$OfflineMapFromJson(Map<String, dynamic> json) {
+  return _OfflineMap.fromJson(json);
+}
 
 /// @nodoc
 mixin _$OfflineMap {
-
- String get id; String get name; double get minLat; double get maxLat; double get minLng; double get maxLng; int get zoomLevel; DateTime get downloadedAt; int get sizeBytes; bool get isDownloading; double get downloadProgress;
-/// Create a copy of OfflineMap
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$OfflineMapCopyWith<OfflineMap> get copyWith => _$OfflineMapCopyWithImpl<OfflineMap>(this as OfflineMap, _$identity);
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  double get minLat => throw _privateConstructorUsedError;
+  double get maxLat => throw _privateConstructorUsedError;
+  double get minLng => throw _privateConstructorUsedError;
+  double get maxLng => throw _privateConstructorUsedError;
+  int get zoomLevel => throw _privateConstructorUsedError;
+  DateTime get downloadedAt => throw _privateConstructorUsedError;
+  int get sizeBytes => throw _privateConstructorUsedError;
+  bool get isDownloading => throw _privateConstructorUsedError;
+  double get downloadProgress => throw _privateConstructorUsedError;
 
   /// Serializes this OfflineMap to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OfflineMap&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.minLat, minLat) || other.minLat == minLat)&&(identical(other.maxLat, maxLat) || other.maxLat == maxLat)&&(identical(other.minLng, minLng) || other.minLng == minLng)&&(identical(other.maxLng, maxLng) || other.maxLng == maxLng)&&(identical(other.zoomLevel, zoomLevel) || other.zoomLevel == zoomLevel)&&(identical(other.downloadedAt, downloadedAt) || other.downloadedAt == downloadedAt)&&(identical(other.sizeBytes, sizeBytes) || other.sizeBytes == sizeBytes)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,minLat,maxLat,minLng,maxLng,zoomLevel,downloadedAt,sizeBytes,isDownloading,downloadProgress);
-
-@override
-String toString() {
-  return 'OfflineMap(id: $id, name: $name, minLat: $minLat, maxLat: $maxLat, minLng: $minLng, maxLng: $maxLng, zoomLevel: $zoomLevel, downloadedAt: $downloadedAt, sizeBytes: $sizeBytes, isDownloading: $isDownloading, downloadProgress: $downloadProgress)';
-}
-
-
+  /// Create a copy of OfflineMap
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $OfflineMapCopyWith<OfflineMap> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $OfflineMapCopyWith<$Res>  {
-  factory $OfflineMapCopyWith(OfflineMap value, $Res Function(OfflineMap) _then) = _$OfflineMapCopyWithImpl;
-@useResult
-$Res call({
- String id, String name, double minLat, double maxLat, double minLng, double maxLng, int zoomLevel, DateTime downloadedAt, int sizeBytes, bool isDownloading, double downloadProgress
-});
-
-
-
-
+abstract class $OfflineMapCopyWith<$Res> {
+  factory $OfflineMapCopyWith(
+    OfflineMap value,
+    $Res Function(OfflineMap) then,
+  ) = _$OfflineMapCopyWithImpl<$Res, OfflineMap>;
+  @useResult
+  $Res call({
+    String id,
+    String name,
+    double minLat,
+    double maxLat,
+    double minLng,
+    double maxLng,
+    int zoomLevel,
+    DateTime downloadedAt,
+    int sizeBytes,
+    bool isDownloading,
+    double downloadProgress,
+  });
 }
+
 /// @nodoc
-class _$OfflineMapCopyWithImpl<$Res>
+class _$OfflineMapCopyWithImpl<$Res, $Val extends OfflineMap>
     implements $OfflineMapCopyWith<$Res> {
-  _$OfflineMapCopyWithImpl(this._self, this._then);
+  _$OfflineMapCopyWithImpl(this._value, this._then);
 
-  final OfflineMap _self;
-  final $Res Function(OfflineMap) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of OfflineMap
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? minLat = null,Object? maxLat = null,Object? minLng = null,Object? maxLng = null,Object? zoomLevel = null,Object? downloadedAt = null,Object? sizeBytes = null,Object? isDownloading = null,Object? downloadProgress = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,minLat: null == minLat ? _self.minLat : minLat // ignore: cast_nullable_to_non_nullable
-as double,maxLat: null == maxLat ? _self.maxLat : maxLat // ignore: cast_nullable_to_non_nullable
-as double,minLng: null == minLng ? _self.minLng : minLng // ignore: cast_nullable_to_non_nullable
-as double,maxLng: null == maxLng ? _self.maxLng : maxLng // ignore: cast_nullable_to_non_nullable
-as double,zoomLevel: null == zoomLevel ? _self.zoomLevel : zoomLevel // ignore: cast_nullable_to_non_nullable
-as int,downloadedAt: null == downloadedAt ? _self.downloadedAt : downloadedAt // ignore: cast_nullable_to_non_nullable
-as DateTime,sizeBytes: null == sizeBytes ? _self.sizeBytes : sizeBytes // ignore: cast_nullable_to_non_nullable
-as int,isDownloading: null == isDownloading ? _self.isDownloading : isDownloading // ignore: cast_nullable_to_non_nullable
-as bool,downloadProgress: null == downloadProgress ? _self.downloadProgress : downloadProgress // ignore: cast_nullable_to_non_nullable
-as double,
-  ));
+  /// Create a copy of OfflineMap
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? minLat = null,
+    Object? maxLat = null,
+    Object? minLng = null,
+    Object? maxLng = null,
+    Object? zoomLevel = null,
+    Object? downloadedAt = null,
+    Object? sizeBytes = null,
+    Object? isDownloading = null,
+    Object? downloadProgress = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            minLat: null == minLat
+                ? _value.minLat
+                : minLat // ignore: cast_nullable_to_non_nullable
+                      as double,
+            maxLat: null == maxLat
+                ? _value.maxLat
+                : maxLat // ignore: cast_nullable_to_non_nullable
+                      as double,
+            minLng: null == minLng
+                ? _value.minLng
+                : minLng // ignore: cast_nullable_to_non_nullable
+                      as double,
+            maxLng: null == maxLng
+                ? _value.maxLng
+                : maxLng // ignore: cast_nullable_to_non_nullable
+                      as double,
+            zoomLevel: null == zoomLevel
+                ? _value.zoomLevel
+                : zoomLevel // ignore: cast_nullable_to_non_nullable
+                      as int,
+            downloadedAt: null == downloadedAt
+                ? _value.downloadedAt
+                : downloadedAt // ignore: cast_nullable_to_non_nullable
+                      as DateTime,
+            sizeBytes: null == sizeBytes
+                ? _value.sizeBytes
+                : sizeBytes // ignore: cast_nullable_to_non_nullable
+                      as int,
+            isDownloading: null == isDownloading
+                ? _value.isDownloading
+                : isDownloading // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            downloadProgress: null == downloadProgress
+                ? _value.downloadProgress
+                : downloadProgress // ignore: cast_nullable_to_non_nullable
+                      as double,
+          )
+          as $Val,
+    );
+  }
 }
 
+/// @nodoc
+abstract class _$$OfflineMapImplCopyWith<$Res>
+    implements $OfflineMapCopyWith<$Res> {
+  factory _$$OfflineMapImplCopyWith(
+    _$OfflineMapImpl value,
+    $Res Function(_$OfflineMapImpl) then,
+  ) = __$$OfflineMapImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String id,
+    String name,
+    double minLat,
+    double maxLat,
+    double minLng,
+    double maxLng,
+    int zoomLevel,
+    DateTime downloadedAt,
+    int sizeBytes,
+    bool isDownloading,
+    double downloadProgress,
+  });
 }
 
+/// @nodoc
+class __$$OfflineMapImplCopyWithImpl<$Res>
+    extends _$OfflineMapCopyWithImpl<$Res, _$OfflineMapImpl>
+    implements _$$OfflineMapImplCopyWith<$Res> {
+  __$$OfflineMapImplCopyWithImpl(
+    _$OfflineMapImpl _value,
+    $Res Function(_$OfflineMapImpl) _then,
+  ) : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [OfflineMap].
-extension OfflineMapPatterns on OfflineMap {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _OfflineMap value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _OfflineMap() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _OfflineMap value)  $default,){
-final _that = this;
-switch (_that) {
-case _OfflineMap():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _OfflineMap value)?  $default,){
-final _that = this;
-switch (_that) {
-case _OfflineMap() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  double minLat,  double maxLat,  double minLng,  double maxLng,  int zoomLevel,  DateTime downloadedAt,  int sizeBytes,  bool isDownloading,  double downloadProgress)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _OfflineMap() when $default != null:
-return $default(_that.id,_that.name,_that.minLat,_that.maxLat,_that.minLng,_that.maxLng,_that.zoomLevel,_that.downloadedAt,_that.sizeBytes,_that.isDownloading,_that.downloadProgress);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  double minLat,  double maxLat,  double minLng,  double maxLng,  int zoomLevel,  DateTime downloadedAt,  int sizeBytes,  bool isDownloading,  double downloadProgress)  $default,) {final _that = this;
-switch (_that) {
-case _OfflineMap():
-return $default(_that.id,_that.name,_that.minLat,_that.maxLat,_that.minLng,_that.maxLng,_that.zoomLevel,_that.downloadedAt,_that.sizeBytes,_that.isDownloading,_that.downloadProgress);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  double minLat,  double maxLat,  double minLng,  double maxLng,  int zoomLevel,  DateTime downloadedAt,  int sizeBytes,  bool isDownloading,  double downloadProgress)?  $default,) {final _that = this;
-switch (_that) {
-case _OfflineMap() when $default != null:
-return $default(_that.id,_that.name,_that.minLat,_that.maxLat,_that.minLng,_that.maxLng,_that.zoomLevel,_that.downloadedAt,_that.sizeBytes,_that.isDownloading,_that.downloadProgress);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of OfflineMap
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? minLat = null,
+    Object? maxLat = null,
+    Object? minLng = null,
+    Object? maxLng = null,
+    Object? zoomLevel = null,
+    Object? downloadedAt = null,
+    Object? sizeBytes = null,
+    Object? isDownloading = null,
+    Object? downloadProgress = null,
+  }) {
+    return _then(
+      _$OfflineMapImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        minLat: null == minLat
+            ? _value.minLat
+            : minLat // ignore: cast_nullable_to_non_nullable
+                  as double,
+        maxLat: null == maxLat
+            ? _value.maxLat
+            : maxLat // ignore: cast_nullable_to_non_nullable
+                  as double,
+        minLng: null == minLng
+            ? _value.minLng
+            : minLng // ignore: cast_nullable_to_non_nullable
+                  as double,
+        maxLng: null == maxLng
+            ? _value.maxLng
+            : maxLng // ignore: cast_nullable_to_non_nullable
+                  as double,
+        zoomLevel: null == zoomLevel
+            ? _value.zoomLevel
+            : zoomLevel // ignore: cast_nullable_to_non_nullable
+                  as int,
+        downloadedAt: null == downloadedAt
+            ? _value.downloadedAt
+            : downloadedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime,
+        sizeBytes: null == sizeBytes
+            ? _value.sizeBytes
+            : sizeBytes // ignore: cast_nullable_to_non_nullable
+                  as int,
+        isDownloading: null == isDownloading
+            ? _value.isDownloading
+            : isDownloading // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        downloadProgress: null == downloadProgress
+            ? _value.downloadProgress
+            : downloadProgress // ignore: cast_nullable_to_non_nullable
+                  as double,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$OfflineMapImpl implements _OfflineMap {
+  const _$OfflineMapImpl({
+    required this.id,
+    required this.name,
+    required this.minLat,
+    required this.maxLat,
+    required this.minLng,
+    required this.maxLng,
+    required this.zoomLevel,
+    required this.downloadedAt,
+    required this.sizeBytes,
+    this.isDownloading = false,
+    this.downloadProgress = 0,
+  });
 
-class _OfflineMap implements OfflineMap {
-  const _OfflineMap({required this.id, required this.name, required this.minLat, required this.maxLat, required this.minLng, required this.maxLng, required this.zoomLevel, required this.downloadedAt, required this.sizeBytes, this.isDownloading = false, this.downloadProgress = 0});
-  factory _OfflineMap.fromJson(Map<String, dynamic> json) => _$OfflineMapFromJson(json);
+  factory _$OfflineMapImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OfflineMapImplFromJson(json);
 
-@override final  String id;
-@override final  String name;
-@override final  double minLat;
-@override final  double maxLat;
-@override final  double minLng;
-@override final  double maxLng;
-@override final  int zoomLevel;
-@override final  DateTime downloadedAt;
-@override final  int sizeBytes;
-@override@JsonKey() final  bool isDownloading;
-@override@JsonKey() final  double downloadProgress;
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final double minLat;
+  @override
+  final double maxLat;
+  @override
+  final double minLng;
+  @override
+  final double maxLng;
+  @override
+  final int zoomLevel;
+  @override
+  final DateTime downloadedAt;
+  @override
+  final int sizeBytes;
+  @override
+  @JsonKey()
+  final bool isDownloading;
+  @override
+  @JsonKey()
+  final double downloadProgress;
 
-/// Create a copy of OfflineMap
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$OfflineMapCopyWith<_OfflineMap> get copyWith => __$OfflineMapCopyWithImpl<_OfflineMap>(this, _$identity);
+  @override
+  String toString() {
+    return 'OfflineMap(id: $id, name: $name, minLat: $minLat, maxLat: $maxLat, minLng: $minLng, maxLng: $maxLng, zoomLevel: $zoomLevel, downloadedAt: $downloadedAt, sizeBytes: $sizeBytes, isDownloading: $isDownloading, downloadProgress: $downloadProgress)';
+  }
 
-@override
-Map<String, dynamic> toJson() {
-  return _$OfflineMapToJson(this, );
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OfflineMapImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.minLat, minLat) || other.minLat == minLat) &&
+            (identical(other.maxLat, maxLat) || other.maxLat == maxLat) &&
+            (identical(other.minLng, minLng) || other.minLng == minLng) &&
+            (identical(other.maxLng, maxLng) || other.maxLng == maxLng) &&
+            (identical(other.zoomLevel, zoomLevel) ||
+                other.zoomLevel == zoomLevel) &&
+            (identical(other.downloadedAt, downloadedAt) ||
+                other.downloadedAt == downloadedAt) &&
+            (identical(other.sizeBytes, sizeBytes) ||
+                other.sizeBytes == sizeBytes) &&
+            (identical(other.isDownloading, isDownloading) ||
+                other.isDownloading == isDownloading) &&
+            (identical(other.downloadProgress, downloadProgress) ||
+                other.downloadProgress == downloadProgress));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    name,
+    minLat,
+    maxLat,
+    minLng,
+    maxLng,
+    zoomLevel,
+    downloadedAt,
+    sizeBytes,
+    isDownloading,
+    downloadProgress,
+  );
+
+  /// Create a copy of OfflineMap
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OfflineMapImplCopyWith<_$OfflineMapImpl> get copyWith =>
+      __$$OfflineMapImplCopyWithImpl<_$OfflineMapImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$OfflineMapImplToJson(this);
+  }
 }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OfflineMap&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.minLat, minLat) || other.minLat == minLat)&&(identical(other.maxLat, maxLat) || other.maxLat == maxLat)&&(identical(other.minLng, minLng) || other.minLng == minLng)&&(identical(other.maxLng, maxLng) || other.maxLng == maxLng)&&(identical(other.zoomLevel, zoomLevel) || other.zoomLevel == zoomLevel)&&(identical(other.downloadedAt, downloadedAt) || other.downloadedAt == downloadedAt)&&(identical(other.sizeBytes, sizeBytes) || other.sizeBytes == sizeBytes)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress));
+abstract class _OfflineMap implements OfflineMap {
+  const factory _OfflineMap({
+    required final String id,
+    required final String name,
+    required final double minLat,
+    required final double maxLat,
+    required final double minLng,
+    required final double maxLng,
+    required final int zoomLevel,
+    required final DateTime downloadedAt,
+    required final int sizeBytes,
+    final bool isDownloading,
+    final double downloadProgress,
+  }) = _$OfflineMapImpl;
+
+  factory _OfflineMap.fromJson(Map<String, dynamic> json) =
+      _$OfflineMapImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  double get minLat;
+  @override
+  double get maxLat;
+  @override
+  double get minLng;
+  @override
+  double get maxLng;
+  @override
+  int get zoomLevel;
+  @override
+  DateTime get downloadedAt;
+  @override
+  int get sizeBytes;
+  @override
+  bool get isDownloading;
+  @override
+  double get downloadProgress;
+
+  /// Create a copy of OfflineMap
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OfflineMapImplCopyWith<_$OfflineMapImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,minLat,maxLat,minLng,maxLng,zoomLevel,downloadedAt,sizeBytes,isDownloading,downloadProgress);
-
-@override
-String toString() {
-  return 'OfflineMap(id: $id, name: $name, minLat: $minLat, maxLat: $maxLat, minLng: $minLng, maxLng: $maxLng, zoomLevel: $zoomLevel, downloadedAt: $downloadedAt, sizeBytes: $sizeBytes, isDownloading: $isDownloading, downloadProgress: $downloadProgress)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$OfflineMapCopyWith<$Res> implements $OfflineMapCopyWith<$Res> {
-  factory _$OfflineMapCopyWith(_OfflineMap value, $Res Function(_OfflineMap) _then) = __$OfflineMapCopyWithImpl;
-@override @useResult
-$Res call({
- String id, String name, double minLat, double maxLat, double minLng, double maxLng, int zoomLevel, DateTime downloadedAt, int sizeBytes, bool isDownloading, double downloadProgress
-});
-
-
-
-
-}
-/// @nodoc
-class __$OfflineMapCopyWithImpl<$Res>
-    implements _$OfflineMapCopyWith<$Res> {
-  __$OfflineMapCopyWithImpl(this._self, this._then);
-
-  final _OfflineMap _self;
-  final $Res Function(_OfflineMap) _then;
-
-/// Create a copy of OfflineMap
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? minLat = null,Object? maxLat = null,Object? minLng = null,Object? maxLng = null,Object? zoomLevel = null,Object? downloadedAt = null,Object? sizeBytes = null,Object? isDownloading = null,Object? downloadProgress = null,}) {
-  return _then(_OfflineMap(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,minLat: null == minLat ? _self.minLat : minLat // ignore: cast_nullable_to_non_nullable
-as double,maxLat: null == maxLat ? _self.maxLat : maxLat // ignore: cast_nullable_to_non_nullable
-as double,minLng: null == minLng ? _self.minLng : minLng // ignore: cast_nullable_to_non_nullable
-as double,maxLng: null == maxLng ? _self.maxLng : maxLng // ignore: cast_nullable_to_non_nullable
-as double,zoomLevel: null == zoomLevel ? _self.zoomLevel : zoomLevel // ignore: cast_nullable_to_non_nullable
-as int,downloadedAt: null == downloadedAt ? _self.downloadedAt : downloadedAt // ignore: cast_nullable_to_non_nullable
-as DateTime,sizeBytes: null == sizeBytes ? _self.sizeBytes : sizeBytes // ignore: cast_nullable_to_non_nullable
-as int,isDownloading: null == isDownloading ? _self.isDownloading : isDownloading // ignore: cast_nullable_to_non_nullable
-as bool,downloadProgress: null == downloadProgress ? _self.downloadProgress : downloadProgress // ignore: cast_nullable_to_non_nullable
-as double,
-  ));
-}
-
-
-}
-
-// dart format on

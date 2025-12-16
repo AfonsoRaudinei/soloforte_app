@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:soloforte_app/core/theme/app_colors.dart';
 
 /// Widget de indicador de auto-save visual
 class AutoSaveIndicator extends StatefulWidget {

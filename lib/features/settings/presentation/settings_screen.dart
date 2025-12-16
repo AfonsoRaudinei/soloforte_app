@@ -204,7 +204,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
         value: value,
         onChanged: onChanged,
-        activeColor: AppColors.primary,
+        activeThumbColor: AppColors.primary,
       ),
     );
   }

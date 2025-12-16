@@ -6,7 +6,7 @@ part of 'area_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Area _$AreaFromJson(Map<String, dynamic> json) => _Area(
+_$AreaImpl _$$AreaImplFromJson(Map<String, dynamic> json) => _$AreaImpl(
   id: json['id'] as String,
   name: json['name'] as String,
   hectares: (json['hectares'] as num).toDouble(),
@@ -24,16 +24,17 @@ _Area _$AreaFromJson(Map<String, dynamic> json) => _Area(
       : DateTime.parse(json['lastUpdate'] as String),
 );
 
-Map<String, dynamic> _$AreaToJson(_Area instance) => <String, dynamic>{
-  'id': instance.id,
-  'name': instance.name,
-  'hectares': instance.hectares,
-  'clienteNome': instance.clienteNome,
-  'fazendaNome': instance.fazendaNome,
-  'status': instance.status,
-  'coordinates': instance.coordinates,
-  'culture': instance.culture,
-  'safra': instance.safra,
-  'ndviAverage': instance.ndviAverage,
-  'lastUpdate': instance.lastUpdate?.toIso8601String(),
-};
+Map<String, dynamic> _$$AreaImplToJson(_$AreaImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'hectares': instance.hectares,
+      'clienteNome': instance.clienteNome,
+      'fazendaNome': instance.fazendaNome,
+      'status': instance.status,
+      'coordinates': instance.coordinates,
+      'culture': instance.culture,
+      'safra': instance.safra,
+      'ndviAverage': instance.ndviAverage,
+      'lastUpdate': instance.lastUpdate?.toIso8601String(),
+    };

@@ -9,11 +9,13 @@ part 'visit_controller.g.dart';
 @Riverpod(keepAlive: true)
 class VisitController extends _$VisitController {
   @override
-  Visit? build() {
-    return null; // Null means no active visit
+  Future<Visit?> build() async {
+    // Load active visit from local database on startup
+    return ref.read(visitRepositoryProvider).getActiveVisit();
   }
 
   Future<void> checkIn(Client client) async {
+    state = const AsyncLoading();
     try {
       // Check permissions
       LocationPermission permission = await Geolocator.checkPermission();
@@ -24,6 +26,8 @@ class VisitController extends _$VisitController {
         }
       }
 
+      // Check service enabled? (Optional: Geolocator.isLocationServiceEnabled())
+
       final position = await Geolocator.getCurrentPosition();
 
       final newVisit = Visit(
@@ -32,28 +36,52 @@ class VisitController extends _$VisitController {
         checkInTime: DateTime.now(),
         latitude: position.latitude,
         longitude: position.longitude,
+        status: VisitStatus.ongoing,
       );
 
-      // Save to repo (although for active visit we mostly keep in state)
       await ref.read(visitRepositoryProvider).saveVisit(newVisit);
-      state = newVisit;
-    } catch (e) {
+      state = AsyncData(newVisit);
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
       throw Exception('Failed to check in: $e');
     }
   }
 
-  Future<void> checkOut() async {
-    final currentVisit = state;
+  Future<void> addPhoto(String path) async {
+    final currentVisit = state.value;
     if (currentVisit == null) return;
 
+    // Optimistic update
+    final updatedVisit = currentVisit.copyWith(
+      photos: [...currentVisit.photos, path],
+    );
+    state = AsyncData(updatedVisit);
+
+    try {
+      await ref.read(visitRepositoryProvider).saveVisit(updatedVisit);
+    } catch (e, stack) {
+      // Revert on error? Or just show error
+      state = AsyncError(e, stack);
+    }
+  }
+
+  Future<void> checkOut({String? notes, Map<String, bool>? checklist}) async {
+    final currentVisit = state.value;
+    if (currentVisit == null) return;
+
+    state = const AsyncLoading();
     try {
       final completedVisit = currentVisit.copyWith(
         checkOutTime: DateTime.now(),
+        status: VisitStatus.completed,
+        checkOutNotes: notes,
+        checklist: checklist ?? {},
       );
 
       await ref.read(visitRepositoryProvider).saveVisit(completedVisit);
-      state = null; // Clear active visit
-    } catch (e) {
+      state = const AsyncData(null); // Clear active visit
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
       throw Exception('Failed to check out: $e');
     }
   }

@@ -6,8 +6,8 @@ part of 'weather_radar_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_WeatherRadar _$WeatherRadarFromJson(Map<String, dynamic> json) =>
-    _WeatherRadar(
+_$WeatherRadarImpl _$$WeatherRadarImplFromJson(Map<String, dynamic> json) =>
+    _$WeatherRadarImpl(
       id: json['id'] as String,
       timestamp: DateTime.parse(json['timestamp'] as String),
       latitude: (json['latitude'] as num).toDouble(),
@@ -18,7 +18,7 @@ _WeatherRadar _$WeatherRadarFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$WeatherRadarToJson(_WeatherRadar instance) =>
+Map<String, dynamic> _$$WeatherRadarImplToJson(_$WeatherRadarImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'timestamp': instance.timestamp.toIso8601String(),

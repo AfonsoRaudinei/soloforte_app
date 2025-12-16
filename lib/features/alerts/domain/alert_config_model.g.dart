@@ -6,18 +6,19 @@ part of 'alert_config_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AlertConfig _$AlertConfigFromJson(Map<String, dynamic> json) => _AlertConfig(
-  id: json['id'] as String,
-  type: $enumDecode(_$AlertTypeEnumMap, json['type']),
-  title: json['title'] as String,
-  isEnabled: json['isEnabled'] as bool,
-  pushNotification: json['pushNotification'] as bool? ?? true,
-  emailNotification: json['emailNotification'] as bool? ?? false,
-  smsNotification: json['smsNotification'] as bool? ?? false,
-  conditions: json['conditions'] as Map<String, dynamic>?,
-);
+_$AlertConfigImpl _$$AlertConfigImplFromJson(Map<String, dynamic> json) =>
+    _$AlertConfigImpl(
+      id: json['id'] as String,
+      type: $enumDecode(_$AlertTypeEnumMap, json['type']),
+      title: json['title'] as String,
+      isEnabled: json['isEnabled'] as bool,
+      pushNotification: json['pushNotification'] as bool? ?? true,
+      emailNotification: json['emailNotification'] as bool? ?? false,
+      smsNotification: json['smsNotification'] as bool? ?? false,
+      conditions: json['conditions'] as Map<String, dynamic>?,
+    );
 
-Map<String, dynamic> _$AlertConfigToJson(_AlertConfig instance) =>
+Map<String, dynamic> _$$AlertConfigImplToJson(_$AlertConfigImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': _$AlertTypeEnumMap[instance.type]!,

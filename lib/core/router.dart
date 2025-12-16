@@ -12,6 +12,8 @@ import '../features/dashboard/presentation/executive_dashboard_screen.dart';
 import '../features/analysis/presentation/analysis_wizard_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
 import '../features/visits/presentation/check_in_screen.dart';
+import '../features/visits/presentation/active_visit_screen.dart';
+import '../features/visits/presentation/check_out_screen.dart';
 import '../features/auth/presentation/forgot_password_screen.dart';
 
 import '../features/ndvi/presentation/ndvi_history_screen.dart';
@@ -21,6 +23,8 @@ import '../features/harvests/presentation/harvest_form_screen.dart';
 import '../features/integrations/presentation/integrations_screen.dart';
 import '../features/support/presentation/support_home_screen.dart';
 import '../features/support/presentation/chat_screen.dart';
+import '../features/support/presentation/create_ticket_screen.dart';
+import '../features/support/domain/ticket_model.dart';
 import '../features/marketing/presentation/feed_screen.dart';
 import '../features/scanner/presentation/scanner_screen.dart';
 import '../features/occurrences/presentation/occurrence_list_screen.dart';
@@ -226,9 +230,17 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const HarvestFormScreen(),
       ),
       GoRoute(
+        path: '/dashboard/support/create',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const CreateTicketScreen(),
+      ),
+      GoRoute(
         path: '/dashboard/support/chat',
         parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => const ChatScreen(),
+        builder: (context, state) {
+          final ticket = state.extra as Ticket?;
+          return ChatScreen(ticket: ticket);
+        },
       ),
       GoRoute(
         path: '/dashboard/scanner',
@@ -239,6 +251,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/check-in',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const CheckInScreen(),
+      ),
+      GoRoute(
+        path: '/visit/active',
+        builder: (context, state) => const ActiveVisitScreen(),
+      ),
+      GoRoute(
+        path: '/visit/checkout',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const CheckOutScreen(),
       ),
       GoRoute(
         path: '/analysis/new',

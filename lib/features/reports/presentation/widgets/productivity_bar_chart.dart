@@ -236,8 +236,9 @@ class _ProductivityBarChartState extends State<ProductivityBarChart> {
                       sideTitles: SideTitles(
                         showTitles: true,
                         getTitlesWidget: (value, meta) {
-                          if (value.toInt() >= _chartData.length)
+                          if (value.toInt() >= _chartData.length) {
                             return const SizedBox();
+                          }
 
                           final style = TextStyle(
                             color: _touchedIndex == value.toInt()

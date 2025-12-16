@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,308 +9,396 @@ part of 'area_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+Area _$AreaFromJson(Map<String, dynamic> json) {
+  return _Area.fromJson(json);
+}
 
 /// @nodoc
 mixin _$Area {
-
- String get id; String get name; double get hectares; String get clienteNome; String get fazendaNome; String get status;// active, monitoring, inactive
- List<LatLng> get coordinates; String? get culture; String? get safra; double get ndviAverage; DateTime? get lastUpdate;
-/// Create a copy of Area
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AreaCopyWith<Area> get copyWith => _$AreaCopyWithImpl<Area>(this as Area, _$identity);
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  double get hectares => throw _privateConstructorUsedError;
+  String get clienteNome => throw _privateConstructorUsedError;
+  String get fazendaNome => throw _privateConstructorUsedError;
+  String get status =>
+      throw _privateConstructorUsedError; // active, monitoring, inactive
+  List<LatLng> get coordinates => throw _privateConstructorUsedError;
+  String? get culture => throw _privateConstructorUsedError;
+  String? get safra => throw _privateConstructorUsedError;
+  double get ndviAverage => throw _privateConstructorUsedError;
+  DateTime? get lastUpdate => throw _privateConstructorUsedError;
 
   /// Serializes this Area to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Area&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.hectares, hectares) || other.hectares == hectares)&&(identical(other.clienteNome, clienteNome) || other.clienteNome == clienteNome)&&(identical(other.fazendaNome, fazendaNome) || other.fazendaNome == fazendaNome)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.coordinates, coordinates)&&(identical(other.culture, culture) || other.culture == culture)&&(identical(other.safra, safra) || other.safra == safra)&&(identical(other.ndviAverage, ndviAverage) || other.ndviAverage == ndviAverage)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,hectares,clienteNome,fazendaNome,status,const DeepCollectionEquality().hash(coordinates),culture,safra,ndviAverage,lastUpdate);
-
-@override
-String toString() {
-  return 'Area(id: $id, name: $name, hectares: $hectares, clienteNome: $clienteNome, fazendaNome: $fazendaNome, status: $status, coordinates: $coordinates, culture: $culture, safra: $safra, ndviAverage: $ndviAverage, lastUpdate: $lastUpdate)';
-}
-
-
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AreaCopyWith<Area> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $AreaCopyWith<$Res>  {
-  factory $AreaCopyWith(Area value, $Res Function(Area) _then) = _$AreaCopyWithImpl;
-@useResult
-$Res call({
- String id, String name, double hectares, String clienteNome, String fazendaNome, String status, List<LatLng> coordinates, String? culture, String? safra, double ndviAverage, DateTime? lastUpdate
-});
-
-
-
-
+abstract class $AreaCopyWith<$Res> {
+  factory $AreaCopyWith(Area value, $Res Function(Area) then) =
+      _$AreaCopyWithImpl<$Res, Area>;
+  @useResult
+  $Res call({
+    String id,
+    String name,
+    double hectares,
+    String clienteNome,
+    String fazendaNome,
+    String status,
+    List<LatLng> coordinates,
+    String? culture,
+    String? safra,
+    double ndviAverage,
+    DateTime? lastUpdate,
+  });
 }
+
 /// @nodoc
-class _$AreaCopyWithImpl<$Res>
+class _$AreaCopyWithImpl<$Res, $Val extends Area>
     implements $AreaCopyWith<$Res> {
-  _$AreaCopyWithImpl(this._self, this._then);
+  _$AreaCopyWithImpl(this._value, this._then);
 
-  final Area _self;
-  final $Res Function(Area) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of Area
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? hectares = null,Object? clienteNome = null,Object? fazendaNome = null,Object? status = null,Object? coordinates = null,Object? culture = freezed,Object? safra = freezed,Object? ndviAverage = null,Object? lastUpdate = freezed,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,hectares: null == hectares ? _self.hectares : hectares // ignore: cast_nullable_to_non_nullable
-as double,clienteNome: null == clienteNome ? _self.clienteNome : clienteNome // ignore: cast_nullable_to_non_nullable
-as String,fazendaNome: null == fazendaNome ? _self.fazendaNome : fazendaNome // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,coordinates: null == coordinates ? _self.coordinates : coordinates // ignore: cast_nullable_to_non_nullable
-as List<LatLng>,culture: freezed == culture ? _self.culture : culture // ignore: cast_nullable_to_non_nullable
-as String?,safra: freezed == safra ? _self.safra : safra // ignore: cast_nullable_to_non_nullable
-as String?,ndviAverage: null == ndviAverage ? _self.ndviAverage : ndviAverage // ignore: cast_nullable_to_non_nullable
-as double,lastUpdate: freezed == lastUpdate ? _self.lastUpdate : lastUpdate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
-  ));
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? hectares = null,
+    Object? clienteNome = null,
+    Object? fazendaNome = null,
+    Object? status = null,
+    Object? coordinates = null,
+    Object? culture = freezed,
+    Object? safra = freezed,
+    Object? ndviAverage = null,
+    Object? lastUpdate = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            hectares: null == hectares
+                ? _value.hectares
+                : hectares // ignore: cast_nullable_to_non_nullable
+                      as double,
+            clienteNome: null == clienteNome
+                ? _value.clienteNome
+                : clienteNome // ignore: cast_nullable_to_non_nullable
+                      as String,
+            fazendaNome: null == fazendaNome
+                ? _value.fazendaNome
+                : fazendaNome // ignore: cast_nullable_to_non_nullable
+                      as String,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as String,
+            coordinates: null == coordinates
+                ? _value.coordinates
+                : coordinates // ignore: cast_nullable_to_non_nullable
+                      as List<LatLng>,
+            culture: freezed == culture
+                ? _value.culture
+                : culture // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            safra: freezed == safra
+                ? _value.safra
+                : safra // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            ndviAverage: null == ndviAverage
+                ? _value.ndviAverage
+                : ndviAverage // ignore: cast_nullable_to_non_nullable
+                      as double,
+            lastUpdate: freezed == lastUpdate
+                ? _value.lastUpdate
+                : lastUpdate // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+          )
+          as $Val,
+    );
+  }
 }
 
+/// @nodoc
+abstract class _$$AreaImplCopyWith<$Res> implements $AreaCopyWith<$Res> {
+  factory _$$AreaImplCopyWith(
+    _$AreaImpl value,
+    $Res Function(_$AreaImpl) then,
+  ) = __$$AreaImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String id,
+    String name,
+    double hectares,
+    String clienteNome,
+    String fazendaNome,
+    String status,
+    List<LatLng> coordinates,
+    String? culture,
+    String? safra,
+    double ndviAverage,
+    DateTime? lastUpdate,
+  });
 }
 
+/// @nodoc
+class __$$AreaImplCopyWithImpl<$Res>
+    extends _$AreaCopyWithImpl<$Res, _$AreaImpl>
+    implements _$$AreaImplCopyWith<$Res> {
+  __$$AreaImplCopyWithImpl(_$AreaImpl _value, $Res Function(_$AreaImpl) _then)
+    : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [Area].
-extension AreaPatterns on Area {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Area value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _Area() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Area value)  $default,){
-final _that = this;
-switch (_that) {
-case _Area():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Area value)?  $default,){
-final _that = this;
-switch (_that) {
-case _Area() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  double hectares,  String clienteNome,  String fazendaNome,  String status,  List<LatLng> coordinates,  String? culture,  String? safra,  double ndviAverage,  DateTime? lastUpdate)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _Area() when $default != null:
-return $default(_that.id,_that.name,_that.hectares,_that.clienteNome,_that.fazendaNome,_that.status,_that.coordinates,_that.culture,_that.safra,_that.ndviAverage,_that.lastUpdate);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  double hectares,  String clienteNome,  String fazendaNome,  String status,  List<LatLng> coordinates,  String? culture,  String? safra,  double ndviAverage,  DateTime? lastUpdate)  $default,) {final _that = this;
-switch (_that) {
-case _Area():
-return $default(_that.id,_that.name,_that.hectares,_that.clienteNome,_that.fazendaNome,_that.status,_that.coordinates,_that.culture,_that.safra,_that.ndviAverage,_that.lastUpdate);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  double hectares,  String clienteNome,  String fazendaNome,  String status,  List<LatLng> coordinates,  String? culture,  String? safra,  double ndviAverage,  DateTime? lastUpdate)?  $default,) {final _that = this;
-switch (_that) {
-case _Area() when $default != null:
-return $default(_that.id,_that.name,_that.hectares,_that.clienteNome,_that.fazendaNome,_that.status,_that.coordinates,_that.culture,_that.safra,_that.ndviAverage,_that.lastUpdate);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? hectares = null,
+    Object? clienteNome = null,
+    Object? fazendaNome = null,
+    Object? status = null,
+    Object? coordinates = null,
+    Object? culture = freezed,
+    Object? safra = freezed,
+    Object? ndviAverage = null,
+    Object? lastUpdate = freezed,
+  }) {
+    return _then(
+      _$AreaImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        hectares: null == hectares
+            ? _value.hectares
+            : hectares // ignore: cast_nullable_to_non_nullable
+                  as double,
+        clienteNome: null == clienteNome
+            ? _value.clienteNome
+            : clienteNome // ignore: cast_nullable_to_non_nullable
+                  as String,
+        fazendaNome: null == fazendaNome
+            ? _value.fazendaNome
+            : fazendaNome // ignore: cast_nullable_to_non_nullable
+                  as String,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String,
+        coordinates: null == coordinates
+            ? _value._coordinates
+            : coordinates // ignore: cast_nullable_to_non_nullable
+                  as List<LatLng>,
+        culture: freezed == culture
+            ? _value.culture
+            : culture // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        safra: freezed == safra
+            ? _value.safra
+            : safra // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        ndviAverage: null == ndviAverage
+            ? _value.ndviAverage
+            : ndviAverage // ignore: cast_nullable_to_non_nullable
+                  as double,
+        lastUpdate: freezed == lastUpdate
+            ? _value.lastUpdate
+            : lastUpdate // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$AreaImpl implements _Area {
+  const _$AreaImpl({
+    required this.id,
+    required this.name,
+    required this.hectares,
+    required this.clienteNome,
+    required this.fazendaNome,
+    this.status = 'active',
+    required final List<LatLng> coordinates,
+    this.culture,
+    this.safra,
+    this.ndviAverage = 0.0,
+    this.lastUpdate,
+  }) : _coordinates = coordinates;
 
-class _Area implements Area {
-  const _Area({required this.id, required this.name, required this.hectares, required this.clienteNome, required this.fazendaNome, this.status = 'active', required final  List<LatLng> coordinates, this.culture, this.safra, this.ndviAverage = 0.0, this.lastUpdate}): _coordinates = coordinates;
-  factory _Area.fromJson(Map<String, dynamic> json) => _$AreaFromJson(json);
+  factory _$AreaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AreaImplFromJson(json);
 
-@override final  String id;
-@override final  String name;
-@override final  double hectares;
-@override final  String clienteNome;
-@override final  String fazendaNome;
-@override@JsonKey() final  String status;
-// active, monitoring, inactive
- final  List<LatLng> _coordinates;
-// active, monitoring, inactive
-@override List<LatLng> get coordinates {
-  if (_coordinates is EqualUnmodifiableListView) return _coordinates;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_coordinates);
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final double hectares;
+  @override
+  final String clienteNome;
+  @override
+  final String fazendaNome;
+  @override
+  @JsonKey()
+  final String status;
+  // active, monitoring, inactive
+  final List<LatLng> _coordinates;
+  // active, monitoring, inactive
+  @override
+  List<LatLng> get coordinates {
+    if (_coordinates is EqualUnmodifiableListView) return _coordinates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_coordinates);
+  }
+
+  @override
+  final String? culture;
+  @override
+  final String? safra;
+  @override
+  @JsonKey()
+  final double ndviAverage;
+  @override
+  final DateTime? lastUpdate;
+
+  @override
+  String toString() {
+    return 'Area(id: $id, name: $name, hectares: $hectares, clienteNome: $clienteNome, fazendaNome: $fazendaNome, status: $status, coordinates: $coordinates, culture: $culture, safra: $safra, ndviAverage: $ndviAverage, lastUpdate: $lastUpdate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AreaImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.hectares, hectares) ||
+                other.hectares == hectares) &&
+            (identical(other.clienteNome, clienteNome) ||
+                other.clienteNome == clienteNome) &&
+            (identical(other.fazendaNome, fazendaNome) ||
+                other.fazendaNome == fazendaNome) &&
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(
+              other._coordinates,
+              _coordinates,
+            ) &&
+            (identical(other.culture, culture) || other.culture == culture) &&
+            (identical(other.safra, safra) || other.safra == safra) &&
+            (identical(other.ndviAverage, ndviAverage) ||
+                other.ndviAverage == ndviAverage) &&
+            (identical(other.lastUpdate, lastUpdate) ||
+                other.lastUpdate == lastUpdate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    name,
+    hectares,
+    clienteNome,
+    fazendaNome,
+    status,
+    const DeepCollectionEquality().hash(_coordinates),
+    culture,
+    safra,
+    ndviAverage,
+    lastUpdate,
+  );
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
+      __$$AreaImplCopyWithImpl<_$AreaImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AreaImplToJson(this);
+  }
 }
 
-@override final  String? culture;
-@override final  String? safra;
-@override@JsonKey() final  double ndviAverage;
-@override final  DateTime? lastUpdate;
+abstract class _Area implements Area {
+  const factory _Area({
+    required final String id,
+    required final String name,
+    required final double hectares,
+    required final String clienteNome,
+    required final String fazendaNome,
+    final String status,
+    required final List<LatLng> coordinates,
+    final String? culture,
+    final String? safra,
+    final double ndviAverage,
+    final DateTime? lastUpdate,
+  }) = _$AreaImpl;
 
-/// Create a copy of Area
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$AreaCopyWith<_Area> get copyWith => __$AreaCopyWithImpl<_Area>(this, _$identity);
+  factory _Area.fromJson(Map<String, dynamic> json) = _$AreaImpl.fromJson;
 
-@override
-Map<String, dynamic> toJson() {
-  return _$AreaToJson(this, );
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  double get hectares;
+  @override
+  String get clienteNome;
+  @override
+  String get fazendaNome;
+  @override
+  String get status; // active, monitoring, inactive
+  @override
+  List<LatLng> get coordinates;
+  @override
+  String? get culture;
+  @override
+  String? get safra;
+  @override
+  double get ndviAverage;
+  @override
+  DateTime? get lastUpdate;
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Area&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.hectares, hectares) || other.hectares == hectares)&&(identical(other.clienteNome, clienteNome) || other.clienteNome == clienteNome)&&(identical(other.fazendaNome, fazendaNome) || other.fazendaNome == fazendaNome)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._coordinates, _coordinates)&&(identical(other.culture, culture) || other.culture == culture)&&(identical(other.safra, safra) || other.safra == safra)&&(identical(other.ndviAverage, ndviAverage) || other.ndviAverage == ndviAverage)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,name,hectares,clienteNome,fazendaNome,status,const DeepCollectionEquality().hash(_coordinates),culture,safra,ndviAverage,lastUpdate);
-
-@override
-String toString() {
-  return 'Area(id: $id, name: $name, hectares: $hectares, clienteNome: $clienteNome, fazendaNome: $fazendaNome, status: $status, coordinates: $coordinates, culture: $culture, safra: $safra, ndviAverage: $ndviAverage, lastUpdate: $lastUpdate)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
-  factory _$AreaCopyWith(_Area value, $Res Function(_Area) _then) = __$AreaCopyWithImpl;
-@override @useResult
-$Res call({
- String id, String name, double hectares, String clienteNome, String fazendaNome, String status, List<LatLng> coordinates, String? culture, String? safra, double ndviAverage, DateTime? lastUpdate
-});
-
-
-
-
-}
-/// @nodoc
-class __$AreaCopyWithImpl<$Res>
-    implements _$AreaCopyWith<$Res> {
-  __$AreaCopyWithImpl(this._self, this._then);
-
-  final _Area _self;
-  final $Res Function(_Area) _then;
-
-/// Create a copy of Area
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? hectares = null,Object? clienteNome = null,Object? fazendaNome = null,Object? status = null,Object? coordinates = null,Object? culture = freezed,Object? safra = freezed,Object? ndviAverage = null,Object? lastUpdate = freezed,}) {
-  return _then(_Area(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,hectares: null == hectares ? _self.hectares : hectares // ignore: cast_nullable_to_non_nullable
-as double,clienteNome: null == clienteNome ? _self.clienteNome : clienteNome // ignore: cast_nullable_to_non_nullable
-as String,fazendaNome: null == fazendaNome ? _self.fazendaNome : fazendaNome // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,coordinates: null == coordinates ? _self._coordinates : coordinates // ignore: cast_nullable_to_non_nullable
-as List<LatLng>,culture: freezed == culture ? _self.culture : culture // ignore: cast_nullable_to_non_nullable
-as String?,safra: freezed == safra ? _self.safra : safra // ignore: cast_nullable_to_non_nullable
-as String?,ndviAverage: null == ndviAverage ? _self.ndviAverage : ndviAverage // ignore: cast_nullable_to_non_nullable
-as double,lastUpdate: freezed == lastUpdate ? _self.lastUpdate : lastUpdate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
-  ));
-}
-
-
-}
-
-// dart format on

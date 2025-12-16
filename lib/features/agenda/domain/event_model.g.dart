@@ -6,45 +6,47 @@ part of 'event_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_EventRecurrence _$EventRecurrenceFromJson(Map<String, dynamic> json) =>
-    _EventRecurrence(
-      frequency: json['frequency'] as String,
-      interval: (json['interval'] as num).toInt(),
-      endDate: json['endDate'] == null
-          ? null
-          : DateTime.parse(json['endDate'] as String),
-      exceptionDates:
-          (json['exceptionDates'] as List<dynamic>?)
-              ?.map((e) => DateTime.parse(e as String))
-              .toList() ??
-          const [],
-    );
+_$EventRecurrenceImpl _$$EventRecurrenceImplFromJson(
+  Map<String, dynamic> json,
+) => _$EventRecurrenceImpl(
+  frequency: json['frequency'] as String,
+  interval: (json['interval'] as num).toInt(),
+  endDate: json['endDate'] == null
+      ? null
+      : DateTime.parse(json['endDate'] as String),
+  exceptionDates:
+      (json['exceptionDates'] as List<dynamic>?)
+          ?.map((e) => DateTime.parse(e as String))
+          .toList() ??
+      const [],
+);
 
-Map<String, dynamic> _$EventRecurrenceToJson(_EventRecurrence instance) =>
-    <String, dynamic>{
-      'frequency': instance.frequency,
-      'interval': instance.interval,
-      'endDate': instance.endDate?.toIso8601String(),
-      'exceptionDates': instance.exceptionDates
-          .map((e) => e.toIso8601String())
-          .toList(),
-    };
+Map<String, dynamic> _$$EventRecurrenceImplToJson(
+  _$EventRecurrenceImpl instance,
+) => <String, dynamic>{
+  'frequency': instance.frequency,
+  'interval': instance.interval,
+  'endDate': instance.endDate?.toIso8601String(),
+  'exceptionDates': instance.exceptionDates
+      .map((e) => e.toIso8601String())
+      .toList(),
+};
 
-_ChecklistItem _$ChecklistItemFromJson(Map<String, dynamic> json) =>
-    _ChecklistItem(
+_$ChecklistItemImpl _$$ChecklistItemImplFromJson(Map<String, dynamic> json) =>
+    _$ChecklistItemImpl(
       id: json['id'] as String,
       label: json['label'] as String,
       isCompleted: json['isCompleted'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$ChecklistItemToJson(_ChecklistItem instance) =>
+Map<String, dynamic> _$$ChecklistItemImplToJson(_$ChecklistItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'label': instance.label,
       'isCompleted': instance.isCompleted,
     };
 
-_Event _$EventFromJson(Map<String, dynamic> json) => _Event(
+_$EventImpl _$$EventImplFromJson(Map<String, dynamic> json) => _$EventImpl(
   id: json['id'] as String,
   title: json['title'] as String,
   description: json['description'] as String,
@@ -90,29 +92,30 @@ _Event _$EventFromJson(Map<String, dynamic> json) => _Event(
       : DateTime.parse(json['updatedAt'] as String),
 );
 
-Map<String, dynamic> _$EventToJson(_Event instance) => <String, dynamic>{
-  'id': instance.id,
-  'title': instance.title,
-  'description': instance.description,
-  'startTime': instance.startTime.toIso8601String(),
-  'endTime': instance.endTime.toIso8601String(),
-  'type': _$EventTypeEnumMap[instance.type]!,
-  'status': _$EventStatusEnumMap[instance.status]!,
-  'location': instance.location,
-  'clientId': instance.clientId,
-  'clientName': instance.clientName,
-  'areaId': instance.areaId,
-  'areaName': instance.areaName,
-  'participants': instance.participants,
-  'checklist': instance.checklist,
-  'attachmentUrls': instance.attachmentUrls,
-  'notes': instance.notes,
-  'recurrence': instance.recurrence,
-  'weatherForecast': instance.weatherForecast,
-  'completedAt': instance.completedAt?.toIso8601String(),
-  'createdAt': instance.createdAt?.toIso8601String(),
-  'updatedAt': instance.updatedAt?.toIso8601String(),
-};
+Map<String, dynamic> _$$EventImplToJson(_$EventImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'description': instance.description,
+      'startTime': instance.startTime.toIso8601String(),
+      'endTime': instance.endTime.toIso8601String(),
+      'type': _$EventTypeEnumMap[instance.type]!,
+      'status': _$EventStatusEnumMap[instance.status]!,
+      'location': instance.location,
+      'clientId': instance.clientId,
+      'clientName': instance.clientName,
+      'areaId': instance.areaId,
+      'areaName': instance.areaName,
+      'participants': instance.participants,
+      'checklist': instance.checklist,
+      'attachmentUrls': instance.attachmentUrls,
+      'notes': instance.notes,
+      'recurrence': instance.recurrence,
+      'weatherForecast': instance.weatherForecast,
+      'completedAt': instance.completedAt?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };
 
 const _$EventTypeEnumMap = {
   EventType.technicalVisit: 'technicalVisit',

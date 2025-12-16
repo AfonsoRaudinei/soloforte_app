@@ -383,7 +383,7 @@ class _ReportHistoryScreenState extends ConsumerState<ReportHistoryScreen>
             onChanged: (value) {
               ref.read(reportHistoryProvider).toggleScheduleActive(schedule.id);
             },
-            activeColor: AppColors.primary,
+            activeThumbColor: AppColors.primary,
           ),
         ],
       ),

@@ -6,53 +6,23 @@ part of 'analysis_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, type=warning
-
-@ProviderFor(analysisRepository)
-const analysisRepositoryProvider = AnalysisRepositoryProvider._();
-
-final class AnalysisRepositoryProvider
-    extends
-        $FunctionalProvider<
-          AnalysisRepository,
-          AnalysisRepository,
-          AnalysisRepository
-        >
-    with $Provider<AnalysisRepository> {
-  const AnalysisRepositoryProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'analysisRepositoryProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$analysisRepositoryHash();
-
-  @$internal
-  @override
-  $ProviderElement<AnalysisRepository> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  AnalysisRepository create(Ref ref) {
-    return analysisRepository(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AnalysisRepository value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AnalysisRepository>(value),
-    );
-  }
-}
-
 String _$analysisRepositoryHash() =>
     r'920cb9dcb6e3544a4ef2e985e814f8ee660e1c33';
+
+/// See also [analysisRepository].
+@ProviderFor(analysisRepository)
+final analysisRepositoryProvider = Provider<AnalysisRepository>.internal(
+  analysisRepository,
+  name: r'analysisRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$analysisRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AnalysisRepositoryRef = ProviderRef<AnalysisRepository>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

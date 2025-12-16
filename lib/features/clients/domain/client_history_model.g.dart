@@ -6,8 +6,8 @@ part of 'client_history_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ClientHistory _$ClientHistoryFromJson(Map<String, dynamic> json) =>
-    _ClientHistory(
+_$ClientHistoryImpl _$$ClientHistoryImplFromJson(Map<String, dynamic> json) =>
+    _$ClientHistoryImpl(
       id: json['id'] as String,
       clientId: json['clientId'] as String,
       actionType: json['actionType'] as String,
@@ -18,7 +18,7 @@ _ClientHistory _$ClientHistoryFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$ClientHistoryToJson(_ClientHistory instance) =>
+Map<String, dynamic> _$$ClientHistoryImplToJson(_$ClientHistoryImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'clientId': instance.clientId,

@@ -148,7 +148,7 @@ class NotificationSettingsModal extends StatelessWidget {
     return SwitchListTile(
       value: value,
       onChanged: onChanged,
-      activeColor: AppColors.primary,
+      activeThumbColor: AppColors.primary,
       contentPadding: EdgeInsets.zero,
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(subtitle, style: const TextStyle(color: Colors.grey)),

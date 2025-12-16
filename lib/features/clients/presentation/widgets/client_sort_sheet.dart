@@ -132,68 +132,68 @@ class _ClientSortSheetState extends State<ClientSortSheet> {
             ),
 
             // Direction Toggle
-            if (_sortOptions.field != null) ...[
-              const Divider(height: 1),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Direção',
-                        style: AppTypography.bodyMedium.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+            ...[
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Direção',
+                      style: AppTypography.bodyMedium.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SegmentedButton<SortDirection>(
-                      segments: [
-                        ButtonSegment(
-                          value: SortDirection.ascending,
-                          icon: const Icon(Icons.arrow_upward, size: 16),
-                          label: Text(
-                            _getDirectionLabel(SortDirection.ascending),
-                          ),
+                  ),
+                  SegmentedButton<SortDirection>(
+                    segments: [
+                      ButtonSegment(
+                        value: SortDirection.ascending,
+                        icon: const Icon(Icons.arrow_upward, size: 16),
+                        label: Text(
+                          _getDirectionLabel(SortDirection.ascending),
                         ),
-                        ButtonSegment(
-                          value: SortDirection.descending,
-                          icon: const Icon(Icons.arrow_downward, size: 16),
-                          label: Text(
-                            _getDirectionLabel(SortDirection.descending),
-                          ),
-                        ),
-                      ],
-                      selected: {_sortOptions.direction},
-                      onSelectionChanged: (Set<SortDirection> newSelection) {
-                        setState(() {
-                          _sortOptions = _sortOptions.copyWith(
-                            direction: newSelection.first,
-                          );
-                        });
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.resolveWith((
-                          states,
-                        ) {
-                          if (states.contains(WidgetState.selected)) {
-                            return AppColors.primary;
-                          }
-                          return Colors.grey[200];
-                        }),
-                        foregroundColor: WidgetStateProperty.resolveWith((
-                          states,
-                        ) {
-                          if (states.contains(WidgetState.selected)) {
-                            return Colors.white;
-                          }
-                          return Colors.grey[700];
-                        }),
                       ),
+                      ButtonSegment(
+                        value: SortDirection.descending,
+                        icon: const Icon(Icons.arrow_downward, size: 16),
+                        label: Text(
+                          _getDirectionLabel(SortDirection.descending),
+                        ),
+                      ),
+                    ],
+                    selected: {_sortOptions.direction},
+                    onSelectionChanged: (Set<SortDirection> newSelection) {
+                      setState(() {
+                        _sortOptions = _sortOptions.copyWith(
+                          direction: newSelection.first,
+                        );
+                      });
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.resolveWith((
+                        states,
+                      ) {
+                        if (states.contains(WidgetState.selected)) {
+                          return AppColors.primary;
+                        }
+                        return Colors.grey[200];
+                      }),
+                      foregroundColor: WidgetStateProperty.resolveWith((
+                        states,
+                      ) {
+                        if (states.contains(WidgetState.selected)) {
+                          return Colors.white;
+                        }
+                        return Colors.grey[700];
+                      }),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
+          ],
 
             // Apply Button
             Padding(

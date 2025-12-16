@@ -6,25 +6,26 @@ part of 'report_history.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SavedReport _$SavedReportFromJson(Map<String, dynamic> json) => _SavedReport(
-  id: json['id'] as String,
-  title: json['title'] as String,
-  template: $enumDecode(_$ReportTemplateEnumMap, json['template']),
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  configuration: ReportConfiguration.fromJson(
-    json['configuration'] as Map<String, dynamic>,
-  ),
-  pdfPath: json['pdfPath'] as String?,
-  fileSizeBytes: (json['fileSizeBytes'] as num?)?.toInt(),
-  isFavorite: json['isFavorite'] as bool? ?? false,
-  sharedLink: json['sharedLink'] as String?,
-  lastViewedAt: json['lastViewedAt'] == null
-      ? null
-      : DateTime.parse(json['lastViewedAt'] as String),
-  viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
-);
+_$SavedReportImpl _$$SavedReportImplFromJson(Map<String, dynamic> json) =>
+    _$SavedReportImpl(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      template: $enumDecode(_$ReportTemplateEnumMap, json['template']),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      configuration: ReportConfiguration.fromJson(
+        json['configuration'] as Map<String, dynamic>,
+      ),
+      pdfPath: json['pdfPath'] as String?,
+      fileSizeBytes: (json['fileSizeBytes'] as num?)?.toInt(),
+      isFavorite: json['isFavorite'] as bool? ?? false,
+      sharedLink: json['sharedLink'] as String?,
+      lastViewedAt: json['lastViewedAt'] == null
+          ? null
+          : DateTime.parse(json['lastViewedAt'] as String),
+      viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
+    );
 
-Map<String, dynamic> _$SavedReportToJson(_SavedReport instance) =>
+Map<String, dynamic> _$$SavedReportImplToJson(_$SavedReportImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -47,8 +48,8 @@ const _$ReportTemplateEnumMap = {
   ReportTemplate.custom: 'custom',
 };
 
-_ReportSchedule _$ReportScheduleFromJson(Map<String, dynamic> json) =>
-    _ReportSchedule(
+_$ReportScheduleImpl _$$ReportScheduleImplFromJson(Map<String, dynamic> json) =>
+    _$ReportScheduleImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       template: $enumDecode(_$ReportTemplateEnumMap, json['template']),
@@ -67,19 +68,20 @@ _ReportSchedule _$ReportScheduleFromJson(Map<String, dynamic> json) =>
       notes: json['notes'] as String?,
     );
 
-Map<String, dynamic> _$ReportScheduleToJson(_ReportSchedule instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'template': _$ReportTemplateEnumMap[instance.template]!,
-      'configuration': instance.configuration,
-      'frequency': _$ScheduleFrequencyEnumMap[instance.frequency]!,
-      'nextRunAt': instance.nextRunAt.toIso8601String(),
-      'lastRunAt': instance.lastRunAt?.toIso8601String(),
-      'isActive': instance.isActive,
-      'emailRecipients': instance.emailRecipients,
-      'notes': instance.notes,
-    };
+Map<String, dynamic> _$$ReportScheduleImplToJson(
+  _$ReportScheduleImpl instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'title': instance.title,
+  'template': _$ReportTemplateEnumMap[instance.template]!,
+  'configuration': instance.configuration,
+  'frequency': _$ScheduleFrequencyEnumMap[instance.frequency]!,
+  'nextRunAt': instance.nextRunAt.toIso8601String(),
+  'lastRunAt': instance.lastRunAt?.toIso8601String(),
+  'isActive': instance.isActive,
+  'emailRecipients': instance.emailRecipients,
+  'notes': instance.notes,
+};
 
 const _$ScheduleFrequencyEnumMap = {
   ScheduleFrequency.daily: 'daily',

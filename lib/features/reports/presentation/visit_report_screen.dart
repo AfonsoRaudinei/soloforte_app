@@ -178,7 +178,7 @@ class _VisitReportScreenState extends ConsumerState<VisitReportScreen> {
                           labelText: 'Estádio',
                           border: OutlineInputBorder(),
                         ),
-                        value: _selectedStage,
+                        initialValue: _selectedStage,
                         items: _stages.entries.map((e) {
                           return DropdownMenuItem(
                             value: e.key,
@@ -304,10 +304,11 @@ class _VisitReportScreenState extends ConsumerState<VisitReportScreen> {
                                       selected: _selectedNutrients.contains(n),
                                       onSelected: (sel) {
                                         setState(() {
-                                          if (sel)
+                                          if (sel) {
                                             _selectedNutrients.add(n);
-                                          else
+                                          } else {
                                             _selectedNutrients.remove(n);
+                                          }
                                         });
                                       },
                                     ),

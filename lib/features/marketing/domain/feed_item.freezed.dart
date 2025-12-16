@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,289 +9,301 @@ part of 'feed_item.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+FeedItem _$FeedItemFromJson(Map<String, dynamic> json) {
+  return _FeedItem.fromJson(json);
+}
 
 /// @nodoc
 mixin _$FeedItem {
-
- String get id; String get title; String get imageUrl; String get type;// 'news' or 'ad'
- String get linkUrl; String get summary; DateTime get publishDate;
-/// Create a copy of FeedItem
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$FeedItemCopyWith<FeedItem> get copyWith => _$FeedItemCopyWithImpl<FeedItem>(this as FeedItem, _$identity);
+  String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError; // 'news' or 'ad'
+  String get linkUrl => throw _privateConstructorUsedError;
+  String get summary => throw _privateConstructorUsedError;
+  DateTime get publishDate => throw _privateConstructorUsedError;
 
   /// Serializes this FeedItem to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FeedItem&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.type, type) || other.type == type)&&(identical(other.linkUrl, linkUrl) || other.linkUrl == linkUrl)&&(identical(other.summary, summary) || other.summary == summary)&&(identical(other.publishDate, publishDate) || other.publishDate == publishDate));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,title,imageUrl,type,linkUrl,summary,publishDate);
-
-@override
-String toString() {
-  return 'FeedItem(id: $id, title: $title, imageUrl: $imageUrl, type: $type, linkUrl: $linkUrl, summary: $summary, publishDate: $publishDate)';
-}
-
-
+  /// Create a copy of FeedItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $FeedItemCopyWith<FeedItem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $FeedItemCopyWith<$Res>  {
-  factory $FeedItemCopyWith(FeedItem value, $Res Function(FeedItem) _then) = _$FeedItemCopyWithImpl;
-@useResult
-$Res call({
- String id, String title, String imageUrl, String type, String linkUrl, String summary, DateTime publishDate
-});
-
-
-
-
+abstract class $FeedItemCopyWith<$Res> {
+  factory $FeedItemCopyWith(FeedItem value, $Res Function(FeedItem) then) =
+      _$FeedItemCopyWithImpl<$Res, FeedItem>;
+  @useResult
+  $Res call({
+    String id,
+    String title,
+    String imageUrl,
+    String type,
+    String linkUrl,
+    String summary,
+    DateTime publishDate,
+  });
 }
+
 /// @nodoc
-class _$FeedItemCopyWithImpl<$Res>
+class _$FeedItemCopyWithImpl<$Res, $Val extends FeedItem>
     implements $FeedItemCopyWith<$Res> {
-  _$FeedItemCopyWithImpl(this._self, this._then);
+  _$FeedItemCopyWithImpl(this._value, this._then);
 
-  final FeedItem _self;
-  final $Res Function(FeedItem) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of FeedItem
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? type = null,Object? linkUrl = null,Object? summary = null,Object? publishDate = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,linkUrl: null == linkUrl ? _self.linkUrl : linkUrl // ignore: cast_nullable_to_non_nullable
-as String,summary: null == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
-as String,publishDate: null == publishDate ? _self.publishDate : publishDate // ignore: cast_nullable_to_non_nullable
-as DateTime,
-  ));
+  /// Create a copy of FeedItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? imageUrl = null,
+    Object? type = null,
+    Object? linkUrl = null,
+    Object? summary = null,
+    Object? publishDate = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            title: null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                      as String,
+            imageUrl: null == imageUrl
+                ? _value.imageUrl
+                : imageUrl // ignore: cast_nullable_to_non_nullable
+                      as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as String,
+            linkUrl: null == linkUrl
+                ? _value.linkUrl
+                : linkUrl // ignore: cast_nullable_to_non_nullable
+                      as String,
+            summary: null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                      as String,
+            publishDate: null == publishDate
+                ? _value.publishDate
+                : publishDate // ignore: cast_nullable_to_non_nullable
+                      as DateTime,
+          )
+          as $Val,
+    );
+  }
 }
 
+/// @nodoc
+abstract class _$$FeedItemImplCopyWith<$Res>
+    implements $FeedItemCopyWith<$Res> {
+  factory _$$FeedItemImplCopyWith(
+    _$FeedItemImpl value,
+    $Res Function(_$FeedItemImpl) then,
+  ) = __$$FeedItemImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String id,
+    String title,
+    String imageUrl,
+    String type,
+    String linkUrl,
+    String summary,
+    DateTime publishDate,
+  });
 }
 
+/// @nodoc
+class __$$FeedItemImplCopyWithImpl<$Res>
+    extends _$FeedItemCopyWithImpl<$Res, _$FeedItemImpl>
+    implements _$$FeedItemImplCopyWith<$Res> {
+  __$$FeedItemImplCopyWithImpl(
+    _$FeedItemImpl _value,
+    $Res Function(_$FeedItemImpl) _then,
+  ) : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [FeedItem].
-extension FeedItemPatterns on FeedItem {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FeedItem value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _FeedItem() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FeedItem value)  $default,){
-final _that = this;
-switch (_that) {
-case _FeedItem():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FeedItem value)?  $default,){
-final _that = this;
-switch (_that) {
-case _FeedItem() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String imageUrl,  String type,  String linkUrl,  String summary,  DateTime publishDate)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _FeedItem() when $default != null:
-return $default(_that.id,_that.title,_that.imageUrl,_that.type,_that.linkUrl,_that.summary,_that.publishDate);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String imageUrl,  String type,  String linkUrl,  String summary,  DateTime publishDate)  $default,) {final _that = this;
-switch (_that) {
-case _FeedItem():
-return $default(_that.id,_that.title,_that.imageUrl,_that.type,_that.linkUrl,_that.summary,_that.publishDate);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String imageUrl,  String type,  String linkUrl,  String summary,  DateTime publishDate)?  $default,) {final _that = this;
-switch (_that) {
-case _FeedItem() when $default != null:
-return $default(_that.id,_that.title,_that.imageUrl,_that.type,_that.linkUrl,_that.summary,_that.publishDate);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of FeedItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? imageUrl = null,
+    Object? type = null,
+    Object? linkUrl = null,
+    Object? summary = null,
+    Object? publishDate = null,
+  }) {
+    return _then(
+      _$FeedItemImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        title: null == title
+            ? _value.title
+            : title // ignore: cast_nullable_to_non_nullable
+                  as String,
+        imageUrl: null == imageUrl
+            ? _value.imageUrl
+            : imageUrl // ignore: cast_nullable_to_non_nullable
+                  as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        linkUrl: null == linkUrl
+            ? _value.linkUrl
+            : linkUrl // ignore: cast_nullable_to_non_nullable
+                  as String,
+        summary: null == summary
+            ? _value.summary
+            : summary // ignore: cast_nullable_to_non_nullable
+                  as String,
+        publishDate: null == publishDate
+            ? _value.publishDate
+            : publishDate // ignore: cast_nullable_to_non_nullable
+                  as DateTime,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$FeedItemImpl implements _FeedItem {
+  const _$FeedItemImpl({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.type,
+    required this.linkUrl,
+    required this.summary,
+    required this.publishDate,
+  });
 
-class _FeedItem implements FeedItem {
-  const _FeedItem({required this.id, required this.title, required this.imageUrl, required this.type, required this.linkUrl, required this.summary, required this.publishDate});
-  factory _FeedItem.fromJson(Map<String, dynamic> json) => _$FeedItemFromJson(json);
+  factory _$FeedItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FeedItemImplFromJson(json);
 
-@override final  String id;
-@override final  String title;
-@override final  String imageUrl;
-@override final  String type;
-// 'news' or 'ad'
-@override final  String linkUrl;
-@override final  String summary;
-@override final  DateTime publishDate;
+  @override
+  final String id;
+  @override
+  final String title;
+  @override
+  final String imageUrl;
+  @override
+  final String type;
+  // 'news' or 'ad'
+  @override
+  final String linkUrl;
+  @override
+  final String summary;
+  @override
+  final DateTime publishDate;
 
-/// Create a copy of FeedItem
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$FeedItemCopyWith<_FeedItem> get copyWith => __$FeedItemCopyWithImpl<_FeedItem>(this, _$identity);
+  @override
+  String toString() {
+    return 'FeedItem(id: $id, title: $title, imageUrl: $imageUrl, type: $type, linkUrl: $linkUrl, summary: $summary, publishDate: $publishDate)';
+  }
 
-@override
-Map<String, dynamic> toJson() {
-  return _$FeedItemToJson(this, );
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FeedItemImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.linkUrl, linkUrl) || other.linkUrl == linkUrl) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.publishDate, publishDate) ||
+                other.publishDate == publishDate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    title,
+    imageUrl,
+    type,
+    linkUrl,
+    summary,
+    publishDate,
+  );
+
+  /// Create a copy of FeedItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FeedItemImplCopyWith<_$FeedItemImpl> get copyWith =>
+      __$$FeedItemImplCopyWithImpl<_$FeedItemImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FeedItemImplToJson(this);
+  }
 }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FeedItem&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.type, type) || other.type == type)&&(identical(other.linkUrl, linkUrl) || other.linkUrl == linkUrl)&&(identical(other.summary, summary) || other.summary == summary)&&(identical(other.publishDate, publishDate) || other.publishDate == publishDate));
+abstract class _FeedItem implements FeedItem {
+  const factory _FeedItem({
+    required final String id,
+    required final String title,
+    required final String imageUrl,
+    required final String type,
+    required final String linkUrl,
+    required final String summary,
+    required final DateTime publishDate,
+  }) = _$FeedItemImpl;
+
+  factory _FeedItem.fromJson(Map<String, dynamic> json) =
+      _$FeedItemImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get title;
+  @override
+  String get imageUrl;
+  @override
+  String get type; // 'news' or 'ad'
+  @override
+  String get linkUrl;
+  @override
+  String get summary;
+  @override
+  DateTime get publishDate;
+
+  /// Create a copy of FeedItem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FeedItemImplCopyWith<_$FeedItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,title,imageUrl,type,linkUrl,summary,publishDate);
-
-@override
-String toString() {
-  return 'FeedItem(id: $id, title: $title, imageUrl: $imageUrl, type: $type, linkUrl: $linkUrl, summary: $summary, publishDate: $publishDate)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$FeedItemCopyWith<$Res> implements $FeedItemCopyWith<$Res> {
-  factory _$FeedItemCopyWith(_FeedItem value, $Res Function(_FeedItem) _then) = __$FeedItemCopyWithImpl;
-@override @useResult
-$Res call({
- String id, String title, String imageUrl, String type, String linkUrl, String summary, DateTime publishDate
-});
-
-
-
-
-}
-/// @nodoc
-class __$FeedItemCopyWithImpl<$Res>
-    implements _$FeedItemCopyWith<$Res> {
-  __$FeedItemCopyWithImpl(this._self, this._then);
-
-  final _FeedItem _self;
-  final $Res Function(_FeedItem) _then;
-
-/// Create a copy of FeedItem
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? type = null,Object? linkUrl = null,Object? summary = null,Object? publishDate = null,}) {
-  return _then(_FeedItem(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,linkUrl: null == linkUrl ? _self.linkUrl : linkUrl // ignore: cast_nullable_to_non_nullable
-as String,summary: null == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
-as String,publishDate: null == publishDate ? _self.publishDate : publishDate // ignore: cast_nullable_to_non_nullable
-as DateTime,
-  ));
-}
-
-
-}
-
-// dart format on

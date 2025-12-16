@@ -22,7 +22,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _createDB,
       onUpgrade: _onUpgrade,
     );
@@ -37,6 +37,18 @@ class DatabaseHelper {
           longitude REAL NOT NULL,
           data TEXT NOT NULL,
           timestamp INTEGER NOT NULL
+        )
+      ''');
+    }
+    if (oldVersion < 3) {
+      await db.execute('''
+        CREATE TABLE visits (
+          id TEXT PRIMARY KEY,
+          client_id TEXT NOT NULL,
+          check_in_time INTEGER NOT NULL,
+          check_out_time INTEGER,
+          status TEXT NOT NULL,
+          data TEXT NOT NULL
         )
       ''');
     }
@@ -70,10 +82,22 @@ class DatabaseHelper {
         timestamp INTEGER NOT NULL
       )
     ''');
+
+    // Visits
+    await db.execute('''
+      CREATE TABLE visits (
+        id TEXT PRIMARY KEY,
+        client_id TEXT NOT NULL,
+        check_in_time INTEGER NOT NULL,
+        check_out_time INTEGER,
+        status TEXT NOT NULL,
+        data TEXT NOT NULL
+      )
+    ''');
   }
 
   Future<void> close() async {
-    final db = await _database;
+    final db = _database;
     if (db != null) {
       await db.close();
     }

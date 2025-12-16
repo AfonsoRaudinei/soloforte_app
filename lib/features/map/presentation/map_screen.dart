@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -207,12 +206,10 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                               height: 24,
                               child: GestureDetector(
                                 onPanUpdate: (details) {
-                                  final p = _mapController.camera.pointToLatLng(
-                                    math.Point(
-                                      details.globalPosition.dx,
-                                      details.globalPosition.dy,
-                                    ),
-                                  );
+                                  final p = _mapController.camera
+                                      .screenOffsetToLatLng(
+                                        details.globalPosition,
+                                      );
                                   drawingController.moveCircleCenter(p);
                                 },
                                 child: Container(
@@ -245,11 +242,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                                 child: GestureDetector(
                                   onPanUpdate: (details) {
                                     final p = _mapController.camera
-                                        .pointToLatLng(
-                                          math.Point(
-                                            details.globalPosition.dx,
-                                            details.globalPosition.dy,
-                                          ),
+                                        .screenOffsetToLatLng(
+                                          details.globalPosition,
                                         );
                                     drawingController.updateCircleRadius(p);
                                   },
@@ -296,11 +290,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                                   );
                                   if (i != -1) {
                                     final p = _mapController.camera
-                                        .pointToLatLng(
-                                          math.Point(
-                                            details.globalPosition.dx,
-                                            details.globalPosition.dy,
-                                          ),
+                                        .screenOffsetToLatLng(
+                                          details.globalPosition,
                                         );
                                     drawingController.moveVertex(i, p);
                                   }

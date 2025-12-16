@@ -4,6 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:soloforte_app/features/visits/presentation/visit_controller.dart';
+import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'widgets/map_side_controls.dart';
 import 'widgets/radial_menu.dart';
 import 'widgets/online_status_badge.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   final MapController _mapController = MapController();
   bool _isOnline = true;
+  bool _isRadialMenuOpen = false;
 
   // Mock Data
   final List<Polygon> _mockAreas = [
@@ -28,7 +31,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         const LatLng(-14.2400, -51.9300),
         const LatLng(-14.2350, -51.9300),
       ],
-      color: Colors.green.withValues(alpha: 0.3),
+      color: Colors.green.withOpacity(0.3),
       borderColor: Colors.green,
       borderStrokeWidth: 2,
     ),
@@ -39,7 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         const LatLng(-14.2500, -51.9400),
         const LatLng(-14.2450, -51.9400),
       ],
-      color: Colors.orange.withValues(alpha: 0.3),
+      color: Colors.orange.withOpacity(0.3),
       borderColor: Colors.orange,
       borderStrokeWidth: 2,
     ),
@@ -156,8 +159,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  void _hideMenus() {
+    if (_isRadialMenuOpen) {
+      setState(() => _isRadialMenuOpen = false);
+    }
+  }
+
+  void _toggleRadialMenu() {
+    setState(() {
+      _isRadialMenuOpen = !_isRadialMenuOpen;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Watch active visit to show sticky card
+    final activeVisitAsync = ref.watch(visitControllerProvider);
+    final activeVisit = activeVisitAsync.value;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -198,11 +217,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.9),
+                      color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.1),
+                          color: Colors.black.withOpacity(0.1),
                           blurRadius: 4,
                           offset: const Offset(0, 2),
                         ),
@@ -288,6 +307,57 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
 
+          // Active Visit Indicator (Bottom Center, just above areas/nav)
+          if (activeVisit != null && activeVisit.status.name == 'ongoing')
+            Positioned(
+              top: 80, // Below header
+              left: 16,
+              right: 80,
+              child: SafeArea(
+                child: GestureDetector(
+                  onTap: () => context.push('/visit/active'),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withOpacity(0.4),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.timer, color: Colors.white),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            "Em andamento: ${activeVisit.client.name}",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 14,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
           // Radial Menu Overlay
           if (_isRadialMenuOpen)
             Positioned.fill(
@@ -327,20 +397,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  bool _isRadialMenuOpen = false;
-
-  void _hideMenus() {
-    if (_isRadialMenuOpen) {
-      setState(() => _isRadialMenuOpen = false);
-    }
-  }
-
-  void _toggleRadialMenu() {
-    setState(() {
-      _isRadialMenuOpen = !_isRadialMenuOpen;
-    });
-  }
-
   Widget _buildOccurrenceCard(int index) {
     final types = ['Praga', 'Doença', 'Daninha'];
     final titles = ['Lagarta do Cartucho', 'Ferrugem Asiática', 'Buva'];
@@ -350,11 +406,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       width: 260,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
+        color: Colors.white.withOpacity(0.95),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -365,7 +421,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: colors[index % 3].withValues(alpha: 0.1),
+              color: colors[index % 3].withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
@@ -422,7 +478,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
+              color: Colors.black.withOpacity(0.1),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -481,7 +537,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.green.withValues(alpha: 0.1),
+                            color: Colors.green.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: const Text(

@@ -229,9 +229,9 @@ class _AreaListItem extends StatelessWidget {
         : '-';
 
     IconData icon;
-    if (area.type == 'circle')
+    if (area.type == 'circle') {
       icon = Icons.circle_outlined;
-    else if (area.type == 'rectangle')
+    } else if (area.type == 'rectangle')
       icon = Icons.crop_square;
     else
       icon = Icons.polyline;

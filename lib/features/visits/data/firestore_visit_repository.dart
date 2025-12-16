@@ -44,6 +44,12 @@ class FirestoreVisitRepository implements VisitRepository {
       await _firestore.collection('visits').add(visit.toJson());
     }
   }
+
+  @override
+  Future<Visit?> getActiveVisit() async {
+    // TODO: Implement syncing logic. For now, we rely on local repository for active visit.
+    return null;
+  }
 }
 
 // Provider override would happen in main or here via a specific provider

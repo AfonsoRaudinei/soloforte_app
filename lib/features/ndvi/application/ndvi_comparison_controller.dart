@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:soloforte_app/features/map/domain/geo_area.dart';
 import 'package:soloforte_app/features/map/application/geometry_utils.dart';

@@ -108,7 +108,7 @@ class _ConfigurationStepState extends ConsumerState<ConfigurationStep> {
                         );
                   }
                 },
-                selectedColor: AppColors.primary.withOpacity(0.2),
+                selectedColor: AppColors.primary.withValues(alpha: 0.2),
                 labelStyle: TextStyle(
                   color: isSelected ? AppColors.primary : Colors.grey[700],
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
@@ -227,20 +227,20 @@ class _ConfigurationStepState extends ConsumerState<ConfigurationStep> {
                     ),
                   ),
                   subtitle: Text(
-                    '${area.areaInHectares.toStringAsFixed(2)} ha',
+                    '${area.areaHectares.toStringAsFixed(2)} ha',
                     style: AppTypography.caption,
                   ),
                   secondary: Container(
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: area.color.withOpacity(0.2),
+                      color: AppColors.primary.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
-                      border: Border.all(color: area.color, width: 2),
+                      border: Border.all(color: AppColors.primary, width: 2),
                     ),
                     child: Icon(
                       area.type == 'polygon' ? Icons.pentagon : Icons.circle,
-                      color: area.color,
+                      color: AppColors.primary,
                       size: 20,
                     ),
                   ),
@@ -307,7 +307,7 @@ class _ConfigurationStepState extends ConsumerState<ConfigurationStep> {
                       .read(reportWizardProvider)
                       .setSelectedMetrics(_selectedMetrics.toList());
                 },
-                selectedColor: AppColors.primary.withOpacity(0.2),
+                selectedColor: AppColors.primary.withValues(alpha: 0.2),
                 checkmarkColor: AppColors.primary,
                 labelStyle: TextStyle(
                   color: isSelected ? AppColors.primary : Colors.grey[700],

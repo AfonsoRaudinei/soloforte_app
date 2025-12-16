@@ -89,7 +89,7 @@ class SentinelService {
       };
 
       final response = await _dio.post(
-        SentinelConfig.catalogUrl + '/search',
+        '${SentinelConfig.catalogUrl}/search',
         data: body,
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );

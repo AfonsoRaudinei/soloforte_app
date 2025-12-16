@@ -60,8 +60,9 @@ class DrawingController extends Notifier<DrawingState> {
   }
 
   void setTool(String tool) {
-    if (state.editingAreaId != null)
+    if (state.editingAreaId != null) {
       return; // Prevent changing tool while editing
+    }
     state = state.copyWith(activeTool: tool);
   }
 
@@ -175,8 +176,9 @@ class DrawingController extends Notifier<DrawingState> {
   void updateCircleRadius(LatLng point) {
     if (!state.isDrawing ||
         state.activeTool != 'circle' ||
-        state.circleCenter == null)
+        state.circleCenter == null) {
       return;
+    }
     final radius = GeometryUtils.calculateDistance(state.circleCenter!, point);
     state = state.copyWith(circleRadius: radius);
   }
@@ -193,10 +195,12 @@ class DrawingController extends Notifier<DrawingState> {
   void saveArea(String name) {
     if (state.activeTool == 'polygon' && state.currentPoints.length < 3) return;
     if (state.activeTool == 'circle' &&
-        (state.circleCenter == null || state.circleRadius == 0))
+        (state.circleCenter == null || state.circleRadius == 0)) {
       return;
-    if (state.activeTool == 'rectangle' && state.currentPoints.isEmpty)
+    }
+    if (state.activeTool == 'rectangle' && state.currentPoints.isEmpty) {
       return; // Should have points
+    }
 
     double areaHectares = 0;
     double perimeterKm = 0;

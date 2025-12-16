@@ -215,7 +215,7 @@ class _ClientFilterSheetState extends State<ClientFilterSheet> {
                       _buildSectionTitle('Estado'),
                       const SizedBox(height: 8),
                       DropdownButtonFormField<String>(
-                        value: _filters.state,
+                        initialValue: _filters.state,
                         decoration: InputDecoration(
                           hintText: 'Selecione um estado',
                           border: OutlineInputBorder(

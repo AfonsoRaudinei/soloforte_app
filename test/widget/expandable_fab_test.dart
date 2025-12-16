@@ -3,13 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:soloforte_app/core/widgets/expandable_fab.dart';
 
 void main() {
-  group('ExpandableFAB Widget', () {
+  group('ExpandableFab Widget', () {
     testWidgets('renders FAB button', (WidgetTester tester) async {
       // Arrange & Act
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ExpandableFAB(
+            body: ExpandableFab(
               onDrawArea: () {},
               onNewOccurrence: () {},
               onPestScanner: () {},
@@ -29,7 +29,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ExpandableFAB(
+            body: ExpandableFab(
               onDrawArea: () {},
               onNewOccurrence: () {},
               onPestScanner: () {},
@@ -60,7 +60,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ExpandableFAB(
+            body: ExpandableFab(
               onDrawArea: () => drawAreaCalled = true,
               onNewOccurrence: () {},
               onPestScanner: () {},
@@ -87,7 +87,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ExpandableFAB(
+            body: ExpandableFab(
               onDrawArea: () {},
               onNewOccurrence: () {},
               onPestScanner: () {},

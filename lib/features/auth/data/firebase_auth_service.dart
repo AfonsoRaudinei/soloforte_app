@@ -53,7 +53,7 @@ class FirebaseAuthService {
         token: token ?? '',
         refreshToken: user.refreshToken ?? '',
       );
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // Try mock login as fallback
       return _mockLogin(email, password);
     } catch (e) {
@@ -103,7 +103,7 @@ class FirebaseAuthService {
         token: token ?? '',
         refreshToken: user.refreshToken ?? '',
       );
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // Try mock register as fallback
       return _mockRegister(name, email, password);
     } catch (e) {

@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'clients_controller.dart';
 import 'package:soloforte_app/features/clients/domain/client_model.dart';
-import 'package:soloforte_app/features/clients/data/clients_repository.dart';
 import 'package:soloforte_app/features/clients/domain/client_history_model.dart';
 import 'package:soloforte_app/features/clients/data/client_history_repository.dart';
 import 'package:soloforte_app/features/farms/domain/farm_model.dart';

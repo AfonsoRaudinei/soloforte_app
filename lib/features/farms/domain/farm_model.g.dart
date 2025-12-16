@@ -6,7 +6,7 @@ part of 'farm_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Farm _$FarmFromJson(Map<String, dynamic> json) => _Farm(
+_$FarmImpl _$$FarmImplFromJson(Map<String, dynamic> json) => _$FarmImpl(
   id: json['id'] as String,
   clientId: json['clientId'] as String,
   name: json['name'] as String,
@@ -25,17 +25,18 @@ _Farm _$FarmFromJson(Map<String, dynamic> json) => _Farm(
       : DateTime.parse(json['updatedAt'] as String),
 );
 
-Map<String, dynamic> _$FarmToJson(_Farm instance) => <String, dynamic>{
-  'id': instance.id,
-  'clientId': instance.clientId,
-  'name': instance.name,
-  'city': instance.city,
-  'state': instance.state,
-  'address': instance.address,
-  'totalAreaHa': instance.totalAreaHa,
-  'totalAreas': instance.totalAreas,
-  'description': instance.description,
-  'isActive': instance.isActive,
-  'createdAt': instance.createdAt?.toIso8601String(),
-  'updatedAt': instance.updatedAt?.toIso8601String(),
-};
+Map<String, dynamic> _$$FarmImplToJson(_$FarmImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'clientId': instance.clientId,
+      'name': instance.name,
+      'city': instance.city,
+      'state': instance.state,
+      'address': instance.address,
+      'totalAreaHa': instance.totalAreaHa,
+      'totalAreas': instance.totalAreas,
+      'description': instance.description,
+      'isActive': instance.isActive,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };

@@ -66,10 +66,11 @@ class _NDVIDetailScreenState extends ConsumerState<NDVIDetailScreen> {
             stats: state.currentStats,
           );
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('Erro ao gerar relatório: $e')));
+      }
     }
   }
 
@@ -302,8 +303,9 @@ class _NDVIDetailScreenState extends ConsumerState<NDVIDetailScreen> {
   }
 
   LatLngBounds _getBounds(List<LatLng> points) {
-    if (points.isEmpty)
+    if (points.isEmpty) {
       return LatLngBounds(const LatLng(0, 0), const LatLng(0, 0));
+    }
     final bbox = GeometryUtils.calculateBBox(points);
     // bbox: [minLng, minLat, maxLng, maxLat]
     return LatLngBounds(

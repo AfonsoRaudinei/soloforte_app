@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/reports/domain/report_configuration.dart';
 import 'package:soloforte_app/features/reports/application/report_wizard_provider.dart';

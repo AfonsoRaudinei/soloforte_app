@@ -6,7 +6,7 @@ part of 'post_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Post _$PostFromJson(Map<String, dynamic> json) => _Post(
+_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
   id: json['id'] as String,
   title: json['title'] as String,
   content: json['content'] as String,
@@ -21,23 +21,36 @@ _Post _$PostFromJson(Map<String, dynamic> json) => _Post(
       const [],
   likes: (json['likes'] as num?)?.toInt() ?? 0,
   comments: (json['comments'] as num?)?.toInt() ?? 0,
-  isPublished: json['isPublished'] as bool? ?? false,
+  status:
+      $enumDecodeNullable(_$PostStatusEnumMap, json['status']) ??
+      PostStatus.draft,
   publishedAt: json['publishedAt'] == null
       ? null
       : DateTime.parse(json['publishedAt'] as String),
+  scheduledTo: json['scheduledTo'] == null
+      ? null
+      : DateTime.parse(json['scheduledTo'] as String),
 );
 
-Map<String, dynamic> _$PostToJson(_Post instance) => <String, dynamic>{
-  'id': instance.id,
-  'title': instance.title,
-  'content': instance.content,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'authorId': instance.authorId,
-  'authorName': instance.authorName,
-  'imageUrls': instance.imageUrls,
-  'tags': instance.tags,
-  'likes': instance.likes,
-  'comments': instance.comments,
-  'isPublished': instance.isPublished,
-  'publishedAt': instance.publishedAt?.toIso8601String(),
+Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'authorId': instance.authorId,
+      'authorName': instance.authorName,
+      'imageUrls': instance.imageUrls,
+      'tags': instance.tags,
+      'likes': instance.likes,
+      'comments': instance.comments,
+      'status': _$PostStatusEnumMap[instance.status]!,
+      'publishedAt': instance.publishedAt?.toIso8601String(),
+      'scheduledTo': instance.scheduledTo?.toIso8601String(),
+    };
+
+const _$PostStatusEnumMap = {
+  PostStatus.draft: 'draft',
+  PostStatus.scheduled: 'scheduled',
+  PostStatus.published: 'published',
 };

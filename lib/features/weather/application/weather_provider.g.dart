@@ -6,122 +6,176 @@ part of 'weather_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, type=warning
+String _$weatherServiceHash() => r'2fd79056223350f17986c2e598357fb950e6c4dc';
 
+/// See also [weatherService].
 @ProviderFor(weatherService)
-const weatherServiceProvider = WeatherServiceProvider._();
+final weatherServiceProvider = AutoDisposeProvider<WeatherService>.internal(
+  weatherService,
+  name: r'weatherServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$weatherServiceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-final class WeatherServiceProvider
-    extends $FunctionalProvider<WeatherService, WeatherService, WeatherService>
-    with $Provider<WeatherService> {
-  const WeatherServiceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'weatherServiceProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WeatherServiceRef = AutoDisposeProviderRef<WeatherService>;
+String _$weatherForecastHash() => r'6ac53afd88be45f95230b6e691f191996b129920';
 
-  @override
-  String debugGetCreateSourceHash() => _$weatherServiceHash();
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
 
-  @$internal
-  @override
-  $ProviderElement<WeatherService> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  WeatherService create(Ref ref) {
-    return weatherService(ref);
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
   }
 
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(WeatherService value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<WeatherService>(value),
-    );
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
 
-String _$weatherServiceHash() => r'2fd79056223350f17986c2e598357fb950e6c4dc';
-
+/// See also [weatherForecast].
 @ProviderFor(weatherForecast)
-const weatherForecastProvider = WeatherForecastFamily._();
+const weatherForecastProvider = WeatherForecastFamily();
 
-final class WeatherForecastProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<WeatherForecast>,
-          WeatherForecast,
-          FutureOr<WeatherForecast>
-        >
-    with $FutureModifier<WeatherForecast>, $FutureProvider<WeatherForecast> {
-  const WeatherForecastProvider._({
-    required WeatherForecastFamily super.from,
-    required (double, double) super.argument,
-  }) : super(
-         retry: null,
-         name: r'weatherForecastProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+/// See also [weatherForecast].
+class WeatherForecastFamily extends Family<AsyncValue<WeatherForecast>> {
+  /// See also [weatherForecast].
+  const WeatherForecastFamily();
 
-  @override
-  String debugGetCreateSourceHash() => _$weatherForecastHash();
-
-  @override
-  String toString() {
-    return r'weatherForecastProvider'
-        ''
-        '$argument';
+  /// See also [weatherForecast].
+  WeatherForecastProvider call(double lat, double lon) {
+    return WeatherForecastProvider(lat, lon);
   }
 
-  @$internal
   @override
-  $FutureProviderElement<WeatherForecast> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
+  WeatherForecastProvider getProviderOverride(
+    covariant WeatherForecastProvider provider,
+  ) {
+    return call(provider.lat, provider.lon);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
 
   @override
-  FutureOr<WeatherForecast> create(Ref ref) {
-    final argument = this.argument as (double, double);
-    return weatherForecast(ref, argument.$1, argument.$2);
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'weatherForecastProvider';
+}
+
+/// See also [weatherForecast].
+class WeatherForecastProvider
+    extends AutoDisposeFutureProvider<WeatherForecast> {
+  /// See also [weatherForecast].
+  WeatherForecastProvider(double lat, double lon)
+    : this._internal(
+        (ref) => weatherForecast(ref as WeatherForecastRef, lat, lon),
+        from: weatherForecastProvider,
+        name: r'weatherForecastProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$weatherForecastHash,
+        dependencies: WeatherForecastFamily._dependencies,
+        allTransitiveDependencies:
+            WeatherForecastFamily._allTransitiveDependencies,
+        lat: lat,
+        lon: lon,
+      );
+
+  WeatherForecastProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.lat,
+    required this.lon,
+  }) : super.internal();
+
+  final double lat;
+  final double lon;
+
+  @override
+  Override overrideWith(
+    FutureOr<WeatherForecast> Function(WeatherForecastRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: WeatherForecastProvider._internal(
+        (ref) => create(ref as WeatherForecastRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        lat: lat,
+        lon: lon,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<WeatherForecast> createElement() {
+    return _WeatherForecastProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is WeatherForecastProvider && other.argument == argument;
+    return other is WeatherForecastProvider &&
+        other.lat == lat &&
+        other.lon == lon;
   }
 
   @override
   int get hashCode {
-    return argument.hashCode;
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, lat.hashCode);
+    hash = _SystemHash.combine(hash, lon.hashCode);
+
+    return _SystemHash.finish(hash);
   }
 }
 
-String _$weatherForecastHash() => r'6ac53afd88be45f95230b6e691f191996b129920';
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin WeatherForecastRef on AutoDisposeFutureProviderRef<WeatherForecast> {
+  /// The parameter `lat` of this provider.
+  double get lat;
 
-final class WeatherForecastFamily extends $Family
-    with
-        $FunctionalFamilyOverride<FutureOr<WeatherForecast>, (double, double)> {
-  const WeatherForecastFamily._()
-    : super(
-        retry: null,
-        name: r'weatherForecastProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
+  /// The parameter `lon` of this provider.
+  double get lon;
+}
 
-  WeatherForecastProvider call(double lat, double lon) =>
-      WeatherForecastProvider._(argument: (lat, lon), from: this);
+class _WeatherForecastProviderElement
+    extends AutoDisposeFutureProviderElement<WeatherForecast>
+    with WeatherForecastRef {
+  _WeatherForecastProviderElement(super.provider);
 
   @override
-  String toString() => r'weatherForecastProvider';
+  double get lat => (origin as WeatherForecastProvider).lat;
+  @override
+  double get lon => (origin as WeatherForecastProvider).lon;
 }
+
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

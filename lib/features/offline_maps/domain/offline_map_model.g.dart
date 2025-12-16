@@ -6,21 +6,22 @@ part of 'offline_map_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_OfflineMap _$OfflineMapFromJson(Map<String, dynamic> json) => _OfflineMap(
-  id: json['id'] as String,
-  name: json['name'] as String,
-  minLat: (json['minLat'] as num).toDouble(),
-  maxLat: (json['maxLat'] as num).toDouble(),
-  minLng: (json['minLng'] as num).toDouble(),
-  maxLng: (json['maxLng'] as num).toDouble(),
-  zoomLevel: (json['zoomLevel'] as num).toInt(),
-  downloadedAt: DateTime.parse(json['downloadedAt'] as String),
-  sizeBytes: (json['sizeBytes'] as num).toInt(),
-  isDownloading: json['isDownloading'] as bool? ?? false,
-  downloadProgress: (json['downloadProgress'] as num?)?.toDouble() ?? 0,
-);
+_$OfflineMapImpl _$$OfflineMapImplFromJson(Map<String, dynamic> json) =>
+    _$OfflineMapImpl(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      minLat: (json['minLat'] as num).toDouble(),
+      maxLat: (json['maxLat'] as num).toDouble(),
+      minLng: (json['minLng'] as num).toDouble(),
+      maxLng: (json['maxLng'] as num).toDouble(),
+      zoomLevel: (json['zoomLevel'] as num).toInt(),
+      downloadedAt: DateTime.parse(json['downloadedAt'] as String),
+      sizeBytes: (json['sizeBytes'] as num).toInt(),
+      isDownloading: json['isDownloading'] as bool? ?? false,
+      downloadProgress: (json['downloadProgress'] as num?)?.toDouble() ?? 0,
+    );
 
-Map<String, dynamic> _$OfflineMapToJson(_OfflineMap instance) =>
+Map<String, dynamic> _$$OfflineMapImplToJson(_$OfflineMapImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

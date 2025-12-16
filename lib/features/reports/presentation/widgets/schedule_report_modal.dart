@@ -264,7 +264,7 @@ class _ScheduleReportModalState extends ConsumerState<ScheduleReportModal> {
             activeColor: AppColors.primary,
             contentPadding: EdgeInsets.zero,
           );
-        }).toList(),
+        }),
 
         // Opções específicas por frequência
         if (_selectedFrequency == ScheduleFrequency.weekly)
@@ -324,7 +324,7 @@ class _ScheduleReportModalState extends ConsumerState<ScheduleReportModal> {
           Text('Dia do mês:', style: AppTypography.bodySmall),
           const SizedBox(height: 8),
           DropdownButtonFormField<int>(
-            value: _selectedDayOfMonth,
+            initialValue: _selectedDayOfMonth,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -437,7 +437,7 @@ class _ScheduleReportModalState extends ConsumerState<ScheduleReportModal> {
               : 'Agendamento pausado',
           style: AppTypography.caption,
         ),
-        activeColor: AppColors.primary,
+        activeThumbColor: AppColors.primary,
         contentPadding: EdgeInsets.zero,
       ),
     );
