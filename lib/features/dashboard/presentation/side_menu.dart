@@ -50,6 +50,12 @@ class SideMenu extends StatelessWidget {
             onTap: () => context.go('/dashboard'),
           ),
           _DrawerItem(
+            icon: Icons.analytics_outlined,
+            label: 'Dash. Executivo',
+            isSelected: location == '/dashboard/executive',
+            onTap: () => context.go('/dashboard/executive'),
+          ),
+          _DrawerItem(
             icon: Icons.map_outlined,
             label: 'Mapa',
             isSelected: location.startsWith('/dashboard/map'),
