@@ -8,7 +8,8 @@ part 'weather_provider.g.dart';
 
 @riverpod
 WeatherService weatherService(WeatherServiceRef ref) {
-  return WeatherService(Dio(), DatabaseHelper());
+  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
+  return WeatherService(Dio(), _dbHelper);
 }
 
 @riverpod

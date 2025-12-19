@@ -3,9 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart'; // Abstracted
 import 'package:soloforte_app/features/visits/presentation/visit_controller.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
+import 'package:soloforte_app/features/areas/presentation/providers/areas_provider.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_provider.dart';
+import 'package:soloforte_app/features/areas/domain/area_model.dart'
+    hide LatLng;
+import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:soloforte_app/core/services/location/location_service.dart';
+import 'package:soloforte_app/l10n/generated/app_localizations.dart';
 import 'widgets/map_side_controls.dart';
 import 'widgets/radial_menu.dart';
 import 'widgets/online_status_badge.dart';
@@ -22,73 +29,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool _isOnline = true;
   bool _isRadialMenuOpen = false;
 
-  // Mock Data
-  final List<Polygon> _mockAreas = [
-    Polygon(
-      points: [
-        const LatLng(-14.2350, -51.9253),
-        const LatLng(-14.2400, -51.9253),
-        const LatLng(-14.2400, -51.9300),
-        const LatLng(-14.2350, -51.9300),
-      ],
-      color: Colors.green.withOpacity(0.3),
-      borderColor: Colors.green,
-      borderStrokeWidth: 2,
-    ),
-    Polygon(
-      points: [
-        const LatLng(-14.2450, -51.9353),
-        const LatLng(-14.2500, -51.9353),
-        const LatLng(-14.2500, -51.9400),
-        const LatLng(-14.2450, -51.9400),
-      ],
-      color: Colors.orange.withOpacity(0.3),
-      borderColor: Colors.orange,
-      borderStrokeWidth: 2,
-    ),
-  ];
-
-  final List<Marker> _mockOccurrences = [
-    Marker(
-      point: const LatLng(-14.2375, -51.9275),
-      width: 40,
-      height: 40,
-      child: Container(
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: const Icon(Icons.bug_report, color: Colors.red, size: 24),
-      ),
-    ),
-    Marker(
-      point: const LatLng(-14.2475, -51.9375),
-      width: 40,
-      height: 40,
-      child: Container(
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: const Icon(Icons.water_drop, color: Colors.blue, size: 24),
-      ),
-    ),
-  ];
-
   @override
   void dispose() {
     _mapController.dispose();
@@ -96,45 +36,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> _centerOnUserLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
+    try {
+      final position = await ref
+          .read(locationServiceProvider)
+          .getCurrentPosition();
+      _mapController.move(position, 15.0);
+    } on LocationException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Serviços de localização desativados.')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.errorLocation)),
         );
       }
-      return;
     }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Permissão de localização negada.')),
-          );
-        }
-        return;
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Permissões de localização permanentemente negadas.'),
-          ),
-        );
-      }
-      return;
-    }
-
-    final position = await Geolocator.getCurrentPosition();
-    _mapController.move(LatLng(position.latitude, position.longitude), 15.0);
   }
 
   void _zoomIn() {
@@ -153,7 +72,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(_isOnline ? 'Sincronizado' : 'Modo Offline'),
+        content: Text(
+          _isOnline
+              ? AppLocalizations.of(context)!.synced
+              : AppLocalizations.of(context)!.offlineMode,
+        ),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -173,8 +96,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Watch active visit to show sticky card
+    // Providers
     final activeVisitAsync = ref.watch(visitControllerProvider);
+    final AsyncValue<List<Area>> areasAsync = ref.watch(areasProvider);
+    final AsyncValue<List<Occurrence>> occurrencesAsync = ref.watch(
+      occurrencesProvider,
+    );
+
     final activeVisit = activeVisitAsync.value;
 
     return Scaffold(
@@ -184,7 +112,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: const LatLng(-14.2350, -51.9253),
+              initialCenter: const LatLng(-23.5505, -46.6333),
               initialZoom: 13.0,
               minZoom: 3.0,
               maxZoom: 18.0,
@@ -196,8 +124,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 userAgentPackageName: 'com.soloforte.app',
                 maxZoom: 19,
               ),
-              PolygonLayer(polygons: _mockAreas),
-              MarkerLayer(markers: _mockOccurrences),
+              // Loaded Areas
+              if (areasAsync.hasValue)
+                PolygonLayer(
+                  polygons: areasAsync.value!.map((Area area) {
+                    return Polygon(
+                      points: area.coordinates
+                          .map((c) => LatLng(c.latitude, c.longitude))
+                          .toList(),
+                      color: _getAreaColor(area.status).withOpacity(0.3),
+                      borderColor: _getAreaColor(area.status),
+                      borderStrokeWidth: 2,
+                    );
+                  }).toList(),
+                ),
+
+              // Loaded Occurrences Markers
+              if (occurrencesAsync.hasValue)
+                MarkerLayer(
+                  markers: occurrencesAsync.value!.map((occ) {
+                    return Marker(
+                      point: LatLng(occ.latitude, occ.longitude),
+                      width: 40,
+                      height: 40,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          _getOccurrenceIcon(occ.type),
+                          color: _getSeverityColor(occ.severity),
+                          size: 24,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
             ],
           ),
 
@@ -222,66 +192,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.warning_amber_rounded,
-                          size: 16,
-                          color: Colors.orange,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          'Ocorrências Ativas',
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(width: 4),
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: Colors.orange,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Text(
-                            '3',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildOccurrencesHeader(occurrencesAsync),
                   const SizedBox(height: 8),
                   SizedBox(
-                    height: 400, // Increased height to fit cards
+                    height: 400,
                     width: 300,
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 3,
-                      separatorBuilder: (_, __) => const SizedBox(height: 8),
-                      itemBuilder: (context, index) =>
-                          _buildOccurrenceCard(index),
+                    child: occurrencesAsync.when(
+                      data: (occurrences) {
+                        if (occurrences.isEmpty) {
+                          return Center(
+                            child: Text(
+                              AppLocalizations.of(context)!.noOccurrences,
+                            ),
+                          );
+                        }
+                        return ListView.separated(
+                          padding: EdgeInsets.zero,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: occurrences.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 8),
+                          itemBuilder: (context, index) =>
+                              _buildOccurrenceCard(occurrences[index], index),
+                        );
+                      },
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      error: (err, stack) => const Center(
+                        child: Icon(Icons.error, color: Colors.red),
+                      ),
                     ),
                   ),
                 ],
@@ -296,9 +235,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onZoomIn: _zoomIn,
             onZoomOut: _zoomOut,
             onLayersTap: () {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text('Camadas')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(AppLocalizations.of(context)!.layers)),
+              );
             },
             onDrawTap: () {
               context.push('/analysis/new');
@@ -312,18 +251,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             right: 0,
             child: SizedBox(
               height: 150,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemCount: 5,
-                separatorBuilder: (_, __) => const SizedBox(width: 12),
-                itemBuilder: (context, index) => _buildAreaCard(index),
+              child: areasAsync.when(
+                data: (areas) {
+                  if (areas.isEmpty) {
+                    return Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.noAreasRegistered,
+                      ),
+                    );
+                  }
+                  return ListView.separated(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: areas.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 12),
+                    itemBuilder: (context, index) =>
+                        _buildAreaCard(areas[index], index),
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, stack) => const Center(
+                  child: Icon(Icons.error_outline, color: Colors.red),
+                ),
               ),
             ),
           ),
 
-          // Active Visit Indicator (Bottom Center, just above areas/nav)
+          // Active Visit Indicator
           if (activeVisit != null && activeVisit.status.name == 'ongoing')
             Positioned(
               top: 80, // Below header
@@ -354,7 +309,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            "Em andamento: ${activeVisit.client.name}",
+                            AppLocalizations.of(
+                              context,
+                            )!.visitInProgress(activeVisit.client.name),
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -413,16 +370,65 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildOccurrenceCard(int index) {
-    // Mock data for display
-    final titles = ['Lagarta na Soja', 'Ferrugem Asiática', 'Buva Resistente'];
-    final severity = [0.85, 0.60, 0.45];
-    final locations = ['Talhão Norte', 'Talhão Sul', 'Área Teste'];
-    final colors = [Colors.red, Colors.orange, Colors.purple];
-    final times = ['Há 2h', 'Há 5h', 'Ontem'];
+  Widget _buildOccurrencesHeader(
+    AsyncValue<List<Occurrence>> occurrencesAsync,
+  ) {
+    final count = occurrencesAsync.asData?.value.length ?? 0;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.warning_amber_rounded,
+            size: 16,
+            color: Colors.orange,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            AppLocalizations.of(context)!.activeOccurrences,
+            style: Theme.of(
+              context,
+            ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 4),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: const BoxDecoration(
+              color: Colors.orange,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              '$count',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOccurrenceCard(Occurrence occurrence, int index) {
+    // Format time ago or date
+    final String timeAgo = _formatTimeAgo(occurrence.date);
 
     return GestureDetector(
-      onTap: () => context.push('/occurrences/detail/$index'),
+      onTap: () => context.push('/occurrences/detail/${occurrence.id}'),
       child: Container(
         width: 280,
         padding: const EdgeInsets.all(16),
@@ -444,12 +450,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: colors[index % 3].withOpacity(0.1),
+                color: _getSeverityColor(occurrence.severity).withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                Icons.bug_report_rounded,
-                color: colors[index % 3],
+                _getOccurrenceIcon(occurrence.type),
+                color: _getSeverityColor(occurrence.severity),
                 size: 24,
               ),
             ),
@@ -464,7 +470,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     children: [
                       Expanded(
                         child: Text(
-                          titles[index % 3],
+                          occurrence.title,
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
@@ -475,7 +481,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ),
                       Text(
-                        times[index % 3],
+                        timeAgo,
                         style: TextStyle(fontSize: 10, color: Colors.grey[500]),
                       ),
                     ],
@@ -491,7 +497,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const SizedBox(width: 2),
                       Expanded(
                         child: Text(
-                          locations[index % 3],
+                          occurrence.areaName,
                           style: TextStyle(
                             color: Colors.grey[600],
                             fontSize: 12,
@@ -511,18 +517,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Severidade',
+                            AppLocalizations.of(context)!.severity,
                             style: TextStyle(
                               fontSize: 10,
                               color: Colors.grey[500],
                             ),
                           ),
                           Text(
-                            '${(severity[index % 3] * 100).toInt()}%',
+                            '${(occurrence.severity * 100).toInt()}%',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
-                              color: colors[index % 3],
+                              color: _getSeverityColor(occurrence.severity),
                             ),
                           ),
                         ],
@@ -531,9 +537,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(2),
                         child: LinearProgressIndicator(
-                          value: severity[index % 3],
+                          value: occurrence.severity,
                           backgroundColor: Colors.grey[200],
-                          valueColor: AlwaysStoppedAnimation(colors[index % 3]),
+                          valueColor: AlwaysStoppedAnimation(
+                            _getSeverityColor(occurrence.severity),
+                          ),
                           minHeight: 4,
                         ),
                       ),
@@ -548,14 +556,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildAreaCard(int index) {
+  Widget _buildAreaCard(Area area, int index) {
     return Dismissible(
-      key: ValueKey('area_$index'),
+      key: ValueKey('area_${area.id}'),
       direction: DismissDirection.up,
       confirmDismiss: (direction) async {
         // Show options
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Opções: Editar / Excluir')),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.optionsEditDelete),
+          ),
         );
         return false;
       },
@@ -569,13 +579,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       child: GestureDetector(
         onTap: () {
-          _mapController.move(const LatLng(-14.2350, -51.9253), 15.5);
+          if (area.coordinates.isNotEmpty) {
+            final first = area.coordinates.first;
+            _mapController.move(LatLng(first.latitude, first.longitude), 15.5);
+          }
         },
         onLongPress: () {
           // Context menu
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Menu da Área')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.areaMenu)),
+          );
         },
         child: Container(
           width: 160,
@@ -612,7 +625,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: Icon(
                           Icons.grass,
                           size: 60,
-                          color: Colors.green[200],
+                          color: _getAreaColor(area.status).withOpacity(0.5),
                         ),
                       ),
                       Positioned(
@@ -632,12 +645,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               Icon(
                                 Icons.circle,
                                 size: 8,
-                                color: Colors.green[400],
+                                color: _getAreaColor(area.status),
                               ),
                               const SizedBox(width: 4),
-                              const Text(
-                                'Ativa',
-                                style: TextStyle(
+                              Text(
+                                area.status.toUpperCase(),
+                                style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black87,
@@ -661,12 +674,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Talhão ${index + 1}',
+                        area.name,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                           color: Color(0xFF1A1A1A),
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Row(
                         children: [
@@ -677,7 +692,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '${(120 + index * 15)} ha',
+                            '${area.hectares} ha',
                             style: TextStyle(
                               color: Colors.grey[600],
                               fontSize: 12,
@@ -694,5 +709,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
     );
+  }
+
+  // Helpers
+  Color _getSeverityColor(double severity) {
+    if (severity > 0.7) return Colors.red;
+    if (severity > 0.4) return Colors.orange;
+    return Colors.purple;
+  }
+
+  IconData _getOccurrenceIcon(String type) {
+    switch (type) {
+      case 'pest':
+        return Icons.bug_report_rounded;
+      case 'disease':
+        return Icons.coronavirus_rounded;
+      case 'deficiency':
+        return Icons.water_drop_rounded;
+      default:
+        return Icons.warning_rounded;
+    }
+  }
+
+  Color _getAreaColor(String status) {
+    switch (status) {
+      case 'active':
+        return Colors.green;
+      case 'monitoring':
+        return Colors.orange;
+      case 'attention':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  String _formatTimeAgo(DateTime date) {
+    final diff = DateTime.now().difference(date);
+    final l10n = AppLocalizations.of(context)!;
+    if (diff.inDays > 0) return l10n.daysAgo(diff.inDays);
+    if (diff.inHours > 0) return l10n.hoursAgo(diff.inHours);
+    if (diff.inMinutes > 0) return l10n.minutesAgo(diff.inMinutes);
+    return l10n.now;
   }
 }

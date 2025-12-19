@@ -15,7 +15,7 @@ class NdviCacheEntry {
 }
 
 class NdviCacheService {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 
   Future<void> saveNdviData({
     required String areaId,

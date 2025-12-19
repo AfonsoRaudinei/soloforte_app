@@ -1,0 +1,27 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'visit_form_provider.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$visitFormControllerHash() =>
+    r'32c45546de09e3b7a70b0b3ad835fb09f64216fc';
+
+/// See also [VisitFormController].
+@ProviderFor(VisitFormController)
+final visitFormControllerProvider =
+    AutoDisposeNotifierProvider<VisitFormController, VisitFormState>.internal(
+      VisitFormController.new,
+      name: r'visitFormControllerProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$visitFormControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$VisitFormController = AutoDisposeNotifier<VisitFormState>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

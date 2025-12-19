@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
-import 'package:soloforte_app/features/reports/presentation/reports_list_screen.dart'; // For MockReport model
 
-class ReportDetailScreen extends StatelessWidget {
-  final MockReport report;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:soloforte_app/features/reports/data/report_repository.dart';
 
-  const ReportDetailScreen({super.key, required this.report});
+class ReportDetailScreen extends ConsumerWidget {
+  final String reportId;
+
+  const ReportDetailScreen({super.key, required this.reportId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reportAsync = ref.watch(reportByIdProvider(reportId));
+
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -24,142 +28,157 @@ class ReportDetailScreen extends StatelessWidget {
           IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Header
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24),
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade50,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.description,
-                      size: 32,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    report.title,
-                    style: AppTypography.h4,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    report.period,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Resumo Executivo
-            _SectionCard(
-              title: "RESUMO EXECUTIVO",
-              icon: Icons.bar_chart,
-              child: Column(
-                children: [
-                  _SummaryRow(
-                    label: 'Áreas Monitoradas',
-                    value: '${report.areaCount}',
-                  ),
-                  _SummaryRow(
-                    label: 'Ocorrências',
-                    value: '${report.occurrenceCount}',
-                  ),
-                  _SummaryRow(label: 'Aplicações', value: '5'), // Mock
-                  _SummaryRow(
-                    label: 'NDVI Médio',
-                    value: '0.68 (+0.05)',
-                  ), // Mock
-                ],
-              ),
-            ),
-
-            // Áreas
-            _SectionCard(
-              title: "ÁREAS MONITORADAS",
-              icon: Icons.grass,
-              child: Column(
-                children: [
-                  _AreaRow(
-                    name: 'Talhão Norte',
-                    size: '45.3 ha',
-                    ndvi: '0.72 (Bom)',
-                    issues: 3,
-                  ),
-                  const Divider(),
-                  _AreaRow(
-                    name: 'Lavoura Sul',
-                    size: '32.1 ha',
-                    ndvi: '0.65 (Regular)',
-                    issues: 2,
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 32),
-
-            // Actions
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.picture_as_pdf),
-                      label: const Text('VER RELATÓRIO COMPLETO (PDF)'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
+      body: reportAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, stack) => Center(child: Text('Erro: $err')),
+        data: (report) {
+          if (report == null)
+            return const Center(child: Text('Relatório não encontrado'));
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                // Header
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(24),
+                  color: Colors.white,
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.share),
-                          label: const Text('Compartilhar'),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                          ),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.blue.shade50,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.description,
+                          size: 32,
+                          color: Colors.blue,
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.print),
-                          label: const Text('Imprimir'),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                          ),
+                      const SizedBox(height: 16),
+                      Text(
+                        report.title,
+                        style: AppTypography.h4,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        report.period,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 16),
+
+                // Resumo Executivo
+                _SectionCard(
+                  title: "RESUMO EXECUTIVO",
+                  icon: Icons.bar_chart,
+                  child: Column(
+                    children: [
+                      _SummaryRow(
+                        label: 'Áreas Monitoradas',
+                        value: '${report.areaCount}',
+                      ),
+                      _SummaryRow(
+                        label: 'Ocorrências',
+                        value: '${report.occurrenceCount}',
+                      ),
+                      _SummaryRow(label: 'Aplicações', value: '5'), // Mock
+                      _SummaryRow(
+                        label: 'NDVI Médio',
+                        value: '0.68 (+0.05)',
+                      ), // Mock
+                    ],
+                  ),
+                ),
+
+                // Áreas
+                _SectionCard(
+                  title: "ÁREAS MONITORADAS",
+                  icon: Icons.grass,
+                  child: Column(
+                    children: [
+                      _AreaRow(
+                        name: 'Talhão Norte',
+                        size: '45.3 ha',
+                        ndvi: '0.72 (Bom)',
+                        issues: 3,
+                      ),
+                      const Divider(),
+                      _AreaRow(
+                        name: 'Lavoura Sul',
+                        size: '32.1 ha',
+                        ndvi: '0.65 (Regular)',
+                        issues: 2,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 32),
+
+                // Actions
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.picture_as_pdf),
+                          label: const Text('VER RELATÓRIO COMPLETO (PDF)'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.share),
+                              label: const Text('Compartilhar'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(Icons.print),
+                              label: const Text('Imprimir'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+              ],
             ),
-            const SizedBox(height: 32),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

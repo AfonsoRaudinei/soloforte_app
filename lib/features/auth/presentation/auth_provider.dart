@@ -1,15 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/firebase_auth_service.dart';
+import '../data/auth_service.dart';
 import '../domain/auth_state.dart' as app;
 
-// Firebase Auth Service Provider
-final firebaseAuthServiceProvider = Provider<FirebaseAuthService>((ref) {
-  return FirebaseAuthService();
+// Auth Service Provider
+final authServiceProvider = Provider<AuthService>((ref) {
+  return AuthService();
 });
 
 // Auth State Provider
 final authStateProvider = StreamProvider<app.AuthState?>((ref) {
-  final authService = ref.watch(firebaseAuthServiceProvider);
+  final authService = ref.watch(authServiceProvider);
 
   return authService.authStateChanges.asyncMap((user) async {
     if (user == null) return null;
@@ -33,8 +33,7 @@ class AuthController {
 
   AuthController(this._ref);
 
-  FirebaseAuthService get _authService =>
-      _ref.read(firebaseAuthServiceProvider);
+  AuthService get _authService => _ref.read(authServiceProvider);
 
   // Login
   Future<void> login(String email, String password) async {

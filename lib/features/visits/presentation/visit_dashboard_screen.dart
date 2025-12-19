@@ -299,7 +299,7 @@ class VisitDashboardScreen extends ConsumerWidget {
                   photos: [],
                   occurrenceIds: ['occ-1', 'occ-2'],
                 );
-                context.push('/visit/detail', extra: mockVisit);
+                context.push('/visit/detail/${mockVisit.id}');
               },
               child: const Text('Ver Detalhes'),
             ),

@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
-
 import 'package:soloforte_app/features/support/data/ticket_repository.dart';
 import 'package:soloforte_app/features/support/domain/ticket_model.dart';
 import 'package:soloforte_app/features/support/presentation/help_center_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
-import 'package:shake/shake.dart';
-
-import 'package:soloforte_app/features/support/presentation/widgets/rating_dialog.dart';
 
 class SupportHomeScreen extends StatefulWidget {
   const SupportHomeScreen({super.key});
@@ -23,48 +18,13 @@ class _SupportHomeScreenState extends State<SupportHomeScreen> {
   final _repo = TicketRepository();
   List<Ticket> _tickets = [];
   bool _isLoading = true;
-  late ShakeDetector _shakeDetector;
+  String _filter = 'Abertas'; // 'Abertas', 'Resolvidas'
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _loadTickets();
-    _shakeDetector = ShakeDetector.autoStart(onPhoneShake: _onShake);
-  }
-
-  void _onShake() {
-    if (!mounted) return;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Reportar Bug?'),
-        content: const Text(
-          'Detectamos que você agitou o telefone. Deseja reportar um erro?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Não'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.push('/dashboard/support/chat');
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Iniciando relato de bug...')),
-              );
-            },
-            child: const Text('Sim'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _shakeDetector.stopListening();
-    super.dispose();
   }
 
   Future<void> _loadTickets() async {
@@ -77,263 +37,280 @@ class _SupportHomeScreenState extends State<SupportHomeScreen> {
     }
   }
 
-  Widget _buildStatistics() {
-    if (_isLoading) return const SizedBox.shrink();
+  List<Ticket> get _filteredTickets {
+    final search = _searchController.text.toLowerCase();
+    return _tickets.where((t) {
+      final matchSearch =
+          t.subject.toLowerCase().contains(search) ||
+          t.description.toLowerCase().contains(search);
+      bool matchStatus;
+      if (_filter == 'Abertas') {
+        matchStatus =
+            t.status == TicketStatus.open ||
+            t.status == TicketStatus.inProgress;
+      } else {
+        matchStatus =
+            t.status == TicketStatus.resolved ||
+            t.status == TicketStatus.closed;
+      }
+      return matchSearch && matchStatus;
+    }).toList();
+  }
 
-    final total = _tickets.length;
-    final active = _tickets
+  List<Ticket> get _resolvedRecently {
+    return _tickets
+        .where(
+          (t) =>
+              t.status == TicketStatus.resolved ||
+              t.status == TicketStatus.closed,
+        )
+        .toList()
+      ..sort(
+        (a, b) => b.lastUpdate.compareTo(a.lastUpdate),
+      ); // Most recent first
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final openCount = _tickets
         .where(
           (t) =>
               t.status == TicketStatus.open ||
               t.status == TicketStatus.inProgress,
         )
         .length;
-    final solved = _tickets
-        .where(
-          (t) =>
-              t.status == TicketStatus.resolved ||
-              t.status == TicketStatus.closed,
-        )
-        .length;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        children: [
-          Expanded(
-            child: _StatCard(
-              label: 'Total',
-              count: total.toString(),
-              color: Colors.blue,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: _StatCard(
-              label: 'Abertos',
-              count: active.toString(),
-              color: Colors.orange,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: _StatCard(
-              label: 'Resolvidos',
-              count: solved.toString(),
-              color: Colors.green,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
+        ),
+        title: const Text('Suporte'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const HelpCenterScreen()),
             ),
           ),
         ],
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Suporte & Ajuda')),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          await context.push('/dashboard/support/create');
-          _loadTickets(); // Refresh on return
-        },
-        label: const Text('Nova Conversa'),
-        icon: const Icon(Icons.chat),
-      ),
       body: RefreshIndicator(
         onRefresh: _loadTickets,
-        child: ListView(
-          padding: const EdgeInsets.all(16),
+        child: Column(
           children: [
-            _SupportOptionCard(
-              icon: Icons.book_outlined,
-              title: 'Central de Ajuda',
-              subtitle: 'Perguntas frequentes e tutoriais',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HelpCenterScreen(),
-                  ),
-                );
-              },
-            ),
-
-            _buildStatistics(),
-
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Meus Chamados', style: AppTypography.h3),
-                if (_isLoading)
-                  const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            if (!_isLoading && _tickets.isEmpty)
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(32.0),
-                  child: Text('Nenhum chamado aberto'),
+            // Search
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              )
-            else
-              ..._tickets.map(
-                (ticket) => Dismissible(
-                  key: Key(ticket.id),
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (direction) async {
-                    await _repo.updateTicketStatus(
-                      ticket.id,
-                      TicketStatus.closed,
-                    );
-                    if (context.mounted) {
-                      await showDialog(
-                        context: context,
-                        builder: (context) => const RatingDialog(),
-                      );
-                    }
-                    _loadTickets();
-                  },
-                  confirmDismiss: (direction) async {
-                    return await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Fechar Chamado?'),
-                        content: const Text(
-                          'Tem certeza que deseja marcar este chamado como resolvido/fechado?',
+                child: Row(
+                  children: [
+                    const Icon(Icons.search, color: Colors.grey),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: _searchController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Buscar conversas...',
                         ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(false),
-                            child: const Text('Cancelar'),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(true),
-                            child: const Text('Fechar'),
-                          ),
-                        ],
+                        onChanged: (_) => setState(() {}),
                       ),
-                    );
-                  },
-                  child: _TicketCard(ticket: ticket),
+                    ),
+                  ],
                 ),
               ),
+            ),
+
+            // Filters
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  _buildFilterChip(
+                    'Abertas ($openCount)',
+                    _filter == 'Abertas',
+                  ),
+                  const SizedBox(width: 8),
+                  _buildFilterChip('Resolvidas', _filter == 'Resolvidas'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Main List
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                children: [
+                  if (_filteredTickets.isEmpty && !_isLoading)
+                    const Padding(
+                      padding: EdgeInsets.all(32),
+                      child: Center(child: Text('Nenhuma conversa encontrada')),
+                    ),
+
+                  ..._filteredTickets.map((t) => _buildConversationCard(t)),
+
+                  if (_filter == 'Abertas' && _resolvedRecently.isNotEmpty) ...[
+                    const SizedBox(height: 24),
+                    Text(
+                      'Resolvidas Recentemente',
+                      style: AppTypography.h4.copyWith(color: Colors.grey),
+                    ),
+                    const Divider(),
+                    ..._resolvedRecently
+                        .take(3)
+                        .map((t) => _buildResolvedCard(t)),
+                  ],
+                ],
+              ),
+            ),
+
+            // Bottom Button
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    await context.push('/dashboard/support/create');
+                    _loadTickets();
+                  },
+                  icon: const Icon(Icons.add),
+                  label: const Text('Nova Conversa'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-}
 
-class _SupportOptionCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final VoidCallback onTap;
-
-  const _SupportOptionCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Icon(icon, color: AppColors.primary),
-        title: Text(title, style: AppTypography.label),
-        subtitle: Text(subtitle),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: onTap,
+  Widget _buildFilterChip(String label, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (label.startsWith('Abertas'))
+            _filter = 'Abertas';
+          else
+            _filter = 'Resolvidas';
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.black : Colors.grey[200],
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
-}
 
-class _TicketCard extends StatelessWidget {
-  final Ticket ticket;
+  Widget _buildConversationCard(Ticket ticket) {
+    final isBot =
+        ticket.subject.toLowerCase().contains('bot') ||
+        ticket.subject.contains('Suporte'); // Mock logic
+    final isOnline = true; // status check
 
-  const _TicketCard({required this.ticket});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: ticket.status.color.withOpacity(0.1),
-          child: Icon(Icons.support_agent, color: ticket.status.color),
+    return GestureDetector(
+      onTap: () => context.push('/dashboard/support/chat', extra: ticket),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
         ),
-        title: Text(
-          ticket.subject,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          '#${ticket.id.substring(0, 8)} • ${timeago.format(ticket.lastUpdate, locale: 'en_short')}',
-        ),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: ticket.status.color.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Text(
-            ticket.status.label,
-            style: AppTypography.caption.copyWith(
-              color: ticket.status.color,
-              fontWeight: AppTypography.bold,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              backgroundColor: isBot ? Colors.blue[50] : Colors.grey[100],
+              child: Text(isBot ? '🤖' : '👤'),
             ),
-          ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(ticket.subject, style: AppTypography.h4),
+                  const Divider(height: 12),
+                  Text(
+                    ticket.description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.bodySmall.copyWith(
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.circle,
+                        size: 8,
+                        color: isOnline ? Colors.green : Colors.red,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        isOnline ? 'Online' : 'Offline',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  timeago.format(ticket.lastUpdate, locale: 'en_short'),
+                  style: TextStyle(color: Colors.grey[500], fontSize: 12),
+                ),
+              ],
+            ),
+          ],
         ),
-        onTap: () => context.push('/dashboard/support/chat', extra: ticket),
       ),
     );
   }
-}
 
-class _StatCard extends StatelessWidget {
-  final String label;
-  final String count;
-  final Color color;
-
-  const _StatCard({
-    required this.label,
-    required this.count,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.2)),
+  Widget _buildResolvedCard(Ticket ticket) {
+    return ListTile(
+      leading: const Icon(Icons.check_circle, color: Colors.green),
+      title: Text(
+        ticket.subject,
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      child: Column(
-        children: [
-          Text(count, style: AppTypography.h2.copyWith(color: color)),
-          const SizedBox(height: 4),
-          Text(label, style: AppTypography.caption),
-        ],
-      ),
+      subtitle: Text('Resolvido • ${timeago.format(ticket.lastUpdate)}'),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => context.push('/dashboard/support/chat', extra: ticket),
     );
   }
 }

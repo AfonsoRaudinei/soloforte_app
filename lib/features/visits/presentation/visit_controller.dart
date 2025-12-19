@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:geolocator/geolocator.dart';
-import '../domain/visit_model.dart';
-import '../data/visit_repository.dart';
+import '../domain/entities/visit.dart';
+import '../data/repositories/visit_repository_impl.dart';
 import '../../clients/domain/client_model.dart';
 
 part 'visit_controller.g.dart';

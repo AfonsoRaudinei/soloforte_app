@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'visit_model.dart';
+part of 'visit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
-
-Visit _$VisitFromJson(Map<String, dynamic> json) {
-  return _Visit.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Visit {
@@ -31,14 +27,10 @@ mixin _$Visit {
   List<String> get photos => throw _privateConstructorUsedError;
   List<String> get occurrenceIds => throw _privateConstructorUsedError;
   Map<String, bool> get checklist => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
   List<LatLng> get routePoints => throw _privateConstructorUsedError;
   double get distanceTraveled => throw _privateConstructorUsedError;
   String? get eventId => throw _privateConstructorUsedError;
   VisitStatus get status => throw _privateConstructorUsedError;
-
-  /// Serializes this Visit to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Visit
   /// with the given fields replaced by the non-null parameter values.
@@ -62,7 +54,6 @@ abstract class $VisitCopyWith<$Res> {
     List<String> photos,
     List<String> occurrenceIds,
     Map<String, bool> checklist,
-    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
     List<LatLng> routePoints,
     double distanceTraveled,
     String? eventId,
@@ -195,7 +186,6 @@ abstract class _$$VisitImplCopyWith<$Res> implements $VisitCopyWith<$Res> {
     List<String> photos,
     List<String> occurrenceIds,
     Map<String, bool> checklist,
-    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
     List<LatLng> routePoints,
     double distanceTraveled,
     String? eventId,
@@ -299,7 +289,7 @@ class __$$VisitImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$VisitImpl implements _Visit {
   const _$VisitImpl({
     required this.id,
@@ -312,7 +302,6 @@ class _$VisitImpl implements _Visit {
     final List<String> photos = const [],
     final List<String> occurrenceIds = const [],
     final Map<String, bool> checklist = const {},
-    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
     final List<LatLng> routePoints = const [],
     this.distanceTraveled = 0.0,
     this.eventId,
@@ -321,9 +310,6 @@ class _$VisitImpl implements _Visit {
        _occurrenceIds = occurrenceIds,
        _checklist = checklist,
        _routePoints = routePoints;
-
-  factory _$VisitImpl.fromJson(Map<String, dynamic> json) =>
-      _$$VisitImplFromJson(json);
 
   @override
   final String id;
@@ -368,7 +354,7 @@ class _$VisitImpl implements _Visit {
 
   final List<LatLng> _routePoints;
   @override
-  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  @JsonKey()
   List<LatLng> get routePoints {
     if (_routePoints is EqualUnmodifiableListView) return _routePoints;
     // ignore: implicit_dynamic_type
@@ -425,7 +411,6 @@ class _$VisitImpl implements _Visit {
             (identical(other.status, status) || other.status == status));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
@@ -452,11 +437,6 @@ class _$VisitImpl implements _Visit {
   @pragma('vm:prefer-inline')
   _$$VisitImplCopyWith<_$VisitImpl> get copyWith =>
       __$$VisitImplCopyWithImpl<_$VisitImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$VisitImplToJson(this);
-  }
 }
 
 abstract class _Visit implements Visit {
@@ -471,14 +451,11 @@ abstract class _Visit implements Visit {
     final List<String> photos,
     final List<String> occurrenceIds,
     final Map<String, bool> checklist,
-    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
     final List<LatLng> routePoints,
     final double distanceTraveled,
     final String? eventId,
     final VisitStatus status,
   }) = _$VisitImpl;
-
-  factory _Visit.fromJson(Map<String, dynamic> json) = _$VisitImpl.fromJson;
 
   @override
   String get id;
@@ -501,7 +478,6 @@ abstract class _Visit implements Visit {
   @override
   Map<String, bool> get checklist;
   @override
-  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
   List<LatLng> get routePoints;
   @override
   double get distanceTraveled;

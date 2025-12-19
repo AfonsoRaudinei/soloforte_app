@@ -88,7 +88,11 @@ dev_dependencies:
   # custom_lint: ^0.8.1
   # riverpod_lint: ^2.3.10
 
+  flutter_localizations:
+    sdk: flutter
+
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/images/

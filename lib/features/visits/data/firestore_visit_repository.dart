@@ -50,6 +50,28 @@ class FirestoreVisitRepository implements VisitRepository {
     // TODO: Implement syncing logic. For now, we rely on local repository for active visit.
     return null;
   }
+
+  @override
+  Future<Visit?> getVisitById(String id) async {
+    try {
+      final doc = await _firestore.collection('visits').doc(id).get();
+      if (!doc.exists) return null;
+      final data = doc.data()!;
+      if (data['checkInTime'] is Timestamp) {
+        data['checkInTime'] = (data['checkInTime'] as Timestamp)
+            .toDate()
+            .toIso8601String();
+      }
+      if (data['checkOutTime'] is Timestamp) {
+        data['checkOutTime'] = (data['checkOutTime'] as Timestamp)
+            .toDate()
+            .toIso8601String();
+      }
+      return Visit.fromJson({...data, 'id': doc.id});
+    } catch (e) {
+      return null;
+    }
+  }
 }
 
 // Provider override would happen in main or here via a specific provider

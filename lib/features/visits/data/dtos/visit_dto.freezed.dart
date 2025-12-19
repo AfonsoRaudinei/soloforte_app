@@ -1,0 +1,526 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'visit_dto.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+VisitDto _$VisitDtoFromJson(Map<String, dynamic> json) {
+  return _VisitDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$VisitDto {
+  String get id => throw _privateConstructorUsedError;
+  Client get client =>
+      throw _privateConstructorUsedError; // Assuming Client has fromJson/toJson
+  DateTime get checkInTime => throw _privateConstructorUsedError;
+  DateTime? get checkOutTime => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+  String? get checkOutNotes => throw _privateConstructorUsedError;
+  List<String> get photos => throw _privateConstructorUsedError;
+  List<String> get occurrenceIds => throw _privateConstructorUsedError;
+  Map<String, bool> get checklist => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  List<LatLng> get routePoints => throw _privateConstructorUsedError;
+  double get distanceTraveled => throw _privateConstructorUsedError;
+  String? get eventId => throw _privateConstructorUsedError;
+  VisitStatus get status => throw _privateConstructorUsedError;
+
+  /// Serializes this VisitDto to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of VisitDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $VisitDtoCopyWith<VisitDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VisitDtoCopyWith<$Res> {
+  factory $VisitDtoCopyWith(VisitDto value, $Res Function(VisitDto) then) =
+      _$VisitDtoCopyWithImpl<$Res, VisitDto>;
+  @useResult
+  $Res call({
+    String id,
+    Client client,
+    DateTime checkInTime,
+    DateTime? checkOutTime,
+    double latitude,
+    double longitude,
+    String? checkOutNotes,
+    List<String> photos,
+    List<String> occurrenceIds,
+    Map<String, bool> checklist,
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    List<LatLng> routePoints,
+    double distanceTraveled,
+    String? eventId,
+    VisitStatus status,
+  });
+
+  $ClientCopyWith<$Res> get client;
+}
+
+/// @nodoc
+class _$VisitDtoCopyWithImpl<$Res, $Val extends VisitDto>
+    implements $VisitDtoCopyWith<$Res> {
+  _$VisitDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of VisitDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? client = null,
+    Object? checkInTime = null,
+    Object? checkOutTime = freezed,
+    Object? latitude = null,
+    Object? longitude = null,
+    Object? checkOutNotes = freezed,
+    Object? photos = null,
+    Object? occurrenceIds = null,
+    Object? checklist = null,
+    Object? routePoints = null,
+    Object? distanceTraveled = null,
+    Object? eventId = freezed,
+    Object? status = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            id: null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as String,
+            client: null == client
+                ? _value.client
+                : client // ignore: cast_nullable_to_non_nullable
+                      as Client,
+            checkInTime: null == checkInTime
+                ? _value.checkInTime
+                : checkInTime // ignore: cast_nullable_to_non_nullable
+                      as DateTime,
+            checkOutTime: freezed == checkOutTime
+                ? _value.checkOutTime
+                : checkOutTime // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            latitude: null == latitude
+                ? _value.latitude
+                : latitude // ignore: cast_nullable_to_non_nullable
+                      as double,
+            longitude: null == longitude
+                ? _value.longitude
+                : longitude // ignore: cast_nullable_to_non_nullable
+                      as double,
+            checkOutNotes: freezed == checkOutNotes
+                ? _value.checkOutNotes
+                : checkOutNotes // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            photos: null == photos
+                ? _value.photos
+                : photos // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            occurrenceIds: null == occurrenceIds
+                ? _value.occurrenceIds
+                : occurrenceIds // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            checklist: null == checklist
+                ? _value.checklist
+                : checklist // ignore: cast_nullable_to_non_nullable
+                      as Map<String, bool>,
+            routePoints: null == routePoints
+                ? _value.routePoints
+                : routePoints // ignore: cast_nullable_to_non_nullable
+                      as List<LatLng>,
+            distanceTraveled: null == distanceTraveled
+                ? _value.distanceTraveled
+                : distanceTraveled // ignore: cast_nullable_to_non_nullable
+                      as double,
+            eventId: freezed == eventId
+                ? _value.eventId
+                : eventId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as VisitStatus,
+          )
+          as $Val,
+    );
+  }
+
+  /// Create a copy of VisitDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ClientCopyWith<$Res> get client {
+    return $ClientCopyWith<$Res>(_value.client, (value) {
+      return _then(_value.copyWith(client: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$VisitDtoImplCopyWith<$Res>
+    implements $VisitDtoCopyWith<$Res> {
+  factory _$$VisitDtoImplCopyWith(
+    _$VisitDtoImpl value,
+    $Res Function(_$VisitDtoImpl) then,
+  ) = __$$VisitDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String id,
+    Client client,
+    DateTime checkInTime,
+    DateTime? checkOutTime,
+    double latitude,
+    double longitude,
+    String? checkOutNotes,
+    List<String> photos,
+    List<String> occurrenceIds,
+    Map<String, bool> checklist,
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    List<LatLng> routePoints,
+    double distanceTraveled,
+    String? eventId,
+    VisitStatus status,
+  });
+
+  @override
+  $ClientCopyWith<$Res> get client;
+}
+
+/// @nodoc
+class __$$VisitDtoImplCopyWithImpl<$Res>
+    extends _$VisitDtoCopyWithImpl<$Res, _$VisitDtoImpl>
+    implements _$$VisitDtoImplCopyWith<$Res> {
+  __$$VisitDtoImplCopyWithImpl(
+    _$VisitDtoImpl _value,
+    $Res Function(_$VisitDtoImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of VisitDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? client = null,
+    Object? checkInTime = null,
+    Object? checkOutTime = freezed,
+    Object? latitude = null,
+    Object? longitude = null,
+    Object? checkOutNotes = freezed,
+    Object? photos = null,
+    Object? occurrenceIds = null,
+    Object? checklist = null,
+    Object? routePoints = null,
+    Object? distanceTraveled = null,
+    Object? eventId = freezed,
+    Object? status = null,
+  }) {
+    return _then(
+      _$VisitDtoImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        client: null == client
+            ? _value.client
+            : client // ignore: cast_nullable_to_non_nullable
+                  as Client,
+        checkInTime: null == checkInTime
+            ? _value.checkInTime
+            : checkInTime // ignore: cast_nullable_to_non_nullable
+                  as DateTime,
+        checkOutTime: freezed == checkOutTime
+            ? _value.checkOutTime
+            : checkOutTime // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        latitude: null == latitude
+            ? _value.latitude
+            : latitude // ignore: cast_nullable_to_non_nullable
+                  as double,
+        longitude: null == longitude
+            ? _value.longitude
+            : longitude // ignore: cast_nullable_to_non_nullable
+                  as double,
+        checkOutNotes: freezed == checkOutNotes
+            ? _value.checkOutNotes
+            : checkOutNotes // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        photos: null == photos
+            ? _value._photos
+            : photos // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        occurrenceIds: null == occurrenceIds
+            ? _value._occurrenceIds
+            : occurrenceIds // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        checklist: null == checklist
+            ? _value._checklist
+            : checklist // ignore: cast_nullable_to_non_nullable
+                  as Map<String, bool>,
+        routePoints: null == routePoints
+            ? _value._routePoints
+            : routePoints // ignore: cast_nullable_to_non_nullable
+                  as List<LatLng>,
+        distanceTraveled: null == distanceTraveled
+            ? _value.distanceTraveled
+            : distanceTraveled // ignore: cast_nullable_to_non_nullable
+                  as double,
+        eventId: freezed == eventId
+            ? _value.eventId
+            : eventId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as VisitStatus,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$VisitDtoImpl extends _VisitDto {
+  const _$VisitDtoImpl({
+    required this.id,
+    required this.client,
+    required this.checkInTime,
+    this.checkOutTime,
+    required this.latitude,
+    required this.longitude,
+    this.checkOutNotes,
+    final List<String> photos = const [],
+    final List<String> occurrenceIds = const [],
+    final Map<String, bool> checklist = const {},
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    final List<LatLng> routePoints = const [],
+    this.distanceTraveled = 0.0,
+    this.eventId,
+    this.status = VisitStatus.ongoing,
+  }) : _photos = photos,
+       _occurrenceIds = occurrenceIds,
+       _checklist = checklist,
+       _routePoints = routePoints,
+       super._();
+
+  factory _$VisitDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VisitDtoImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final Client client;
+  // Assuming Client has fromJson/toJson
+  @override
+  final DateTime checkInTime;
+  @override
+  final DateTime? checkOutTime;
+  @override
+  final double latitude;
+  @override
+  final double longitude;
+  @override
+  final String? checkOutNotes;
+  final List<String> _photos;
+  @override
+  @JsonKey()
+  List<String> get photos {
+    if (_photos is EqualUnmodifiableListView) return _photos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_photos);
+  }
+
+  final List<String> _occurrenceIds;
+  @override
+  @JsonKey()
+  List<String> get occurrenceIds {
+    if (_occurrenceIds is EqualUnmodifiableListView) return _occurrenceIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_occurrenceIds);
+  }
+
+  final Map<String, bool> _checklist;
+  @override
+  @JsonKey()
+  Map<String, bool> get checklist {
+    if (_checklist is EqualUnmodifiableMapView) return _checklist;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_checklist);
+  }
+
+  final List<LatLng> _routePoints;
+  @override
+  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  List<LatLng> get routePoints {
+    if (_routePoints is EqualUnmodifiableListView) return _routePoints;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_routePoints);
+  }
+
+  @override
+  @JsonKey()
+  final double distanceTraveled;
+  @override
+  final String? eventId;
+  @override
+  @JsonKey()
+  final VisitStatus status;
+
+  @override
+  String toString() {
+    return 'VisitDto(id: $id, client: $client, checkInTime: $checkInTime, checkOutTime: $checkOutTime, latitude: $latitude, longitude: $longitude, checkOutNotes: $checkOutNotes, photos: $photos, occurrenceIds: $occurrenceIds, checklist: $checklist, routePoints: $routePoints, distanceTraveled: $distanceTraveled, eventId: $eventId, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VisitDtoImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.client, client) || other.client == client) &&
+            (identical(other.checkInTime, checkInTime) ||
+                other.checkInTime == checkInTime) &&
+            (identical(other.checkOutTime, checkOutTime) ||
+                other.checkOutTime == checkOutTime) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.checkOutNotes, checkOutNotes) ||
+                other.checkOutNotes == checkOutNotes) &&
+            const DeepCollectionEquality().equals(other._photos, _photos) &&
+            const DeepCollectionEquality().equals(
+              other._occurrenceIds,
+              _occurrenceIds,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._checklist,
+              _checklist,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._routePoints,
+              _routePoints,
+            ) &&
+            (identical(other.distanceTraveled, distanceTraveled) ||
+                other.distanceTraveled == distanceTraveled) &&
+            (identical(other.eventId, eventId) || other.eventId == eventId) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    client,
+    checkInTime,
+    checkOutTime,
+    latitude,
+    longitude,
+    checkOutNotes,
+    const DeepCollectionEquality().hash(_photos),
+    const DeepCollectionEquality().hash(_occurrenceIds),
+    const DeepCollectionEquality().hash(_checklist),
+    const DeepCollectionEquality().hash(_routePoints),
+    distanceTraveled,
+    eventId,
+    status,
+  );
+
+  /// Create a copy of VisitDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VisitDtoImplCopyWith<_$VisitDtoImpl> get copyWith =>
+      __$$VisitDtoImplCopyWithImpl<_$VisitDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$VisitDtoImplToJson(this);
+  }
+}
+
+abstract class _VisitDto extends VisitDto {
+  const factory _VisitDto({
+    required final String id,
+    required final Client client,
+    required final DateTime checkInTime,
+    final DateTime? checkOutTime,
+    required final double latitude,
+    required final double longitude,
+    final String? checkOutNotes,
+    final List<String> photos,
+    final List<String> occurrenceIds,
+    final Map<String, bool> checklist,
+    @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+    final List<LatLng> routePoints,
+    final double distanceTraveled,
+    final String? eventId,
+    final VisitStatus status,
+  }) = _$VisitDtoImpl;
+  const _VisitDto._() : super._();
+
+  factory _VisitDto.fromJson(Map<String, dynamic> json) =
+      _$VisitDtoImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  Client get client; // Assuming Client has fromJson/toJson
+  @override
+  DateTime get checkInTime;
+  @override
+  DateTime? get checkOutTime;
+  @override
+  double get latitude;
+  @override
+  double get longitude;
+  @override
+  String? get checkOutNotes;
+  @override
+  List<String> get photos;
+  @override
+  List<String> get occurrenceIds;
+  @override
+  Map<String, bool> get checklist;
+  @override
+  @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
+  List<LatLng> get routePoints;
+  @override
+  double get distanceTraveled;
+  @override
+  String? get eventId;
+  @override
+  VisitStatus get status;
+
+  /// Create a copy of VisitDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VisitDtoImplCopyWith<_$VisitDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

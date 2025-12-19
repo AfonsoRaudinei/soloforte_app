@@ -287,7 +287,7 @@ class _ReportCard extends StatelessWidget {
                         color: AppColors.primary,
                       ),
                       onPressed: () =>
-                          context.push('/reports/detail', extra: report),
+                          context.push('/reports/detail/${report.id}'),
                       tooltip: 'Visualizar',
                     ),
                     IconButton(

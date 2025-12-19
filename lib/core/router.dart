@@ -25,7 +25,6 @@ import '../features/auth/presentation/register_screen.dart';
 import '../features/visits/presentation/check_in_screen.dart';
 import '../features/visits/presentation/visit_dashboard_screen.dart';
 import '../features/visits/presentation/visit_detail_screen.dart';
-import '../features/visits/domain/visit_model.dart';
 
 import '../features/visits/presentation/check_out_screen.dart';
 import '../features/auth/presentation/forgot_password_screen.dart';
@@ -58,6 +57,7 @@ import 'package:soloforte_app/features/agenda/domain/event_model.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../features/settings/presentation/settings_screen.dart';
+import '../features/feedback/presentation/feedback_screen.dart';
 import 'package:soloforte_app/features/scanner/presentation/scan_result_screen.dart';
 import 'package:soloforte_app/features/scanner/domain/scan_result_model.dart';
 import 'package:soloforte_app/features/scanner/presentation/scan_history_screen.dart';
@@ -250,6 +250,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const SettingsScreen(),
           ),
           GoRoute(
+            path: '/dashboard/feedback',
+            builder: (context, state) => const FeedbackScreen(),
+          ),
+          GoRoute(
             path: '/dashboard/executive',
             builder: (context, state) => const ExecutiveDashboardScreen(),
           ),
@@ -389,11 +393,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const NewReportScreen(),
       ),
       GoRoute(
-        path: '/reports/detail',
+        path: '/reports/detail/:id',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
-          final report = state.extra as MockReport;
-          return ReportDetailScreen(report: report);
+          return ReportDetailScreen(reportId: state.pathParameters['id']!);
         },
       ),
       GoRoute(
@@ -416,11 +419,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const AnalysisWizardScreen(),
       ),
       GoRoute(
-        path: '/visit/detail',
+        path: '/visit/detail/:id',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
-          final visit = state.extra as Visit;
-          return VisitDetailScreen(visit: visit);
+          return VisitDetailScreen(visitId: state.pathParameters['id']!);
         },
       ),
     ],

@@ -1,0 +1,103 @@
+{
+  "@@locale": "pt",
+  "appTitle": "SoloForte",
+  "@appTitle": {
+    "description": "Nome da aplicação"
+  },
+  "errorLocation": "Erro ao obter localização.",
+  "locationDisabled": "Serviços de localização desativados.",
+  "locationPermissionDenied": "Permissão de localização negada.",
+  "locationPermissionDeniedForever": "Permissões de localização permanentemente negadas.",
+  "synced": "Sincronizado",
+  "offlineMode": "Modo Offline",
+  "noOccurrences": "Sem ocorrências",
+  "activeOccurrences": "Ocorrências Ativas",
+  "severity": "Severidade",
+  "noAreasRegistered": "Nenhuma área cadastrada",
+  "visitInProgress": "Em andamento: {clientName}",
+  "@visitInProgress": {
+    "placeholders": {
+      "clientName": {
+        "type": "String"
+      }
+    }
+  },
+  "layers": "Camadas",
+  "optionsEditDelete": "Opções: Editar / Excluir",
+  "areaMenu": "Menu da Área",
+  "daysAgo": "{days}d atrás",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursAgo": "{hours}h atrás",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesAgo": "{minutes}m atrás",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "now": "Agora",
+  "visitInProgressTitle": "Visita em Andamento",
+  "visitSavedPdfGenerated": "Visita Salva! PDF gerado.",
+  "save": "Salvar",
+  "observations": "Observações",
+  "generalObservationsHint": "Observações gerais...",
+  "recommendations": "Recomendações",
+  "technicalRecommendationsHint": "Recomendações técnicas...",
+  "visitInfo": "Informações da Visita",
+  "producer": "Produtor",
+  "property": "Propriedade",
+  "date": "Data",
+  "areaHa": "Área (ha)",
+  "cultivar": "Cultivar",
+  "planting": "Plantio",
+  "select": "Selecionar",
+  "dapDays": "DAP: {days} dias",
+  "@dapDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "technician": "Técnico",
+  "locationGps": "Local (GPS)",
+  "typeHere": "Digite...",
+  "photos": "Fotos",
+  "addPhoto": "Adicionar Foto",
+  "catDisease": "Doença",
+  "catInsects": "Insetos",
+  "catWeeds": "Ervas Daninhas",
+  "catNutrients": "Nutrientes",
+  "catWater": "Água",
+  "idIncidence": "Incidência",
+  "idSeverity": "Severidade",
+  "idDefoliation": "Desfolha",
+  "idInfestation": "Infestação",
+  "idLodging": "Acamamento",
+  "sevNone": "Nenhum",
+  "sevLow": "Baixa",
+  "sevMedium": "Média",
+  "sevHigh": "Alta",
+  "nutNitrogen": "Nitrogênio",
+  "nutPhosphorus": "Fósforo",
+  "nutPotassium": "Potássio",
+  "nutCalcium": "Cálcio",
+  "nutMagnesium": "Magnésio",
+  "nutSulfur": "Enxofre",
+  "nutBoron": "Boro",
+  "nutZinc": "Zinco"
+}

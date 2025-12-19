@@ -4,7 +4,7 @@ import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart'
 
 // Repository Provider
 final occurrenceRepositoryProvider = Provider<OccurrenceRepository>((ref) {
-  return MockOccurrenceRepository();
+  return LocalOccurrenceRepository();
 });
 
 // List Provider (Async/Stream)
