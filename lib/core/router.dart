@@ -46,7 +46,7 @@ import '../features/occurrences/presentation/occurrence_detail_screen.dart';
 import '../features/occurrences/presentation/new_occurrence_screen.dart';
 import '../features/reports/presentation/reports_screen.dart';
 import '../features/reports/presentation/visit_report_screen.dart';
-import '../features/clients/presentation/screens/client_list_screen_enhanced.dart';
+import '../features/clients/presentation/client_list_screen.dart';
 import '../features/clients/presentation/screens/client_detail_screen.dart';
 import '../features/clients/presentation/screens/client_form_screen.dart';
 import '../features/agenda/presentation/agenda_screen.dart';
@@ -171,7 +171,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/dashboard/clients',
-            builder: (context, state) => const ClientListScreenEnhanced(),
+            builder: (context, state) => const ClientListScreen(),
             routes: [
               GoRoute(
                 path: 'new',
