@@ -73,7 +73,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
               Text('Categoria *', style: AppTypography.h4),
               const SizedBox(height: 8),
               DropdownButtonFormField<TicketCategory>(
-                value: _selectedCategory,
+                initialValue: _selectedCategory,
                 items: TicketCategory.values.map((c) {
                   return DropdownMenuItem(value: c, child: Text(c.label));
                 }).toList(),
@@ -160,14 +160,16 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                   setState(() => _selectedPriority = newSelection.first);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color?>((
+                  backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     states,
                   ) {
-                    if (states.contains(MaterialState.selected)) {
-                      if (_selectedPriority == TicketPriority.urgent)
+                    if (states.contains(WidgetState.selected)) {
+                      if (_selectedPriority == TicketPriority.urgent) {
                         return Colors.red[100];
-                      if (_selectedPriority == TicketPriority.low)
+                      }
+                      if (_selectedPriority == TicketPriority.low) {
                         return Colors.grey[200];
+                      }
                       return Colors.blue[100];
                     }
                     return null;

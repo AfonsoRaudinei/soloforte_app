@@ -101,11 +101,13 @@ class WeatherNext24hScreen extends StatelessWidget {
 
   IconData _getIconForCondition(String condition) {
     if (condition.toLowerCase().contains('rain') ||
-        condition.toLowerCase().contains('chuva'))
+        condition.toLowerCase().contains('chuva')) {
       return Icons.water_drop;
+    }
     if (condition.toLowerCase().contains('cloud') ||
-        condition.toLowerCase().contains('nuve'))
+        condition.toLowerCase().contains('nuve')) {
       return Icons.cloud;
+    }
     return Icons.wb_sunny;
   }
 

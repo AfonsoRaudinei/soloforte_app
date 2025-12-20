@@ -157,12 +157,14 @@ class WeatherNext7dScreen extends StatelessWidget {
 
   IconData _getIconForCondition(String condition) {
     if (condition.toLowerCase().contains('rain') ||
-        condition.toLowerCase().contains('chuva'))
+        condition.toLowerCase().contains('chuva')) {
       return Icons.water_drop;
+    }
     if (condition.toLowerCase().contains('cloud') ||
         condition.toLowerCase().contains('nuve') ||
-        condition.toLowerCase().contains('nublado'))
+        condition.toLowerCase().contains('nublado')) {
       return Icons.cloud;
+    }
     return Icons.wb_sunny;
   }
 }

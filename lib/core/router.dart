@@ -49,7 +49,7 @@ import '../features/clients/presentation/client_list_screen.dart';
 import '../features/clients/presentation/screens/client_detail_screen.dart';
 import '../features/clients/presentation/screens/client_form_screen.dart';
 import '../features/agenda/presentation/agenda_screen.dart';
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
 import 'package:soloforte_app/features/agenda/presentation/event_detail_screen.dart';
 
 import 'package:soloforte_app/features/agenda/presentation/event_form_screen.dart';

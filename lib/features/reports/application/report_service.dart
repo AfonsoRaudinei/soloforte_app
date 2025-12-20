@@ -9,10 +9,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soloforte_app/features/harvests/data/harvest_repository.dart';
 import 'package:soloforte_app/features/harvests/domain/harvest_model.dart';
 import 'package:soloforte_app/features/harvests/data/firestore_harvest_repository.dart';
-import 'package:soloforte_app/features/occurrences/data/occurrence_repository.dart';
-import 'package:soloforte_app/features/occurrences/data/firestore_occurrence_repository.dart';
-import 'package:soloforte_app/features/visits/data/visit_repository.dart';
-import 'package:soloforte_app/features/visits/data/firestore_visit_repository.dart';
+import 'package:soloforte_app/features/occurrences/data/repositories/occurrence_repository_impl.dart';
+import 'package:soloforte_app/features/occurrences/domain/repositories/occurrence_repository.dart';
+import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
+import 'package:soloforte_app/features/visits/data/repositories/visit_repository_impl.dart';
+import 'package:soloforte_app/features/visits/domain/repositories/visit_repository.dart';
 
 import 'package:soloforte_app/features/ndvi/data/services/sentinel_service.dart';
 import 'package:soloforte_app/features/map/application/geometry_utils.dart';
@@ -1404,9 +1405,9 @@ class ReportService {
 
 final reportServiceProvider = Provider<ReportService>((ref) {
   return ReportService(
-    occurrenceRepository: ref.watch(firestoreOccurrenceRepositoryProvider),
+    occurrenceRepository: ref.watch(occurrenceRepositoryProvider),
     harvestRepository: ref.watch(harvestRepositoryProvider),
-    visitRepository: ref.watch(firestoreVisitRepositoryProvider),
+    visitRepository: ref.watch(visitRepositoryProvider),
     sentinelService: ref.watch(sentinelServiceProvider),
   );
 });

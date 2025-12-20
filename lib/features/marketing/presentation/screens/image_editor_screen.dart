@@ -31,9 +31,9 @@ class _ImageEditorScreenState extends State<ImageEditorScreen> {
   List<double> _currentFilter = _noFilter;
 
   // Overlays
-  List<EditorLayer> _layers = [];
+  final List<EditorLayer> _layers = [];
   bool _showWatermark = false;
-  bool _showLogo = false;
+  final bool _showLogo = false;
 
   // Crop (Mocked for visual only as complex cropping requires packages/native)
   bool _isCropping = false;
@@ -102,7 +102,7 @@ class _ImageEditorScreenState extends State<ImageEditorScreen> {
                       // Layers (Text, Stickers)
                       ..._layers
                           .map((layer) => _buildLayerWidget(layer))
-                          .toList(),
+                          ,
 
                       // Watermark
                       if (_showWatermark)
@@ -294,7 +294,7 @@ class _ImageEditorScreenState extends State<ImageEditorScreen> {
                 Switch(
                   value: _showWatermark,
                   onChanged: (v) => setState(() => _showWatermark = v),
-                  activeColor: AppColors.primary,
+                  activeThumbColor: AppColors.primary,
                 ),
               ],
             ),

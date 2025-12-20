@@ -204,10 +204,11 @@ class _SupportHomeScreenState extends State<SupportHomeScreen> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (label.startsWith('Abertas'))
+          if (label.startsWith('Abertas')) {
             _filter = 'Abertas';
-          else
+          } else {
             _filter = 'Resolvidas';
+          }
         });
       },
       child: Container(

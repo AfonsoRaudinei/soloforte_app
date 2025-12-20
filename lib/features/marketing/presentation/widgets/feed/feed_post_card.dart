@@ -173,31 +173,31 @@ class _FeedPostCardState extends State<FeedPostCard> {
                       style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                     const Spacer(),
-                    Container(
+                    SizedBox(
                       height: 30, // constrain height
                       child: TextButton(
-                        onPressed: widget.onEdit,
-                        child: const Text(
-                          '[Editar]',
-                        ), // Using brackets as per ASCII
+                        onPressed: widget.onEdit, // Using brackets as per ASCII
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: const Text(
+                          '[Editar]',
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Container(
+                    SizedBox(
                       height: 30,
                       child: TextButton(
                         onPressed: widget.onShare,
-                        child: const Text('[Compartilhar]'),
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
+                        child: const Text('[Compartilhar]'),
                       ),
                     ),
                   ],

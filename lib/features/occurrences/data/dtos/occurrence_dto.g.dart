@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'occurrence_model.dart';
+part of 'occurrence_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OccurrenceImpl _$$OccurrenceImplFromJson(Map<String, dynamic> json) =>
-    _$OccurrenceImpl(
+_$OccurrenceDtoImpl _$$OccurrenceDtoImplFromJson(Map<String, dynamic> json) =>
+    _$OccurrenceDtoImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -23,7 +23,7 @@ _$OccurrenceImpl _$$OccurrenceImplFromJson(Map<String, dynamic> json) =>
       longitude: (json['longitude'] as num).toDouble(),
       timeline:
           (json['timeline'] as List<dynamic>?)
-              ?.map((e) => TimelineEvent.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => TimelineEventDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       assignedTo: json['assignedTo'] as String?,
@@ -34,7 +34,7 @@ _$OccurrenceImpl _$$OccurrenceImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$OccurrenceImplToJson(_$OccurrenceImpl instance) =>
+Map<String, dynamic> _$$OccurrenceDtoImplToJson(_$OccurrenceDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -52,22 +52,24 @@ Map<String, dynamic> _$$OccurrenceImplToJson(_$OccurrenceImpl instance) =>
       'recommendations': instance.recommendations,
     };
 
-_$TimelineEventImpl _$$TimelineEventImplFromJson(Map<String, dynamic> json) =>
-    _$TimelineEventImpl(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      date: DateTime.parse(json['date'] as String),
-      type: json['type'] as String,
-      authorName: json['authorName'] as String,
-    );
+_$TimelineEventDtoImpl _$$TimelineEventDtoImplFromJson(
+  Map<String, dynamic> json,
+) => _$TimelineEventDtoImpl(
+  id: json['id'] as String,
+  title: json['title'] as String,
+  description: json['description'] as String,
+  date: DateTime.parse(json['date'] as String),
+  type: json['type'] as String,
+  authorName: json['authorName'] as String,
+);
 
-Map<String, dynamic> _$$TimelineEventImplToJson(_$TimelineEventImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'description': instance.description,
-      'date': instance.date.toIso8601String(),
-      'type': instance.type,
-      'authorName': instance.authorName,
-    };
+Map<String, dynamic> _$$TimelineEventDtoImplToJson(
+  _$TimelineEventDtoImpl instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'title': instance.title,
+  'description': instance.description,
+  'date': instance.date.toIso8601String(),
+  'type': instance.type,
+  'authorName': instance.authorName,
+};

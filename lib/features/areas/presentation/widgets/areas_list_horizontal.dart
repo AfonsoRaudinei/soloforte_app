@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/core/theme/app_spacing.dart';
-import '../providers/areas_provider.dart';
+import '../providers/areas_controller.dart';
 import 'area_card.dart';
 
 class AreasListHorizontal extends ConsumerWidget {
@@ -13,7 +13,7 @@ class AreasListHorizontal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final areasAsync = ref.watch(areasProvider);
+    final areasAsync = ref.watch(areasControllerProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

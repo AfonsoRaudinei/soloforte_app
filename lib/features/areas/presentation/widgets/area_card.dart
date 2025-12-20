@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/core/theme/app_spacing.dart';
-import '../../domain/area_model.dart';
+import 'package:latlong2/latlong.dart' hide Path;
+import '../../domain/entities/area.dart';
 
 class AreaCard extends StatelessWidget {
   final Area area;

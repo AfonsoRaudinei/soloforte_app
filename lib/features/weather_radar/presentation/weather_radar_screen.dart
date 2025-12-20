@@ -99,7 +99,7 @@ class WeatherRadarScreen extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    value: '25km',
+                    initialValue: '25km',
                     items: ['25km', '50km', '100km']
                         .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                         .toList(),

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 import 'package:soloforte_app/features/reports/domain/report_configuration.dart';
 
 part 'report_history.freezed.dart';

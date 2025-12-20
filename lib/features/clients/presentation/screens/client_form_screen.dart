@@ -34,7 +34,7 @@ class _ClientFormScreenState extends ConsumerState<ClientFormScreen> {
 
   File? _selectedAvatar;
   String? _selectedState;
-  String _selectedType = 'producer';
+  final String _selectedType = 'producer';
   bool _isLoading = false;
 
   @override

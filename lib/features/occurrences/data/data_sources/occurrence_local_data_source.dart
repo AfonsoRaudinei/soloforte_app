@@ -1,53 +1,20 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import 'package:soloforte_app/core/database/database_helper.dart';
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import '../dtos/occurrence_dto.dart';
 
-abstract class OccurrenceRepository {
-  Future<List<Occurrence>> getOccurrences();
-  Future<Occurrence?> getOccurrenceById(String id);
-  Future<void> createOccurrence(Occurrence occurrence);
-  Future<void> updateOccurrence(Occurrence occurrence);
+abstract class OccurrenceLocalDataSource {
+  Future<void> saveOccurrence(OccurrenceDto occurrence);
+  Future<List<OccurrenceDto>> getOccurrences();
+  Future<OccurrenceDto?> getOccurrenceById(String id);
   Future<void> deleteOccurrence(String id);
 }
 
-class LocalOccurrenceRepository implements OccurrenceRepository {
+class OccurrenceLocalDataSourceImpl implements OccurrenceLocalDataSource {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 
   @override
-  Future<List<Occurrence>> getOccurrences() async {
-    final db = await _dbHelper.database;
-    final maps = await db.query('occurrences', orderBy: 'date DESC');
-
-    if (maps.isEmpty) {
-      await _seedMocks();
-      return _getMocks(); // Return mocks directly for this call
-    }
-
-    return maps.map((e) {
-      final jsonStr = e['json_data'] as String;
-      final data = jsonDecode(jsonStr) as Map<String, dynamic>;
-      return Occurrence.fromJson(data);
-    }).toList();
-  }
-
-  @override
-  Future<Occurrence?> getOccurrenceById(String id) async {
-    final db = await _dbHelper.database;
-    final maps = await db.query(
-      'occurrences',
-      where: 'id = ?',
-      whereArgs: [id],
-      limit: 1,
-    );
-    if (maps.isEmpty) return null;
-    final jsonStr = maps.first['json_data'] as String;
-    final data = jsonDecode(jsonStr) as Map<String, dynamic>;
-    return Occurrence.fromJson(data);
-  }
-
-  @override
-  Future<void> createOccurrence(Occurrence occurrence) async {
+  Future<void> saveOccurrence(OccurrenceDto occurrence) async {
     final db = await _dbHelper.database;
     await db.insert('occurrences', {
       'id': occurrence.id,
@@ -60,9 +27,38 @@ class LocalOccurrenceRepository implements OccurrenceRepository {
   }
 
   @override
-  Future<void> updateOccurrence(Occurrence occurrence) async {
-    // Same as create (Upsert)
-    await createOccurrence(occurrence);
+  Future<List<OccurrenceDto>> getOccurrences() async {
+    final db = await _dbHelper.database;
+    final maps = await db.query('occurrences', orderBy: 'date DESC');
+
+    if (maps.isEmpty) {
+      final mocks = _getMocks();
+      for (var item in mocks) {
+        await saveOccurrence(item);
+      }
+      return mocks;
+    }
+
+    return maps.map((e) {
+      final jsonStr = e['json_data'] as String;
+      final data = jsonDecode(jsonStr) as Map<String, dynamic>;
+      return OccurrenceDto.fromJson(data);
+    }).toList();
+  }
+
+  @override
+  Future<OccurrenceDto?> getOccurrenceById(String id) async {
+    final db = await _dbHelper.database;
+    final maps = await db.query(
+      'occurrences',
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1,
+    );
+    if (maps.isEmpty) return null;
+    final jsonStr = maps.first['json_data'] as String;
+    final data = jsonDecode(jsonStr) as Map<String, dynamic>;
+    return OccurrenceDto.fromJson(data);
   }
 
   @override
@@ -71,16 +67,9 @@ class LocalOccurrenceRepository implements OccurrenceRepository {
     await db.delete('occurrences', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<void> _seedMocks() async {
-    final mocks = _getMocks();
-    for (var item in mocks) {
-      await createOccurrence(item);
-    }
-  }
-
-  List<Occurrence> _getMocks() {
+  List<OccurrenceDto> _getMocks() {
     return [
-      Occurrence(
+      OccurrenceDto(
         id: '1',
         title: 'Lagarta na Soja',
         description:
@@ -96,7 +85,7 @@ class LocalOccurrenceRepository implements OccurrenceRepository {
         latitude: -23.5505,
         longitude: -46.6333,
         timeline: [
-          TimelineEvent(
+          TimelineEventDto(
             id: '1',
             title: 'Aplicação Inseticida',
             description: 'Produto XYZ (2L/ha)',
@@ -106,7 +95,7 @@ class LocalOccurrenceRepository implements OccurrenceRepository {
           ),
         ],
       ),
-      Occurrence(
+      OccurrenceDto(
         id: '2',
         title: 'Ferrugem Asiática',
         description: 'Primeiros sinais detectados.',
@@ -121,7 +110,7 @@ class LocalOccurrenceRepository implements OccurrenceRepository {
         latitude: -23.5505,
         longitude: -46.6333,
       ),
-      Occurrence(
+      OccurrenceDto(
         id: '3',
         title: 'Falta de Nitrogênio',
         description: 'Folhas amareladas no centro da área.',

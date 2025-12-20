@@ -32,8 +32,9 @@ class ReportDetailScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Erro: $err')),
         data: (report) {
-          if (report == null)
+          if (report == null) {
             return const Center(child: Text('Relatório não encontrado'));
+          }
           return SingleChildScrollView(
             child: Column(
               children: [

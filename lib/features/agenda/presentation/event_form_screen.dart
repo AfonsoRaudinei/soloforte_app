@@ -201,7 +201,7 @@ class _EventFormScreenState extends ConsumerState<EventFormScreen> {
             // Tipo de Atividade *
             _buildLabel('Tipo de Atividade *'),
             DropdownButtonFormField<EventType>(
-              value: _selectedType,
+              initialValue: _selectedType,
               items: EventType.values
                   .map((t) => DropdownMenuItem(value: t, child: Text(t.label)))
                   .toList(),
@@ -222,7 +222,7 @@ class _EventFormScreenState extends ConsumerState<EventFormScreen> {
             // Produtor/Cliente *
             _buildLabel('Produtor/Cliente *'),
             DropdownButtonFormField<String>(
-              value: _selectedProducer,
+              initialValue: _selectedProducer,
               hint: const Text('Selecione...'),
               items: _producersMock
                   .map((p) => DropdownMenuItem(value: p, child: Text(p)))
@@ -235,7 +235,7 @@ class _EventFormScreenState extends ConsumerState<EventFormScreen> {
             // Área/Talhão
             _buildLabel('Área/Talhão'),
             DropdownButtonFormField<String>(
-              value: _selectedArea,
+              initialValue: _selectedArea,
               hint: const Text('Selecione...'),
               items: _areasMock
                   .map((a) => DropdownMenuItem(value: a, child: Text(a)))
@@ -320,7 +320,7 @@ class _EventFormScreenState extends ConsumerState<EventFormScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 12.0), // Indent slightly
                 child: DropdownButtonFormField<String>(
-                  value: _reminderOption,
+                  initialValue: _reminderOption,
                   items: _reminderOptions
                       .map((r) => DropdownMenuItem(value: r, child: Text(r)))
                       .toList(),

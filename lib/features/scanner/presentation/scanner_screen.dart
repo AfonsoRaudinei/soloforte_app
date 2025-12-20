@@ -191,8 +191,9 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen>
     final scannerState = ref.read(scannerControllerProvider);
     if (_controller == null ||
         !_isCameraInitialized ||
-        scannerState.isAnalyzing)
+        scannerState.isAnalyzing) {
       return;
+    }
 
     try {
       final image = await _controller!.takePicture();

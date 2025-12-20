@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
-import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_provider.dart';
+import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_controller.dart';
 import 'package:soloforte_app/shared/widgets/app_card.dart';
 import 'package:soloforte_app/shared/widgets/custom_text_input.dart';
 
@@ -30,7 +30,7 @@ class _OccurrenceListScreenState extends ConsumerState<OccurrenceListScreen> {
   @override
   Widget build(BuildContext context) {
     // Watch provider
-    final occurrencesAsync = ref.watch(occurrencesProvider);
+    final occurrencesAsync = ref.watch(occurrenceControllerProvider);
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -155,7 +155,7 @@ class _OccurrenceListScreenState extends ConsumerState<OccurrenceListScreen> {
 
                   return RefreshIndicator(
                     onRefresh: () async {
-                      await ref.read(occurrencesProvider.notifier).refresh();
+                      await ref.read(occurrenceControllerProvider.notifier).refresh();
                     },
                     child: ListView.builder(
                       itemCount: filteredList.length,
@@ -183,7 +183,7 @@ class _OccurrenceListScreenState extends ConsumerState<OccurrenceListScreen> {
                       ),
                       TextButton(
                         onPressed: () =>
-                            ref.read(occurrencesProvider.notifier).refresh(),
+                            ref.read(occurrenceControllerProvider.notifier).refresh(),
                         child: const Text('Tentar Novamente'),
                       ),
                     ],

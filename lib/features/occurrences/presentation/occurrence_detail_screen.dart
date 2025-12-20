@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
-import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_provider.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_detail_provider.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_controller.dart';
+import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
 import 'package:soloforte_app/shared/widgets/primary_button.dart';
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_plus/share_plus.dart';
@@ -285,7 +286,7 @@ class OccurrenceDetailScreen extends ConsumerWidget {
                               status: 'resolved',
                             );
                             await ref
-                                .read(occurrencesProvider.notifier)
+                                .read(occurrenceControllerProvider.notifier)
                                 .updateOccurrence(updated);
                             if (context.mounted) {
                               context.pop();
@@ -364,7 +365,7 @@ class OccurrenceDetailScreen extends ConsumerWidget {
 
         if (confirm == true) {
           await ref
-              .read(occurrencesProvider.notifier)
+              .read(occurrenceControllerProvider.notifier)
               .deleteOccurrence(occurrence.id);
           if (context.mounted) {
             context.pop(); // Close detail screen

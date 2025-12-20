@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/reports/domain/report_history.dart';
+import 'package:soloforte_app/features/reports/domain/report_configuration.dart';
 import 'package:soloforte_app/features/reports/application/report_history_provider.dart';
 import 'package:soloforte_app/shared/widgets/app_card.dart';
 import 'package:intl/intl.dart';

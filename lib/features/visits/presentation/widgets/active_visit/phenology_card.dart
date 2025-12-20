@@ -27,7 +27,7 @@ class PhenologyCard extends StatelessWidget {
           child: Column(
             children: [
               DropdownButtonFormField<String>(
-                value: selectedStageKey,
+                initialValue: selectedStageKey,
                 hint: const Text('Selecione o estádio'),
                 decoration: const InputDecoration(border: OutlineInputBorder()),
                 items: visitStages.keys.map((key) {

@@ -109,7 +109,7 @@ class SchedulingSection extends StatelessWidget {
                 children: suggestions
                     .map(
                       (time) => ActionChip(
-                        label: Text('${time.format(context)}'),
+                        label: Text(time.format(context)),
                         onPressed: () {
                           onSuggestionSelected(time);
                           Navigator.pop(context);

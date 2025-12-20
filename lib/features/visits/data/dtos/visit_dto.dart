@@ -40,6 +40,7 @@ class VisitDto with _$VisitDto {
     @Default([]) List<String> occurrenceIds,
     @Default({}) Map<String, bool> checklist,
     @Default([])
+    // ignore: invalid_annotation_target
     @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
     List<LatLng> routePoints,
     @Default(0.0) double distanceTraveled,

@@ -141,7 +141,7 @@ class _MarketingScreenState extends State<MarketingScreen>
         return Card(
           child: ListTile(
             leading: draft.imageUrls.isNotEmpty
-                ? Container(
+                ? SizedBox(
                     width: 50,
                     height: 50,
                     child: Image.network(

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/notification_repository.dart';
-import '../domain/notification_model.dart';
+import '../../data/notification_repository.dart';
+import '../../domain/notification_model.dart';
 
 final notificationRepositoryProvider = Provider<NotificationRepository>((ref) {
   return NotificationRepository();

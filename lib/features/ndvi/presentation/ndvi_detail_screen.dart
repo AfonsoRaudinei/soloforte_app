@@ -440,16 +440,18 @@ class _NDVIDetailScreenState extends ConsumerState<NDVIDetailScreen> {
   }
 
   LatLngBounds _getBounds(List<LatLng> points) {
-    if (points.isEmpty)
+    if (points.isEmpty) {
       return LatLngBounds(const LatLng(0, 0), const LatLng(0, 0));
+    }
     final bbox = GeometryUtils.calculateBBox(points);
     return LatLngBounds(LatLng(bbox[1], bbox[0]), LatLng(bbox[3], bbox[2]));
   }
 
   LatLng _getCenter(GeoArea area) {
     if (area.center != null) return area.center!;
-    if (area.points.isNotEmpty)
+    if (area.points.isNotEmpty) {
       return GeometryUtils.calculateCentroid(area.points);
+    }
     return const LatLng(0, 0);
   }
 }

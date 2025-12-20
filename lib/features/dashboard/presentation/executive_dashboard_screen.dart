@@ -485,7 +485,7 @@ class _ExecutiveDashboardScreenState
                     ),
                   ),
                 )
-                .toList(),
+                ,
             const SizedBox(height: 16),
           ],
           // Warnings
@@ -508,7 +508,7 @@ class _ExecutiveDashboardScreenState
                     ),
                   ),
                 )
-                .toList(),
+                ,
           ],
           const SizedBox(height: 12),
           Center(
@@ -705,7 +705,7 @@ class _ExecutiveDashboardScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -991,7 +991,7 @@ class _ExecutiveDashboardScreenState
                   SwitchListTile(
                     title: const Text('Financeiro'),
                     value: _showFinancial,
-                    activeColor: AppColors.primary,
+                    activeThumbColor: AppColors.primary,
                     onChanged: (val) {
                       setModalState(() => _showFinancial = val);
                       setState(() {});
@@ -1000,7 +1000,7 @@ class _ExecutiveDashboardScreenState
                   SwitchListTile(
                     title: const Text('Operacional & Agronômico'),
                     value: _showOperational,
-                    activeColor: AppColors.primary,
+                    activeThumbColor: AppColors.primary,
                     onChanged: (val) {
                       setModalState(() => _showOperational = val);
                       setState(() {});
@@ -1009,7 +1009,7 @@ class _ExecutiveDashboardScreenState
                   SwitchListTile(
                     title: const Text('Atenções e Alertas'),
                     value: _showAttention,
-                    activeColor: AppColors.primary,
+                    activeThumbColor: AppColors.primary,
                     onChanged: (val) {
                       setModalState(() => _showAttention = val);
                       setState(() {});
@@ -1018,7 +1018,7 @@ class _ExecutiveDashboardScreenState
                   SwitchListTile(
                     title: const Text('Gráficos Detalhados'),
                     value: _showCharts,
-                    activeColor: AppColors.primary,
+                    activeThumbColor: AppColors.primary,
                     onChanged: (val) {
                       setModalState(() => _showCharts = val);
                       setState(() {});

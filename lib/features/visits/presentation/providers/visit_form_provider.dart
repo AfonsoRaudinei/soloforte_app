@@ -1,8 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../domain/usecases/calculate_dap.dart';
-import '../../domain/usecases/save_visit.dart';
-import '../../domain/entities/visit.dart';
+// import '../../domain/usecases/save_visit.dart';
 // Note: We might need Client entity import if we construct Visit object here
 // For now, using mock or strings as per existing state
 
@@ -136,7 +135,7 @@ class VisitFormController extends _$VisitFormController {
       state = state.copyWith(recommendations: value);
 
   Future<void> saveVisit() async {
-    final saveVisit = ref.read(saveVisitProvider);
+    // final saveVisit = ref.read(saveVisitProvider);
     // Construct Visit Entity from State
     // Implementation pending real Client object and proper ID generation
     // saveVisit(visitEntity);

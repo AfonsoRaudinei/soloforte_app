@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_spacing.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
-import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_provider.dart';
+import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_controller.dart';
 import 'package:soloforte_app/shared/widgets/custom_text_input.dart';
 import 'package:soloforte_app/shared/widgets/primary_button.dart';
 import 'package:uuid/uuid.dart';
@@ -78,10 +78,12 @@ class _NewOccurrenceScreenState extends ConsumerState<NewOccurrenceScreen> {
       _existingImages = List.from(occ.images);
     } else {
       // Pre-fill from arguments if available
-      if (widget.initialTitle != null)
+      if (widget.initialTitle != null) {
         _titleController.text = widget.initialTitle!;
-      if (widget.initialDescription != null)
+      }
+      if (widget.initialDescription != null) {
         _descriptionController.text = widget.initialDescription!;
+      }
       if (widget.initialType != null) _selectedType = widget.initialType!;
       if (widget.initialSeverity != null) _severity = widget.initialSeverity!;
       if (widget.initialImagePath != null) {
@@ -571,7 +573,7 @@ class _NewOccurrenceScreenState extends ConsumerState<NewOccurrenceScreen> {
 
       if (widget.initialOccurrence != null) {
         await ref
-            .read(occurrencesProvider.notifier)
+            .read(occurrenceControllerProvider.notifier)
             .updateOccurrence(occurrenceData);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -583,7 +585,7 @@ class _NewOccurrenceScreenState extends ConsumerState<NewOccurrenceScreen> {
         }
       } else {
         await ref
-            .read(occurrencesProvider.notifier)
+            .read(occurrenceControllerProvider.notifier)
             .addOccurrence(occurrenceData);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/visits/presentation/visit_controller.dart';
-import 'package:soloforte_app/features/visits/domain/visit_model.dart';
+import 'package:soloforte_app/features/visits/domain/entities/visit.dart';
 import 'package:soloforte_app/features/clients/domain/client_model.dart';
 import 'package:intl/intl.dart';
 

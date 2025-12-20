@@ -201,7 +201,7 @@ class _CheckInScreenState extends ConsumerState<CheckInScreen> {
             const Text('Cliente/Produtor *'),
             clientsState.when(
               data: (clients) => DropdownButtonFormField<Client>(
-                value: _selectedClient,
+                initialValue: _selectedClient,
                 isExpanded: true,
                 hint: const Text('Selecione'),
                 items: clients
@@ -224,7 +224,7 @@ class _CheckInScreenState extends ConsumerState<CheckInScreen> {
             // Area Dropdown
             const Text('Área/Talhão *'),
             DropdownButtonFormField<String>(
-              value: _selectedArea,
+              initialValue: _selectedArea,
               hint: const Text('Selecione'),
               isExpanded: true,
               items: _mockAreas
@@ -251,7 +251,7 @@ class _CheckInScreenState extends ConsumerState<CheckInScreen> {
             // Activity Dropdown
             const Text('Tipo de Atividade *'),
             DropdownButtonFormField<EventType>(
-              value: _selectedActivityType,
+              initialValue: _selectedActivityType,
               hint: const Text('Selecione'),
               isExpanded: true,
               items: const [

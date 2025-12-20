@@ -6,11 +6,10 @@ import 'package:go_router/go_router.dart';
 // import 'package:geolocator/geolocator.dart'; // Abstracted
 import 'package:soloforte_app/features/visits/presentation/visit_controller.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
-import 'package:soloforte_app/features/areas/presentation/providers/areas_provider.dart';
-import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_provider.dart';
-import 'package:soloforte_app/features/areas/domain/area_model.dart'
-    hide LatLng;
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:soloforte_app/features/areas/presentation/providers/areas_controller.dart';
+import 'package:soloforte_app/features/occurrences/presentation/providers/occurrence_controller.dart';
+import 'package:soloforte_app/features/areas/domain/entities/area.dart';
+import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
 import 'package:soloforte_app/core/services/location/location_service.dart';
 import 'package:soloforte_app/l10n/generated/app_localizations.dart';
 import 'widgets/map_side_controls.dart';
@@ -98,9 +97,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     // Providers
     final activeVisitAsync = ref.watch(visitControllerProvider);
-    final AsyncValue<List<Area>> areasAsync = ref.watch(areasProvider);
+    final AsyncValue<List<Area>> areasAsync = ref.watch(
+      areasControllerProvider,
+    );
     final AsyncValue<List<Occurrence>> occurrencesAsync = ref.watch(
-      occurrencesProvider,
+      occurrenceControllerProvider,
     );
 
     final activeVisit = activeVisitAsync.value;
@@ -129,9 +130,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 PolygonLayer(
                   polygons: areasAsync.value!.map((Area area) {
                     return Polygon(
-                      points: area.coordinates
-                          .map((c) => LatLng(c.latitude, c.longitude))
-                          .toList(),
+                      points: area.coordinates,
                       color: _getAreaColor(area.status).withOpacity(0.3),
                       borderColor: _getAreaColor(area.status),
                       borderStrokeWidth: 2,

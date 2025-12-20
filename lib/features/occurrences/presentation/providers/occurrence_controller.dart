@@ -1,22 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soloforte_app/features/occurrences/data/occurrence_repository.dart';
-import 'package:soloforte_app/features/occurrences/domain/occurrence_model.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../domain/entities/occurrence.dart';
+import '../../data/repositories/occurrence_repository_impl.dart';
 
-// Repository Provider
-final occurrenceRepositoryProvider = Provider<OccurrenceRepository>((ref) {
-  return LocalOccurrenceRepository();
-});
+part 'occurrence_controller.g.dart';
 
-// List Provider (Async/Stream)
-final occurrencesProvider =
-    AsyncNotifierProvider<OccurrenceNotifier, List<Occurrence>>(() {
-      return OccurrenceNotifier();
-    });
-
-class OccurrenceNotifier extends AsyncNotifier<List<Occurrence>> {
+@riverpod
+class OccurrenceController extends _$OccurrenceController {
   @override
   Future<List<Occurrence>> build() async {
-    final repository = ref.read(occurrenceRepositoryProvider);
+    final repository = ref.watch(occurrenceRepositoryProvider);
     return repository.getOccurrences();
   }
 
@@ -31,7 +23,8 @@ class OccurrenceNotifier extends AsyncNotifier<List<Occurrence>> {
   Future<void> addOccurrence(Occurrence occurrence) async {
     final repository = ref.read(occurrenceRepositoryProvider);
     await repository.createOccurrence(occurrence);
-    // Refresh list locally to avoid extra fetch or handle optimistic update
+
+    // Refresh list locally
     final previousState = state.asData?.value ?? [];
     state = AsyncValue.data([occurrence, ...previousState]);
   }
@@ -40,7 +33,6 @@ class OccurrenceNotifier extends AsyncNotifier<List<Occurrence>> {
     final repository = ref.read(occurrenceRepositoryProvider);
     await repository.updateOccurrence(occurrence);
 
-    // Optimistic update
     state.whenData((items) {
       final index = items.indexWhere((e) => e.id == occurrence.id);
       if (index != -1) {
@@ -60,12 +52,3 @@ class OccurrenceNotifier extends AsyncNotifier<List<Occurrence>> {
     });
   }
 }
-
-// Single Occurrence Provider
-final occurrenceDetailProvider = FutureProvider.family<Occurrence?, String>((
-  ref,
-  id,
-) async {
-  final repository = ref.watch(occurrenceRepositoryProvider);
-  return repository.getOccurrenceById(id);
-});

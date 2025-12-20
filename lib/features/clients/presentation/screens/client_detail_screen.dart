@@ -40,8 +40,9 @@ class _ClientDetailScreenState extends ConsumerState<ClientDetailScreen> {
       ),
       body: clientAsync.when(
         data: (client) {
-          if (client == null)
+          if (client == null) {
             return const Center(child: Text('Cliente não encontrado'));
+          }
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(

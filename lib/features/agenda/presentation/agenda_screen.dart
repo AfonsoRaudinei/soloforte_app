@@ -166,7 +166,7 @@ class _AgendaScreenState extends ConsumerState<AgendaScreen> {
                     if (dailyEvents.isEmpty) _buildEmptyState(),
                     ...dailyEvents
                         .map((event) => _buildEventCard(context, event))
-                        .toList(),
+                        ,
 
                     const SizedBox(height: 24),
                     // Tomorrow preview if wanted, or just buttons
@@ -273,15 +273,18 @@ class _AgendaScreenState extends ConsumerState<AgendaScreen> {
     // Mapping EventType to symbols roughly
     // Assuming EventType values.
     // technicalVisit -> •, application -> ◆, reminder -> ○
-    if (type == EventType.technicalVisit)
+    if (type == EventType.technicalVisit) {
       return const Text(
         '•',
         style: TextStyle(color: Colors.blue, fontSize: 10),
       );
-    if (type == EventType.application)
+    }
+    if (type == EventType.application) {
       return const Text('◆', style: TextStyle(color: Colors.red, fontSize: 8));
-    if (type == EventType.reminder)
+    }
+    if (type == EventType.reminder) {
       return const Text('○', style: TextStyle(color: Colors.grey, fontSize: 8));
+    }
     return const Text(
       '•',
       style: TextStyle(color: Colors.black, fontSize: 10),

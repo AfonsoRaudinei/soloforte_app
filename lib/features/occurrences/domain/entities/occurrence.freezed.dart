@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'occurrence_model.dart';
+part of 'occurrence.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,31 +15,22 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-Occurrence _$OccurrenceFromJson(Map<String, dynamic> json) {
-  return _Occurrence.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Occurrence {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get type =>
-      throw _privateConstructorUsedError; // 'pest', 'disease', 'deficiency', 'weed', 'other'
-  double get severity => throw _privateConstructorUsedError; // 0.0 to 1.0
+  String get type => throw _privateConstructorUsedError;
+  double get severity => throw _privateConstructorUsedError;
   String get areaName => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  String get status =>
-      throw _privateConstructorUsedError; // 'active', 'monitoring', 'resolved'
+  String get status => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   List<TimelineEvent> get timeline => throw _privateConstructorUsedError;
   String? get assignedTo => throw _privateConstructorUsedError;
   List<String> get recommendations => throw _privateConstructorUsedError;
-
-  /// Serializes this Occurrence to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Occurrence
   /// with the given fields replaced by the non-null parameter values.
@@ -287,7 +278,7 @@ class __$$OccurrenceImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$OccurrenceImpl implements _Occurrence {
   const _$OccurrenceImpl({
     required this.id,
@@ -308,9 +299,6 @@ class _$OccurrenceImpl implements _Occurrence {
        _timeline = timeline,
        _recommendations = recommendations;
 
-  factory _$OccurrenceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OccurrenceImplFromJson(json);
-
   @override
   final String id;
   @override
@@ -319,19 +307,15 @@ class _$OccurrenceImpl implements _Occurrence {
   final String description;
   @override
   final String type;
-  // 'pest', 'disease', 'deficiency', 'weed', 'other'
   @override
   final double severity;
-  // 0.0 to 1.0
   @override
   final String areaName;
   @override
   final DateTime date;
   @override
   final String status;
-  // 'active', 'monitoring', 'resolved'
   final List<String> _images;
-  // 'active', 'monitoring', 'resolved'
   @override
   List<String> get images {
     if (_images is EqualUnmodifiableListView) return _images;
@@ -398,7 +382,6 @@ class _$OccurrenceImpl implements _Occurrence {
             ));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
@@ -425,11 +408,6 @@ class _$OccurrenceImpl implements _Occurrence {
   @pragma('vm:prefer-inline')
   _$$OccurrenceImplCopyWith<_$OccurrenceImpl> get copyWith =>
       __$$OccurrenceImplCopyWithImpl<_$OccurrenceImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OccurrenceImplToJson(this);
-  }
 }
 
 abstract class _Occurrence implements Occurrence {
@@ -450,9 +428,6 @@ abstract class _Occurrence implements Occurrence {
     final List<String> recommendations,
   }) = _$OccurrenceImpl;
 
-  factory _Occurrence.fromJson(Map<String, dynamic> json) =
-      _$OccurrenceImpl.fromJson;
-
   @override
   String get id;
   @override
@@ -460,15 +435,15 @@ abstract class _Occurrence implements Occurrence {
   @override
   String get description;
   @override
-  String get type; // 'pest', 'disease', 'deficiency', 'weed', 'other'
+  String get type;
   @override
-  double get severity; // 0.0 to 1.0
+  double get severity;
   @override
   String get areaName;
   @override
   DateTime get date;
   @override
-  String get status; // 'active', 'monitoring', 'resolved'
+  String get status;
   @override
   List<String> get images;
   @override
@@ -490,22 +465,14 @@ abstract class _Occurrence implements Occurrence {
       throw _privateConstructorUsedError;
 }
 
-TimelineEvent _$TimelineEventFromJson(Map<String, dynamic> json) {
-  return _TimelineEvent.fromJson(json);
-}
-
 /// @nodoc
 mixin _$TimelineEvent {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  String get type =>
-      throw _privateConstructorUsedError; // 'action', 'update', 'photo', 'complete'
+  String get type => throw _privateConstructorUsedError;
   String get authorName => throw _privateConstructorUsedError;
-
-  /// Serializes this TimelineEvent to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of TimelineEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -657,7 +624,7 @@ class __$$TimelineEventImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$TimelineEventImpl implements _TimelineEvent {
   const _$TimelineEventImpl({
     required this.id,
@@ -667,9 +634,6 @@ class _$TimelineEventImpl implements _TimelineEvent {
     required this.type,
     required this.authorName,
   });
-
-  factory _$TimelineEventImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TimelineEventImplFromJson(json);
 
   @override
   final String id;
@@ -681,7 +645,6 @@ class _$TimelineEventImpl implements _TimelineEvent {
   final DateTime date;
   @override
   final String type;
-  // 'action', 'update', 'photo', 'complete'
   @override
   final String authorName;
 
@@ -705,7 +668,6 @@ class _$TimelineEventImpl implements _TimelineEvent {
                 other.authorName == authorName));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, title, description, date, type, authorName);
@@ -717,11 +679,6 @@ class _$TimelineEventImpl implements _TimelineEvent {
   @pragma('vm:prefer-inline')
   _$$TimelineEventImplCopyWith<_$TimelineEventImpl> get copyWith =>
       __$$TimelineEventImplCopyWithImpl<_$TimelineEventImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TimelineEventImplToJson(this);
-  }
 }
 
 abstract class _TimelineEvent implements TimelineEvent {
@@ -734,9 +691,6 @@ abstract class _TimelineEvent implements TimelineEvent {
     required final String authorName,
   }) = _$TimelineEventImpl;
 
-  factory _TimelineEvent.fromJson(Map<String, dynamic> json) =
-      _$TimelineEventImpl.fromJson;
-
   @override
   String get id;
   @override
@@ -746,7 +700,7 @@ abstract class _TimelineEvent implements TimelineEvent {
   @override
   DateTime get date;
   @override
-  String get type; // 'action', 'update', 'photo', 'complete'
+  String get type;
   @override
   String get authorName;
 
