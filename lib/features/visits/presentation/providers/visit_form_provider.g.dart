@@ -7,7 +7,7 @@ part of 'visit_form_provider.dart';
 // **************************************************************************
 
 String _$visitFormControllerHash() =>
-    r'32c45546de09e3b7a70b0b3ad835fb09f64216fc';
+    r'fcc7b08e305dd8ce26ab50055ff62e81880ef65a';
 
 /// See also [VisitFormController].
 @ProviderFor(VisitFormController)

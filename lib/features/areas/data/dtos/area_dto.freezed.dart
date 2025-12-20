@@ -26,7 +26,8 @@ mixin _$AreaDto {
   double get hectares => throw _privateConstructorUsedError;
   String get clienteNome => throw _privateConstructorUsedError;
   String get fazendaNome => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  String get status =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
   List<LatLng> get coordinates => throw _privateConstructorUsedError;
   String? get culture => throw _privateConstructorUsedError;
@@ -279,7 +280,9 @@ class _$AreaDtoImpl extends _AreaDto {
   @override
   @JsonKey()
   final String status;
+  // ignore: invalid_annotation_target
   final List<LatLng> _coordinates;
+  // ignore: invalid_annotation_target
   @override
   @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
   List<LatLng> get coordinates {
@@ -390,7 +393,7 @@ abstract class _AreaDto extends AreaDto {
   @override
   String get fazendaNome;
   @override
-  String get status;
+  String get status; // ignore: invalid_annotation_target
   @override
   @JsonKey(fromJson: _latLngListFromJson, toJson: _latLngListToJson)
   List<LatLng> get coordinates;

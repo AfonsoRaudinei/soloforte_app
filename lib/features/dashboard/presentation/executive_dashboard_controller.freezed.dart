@@ -301,6 +301,7 @@ mixin _$ExecutiveDashboardState {
       throw _privateConstructorUsedError; // Add KPI data holders here if we want them dynamic later
   double get averageNdvi => throw _privateConstructorUsedError;
   int get overdueOccurrencesCount => throw _privateConstructorUsedError;
+  int get criticalAreasCount => throw _privateConstructorUsedError;
   int get todayEventsCount => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get teamProductivity =>
       throw _privateConstructorUsedError;
@@ -327,6 +328,7 @@ abstract class $ExecutiveDashboardStateCopyWith<$Res> {
     String? error,
     double averageNdvi,
     int overdueOccurrencesCount,
+    int criticalAreasCount,
     int todayEventsCount,
     List<Map<String, dynamic>> teamProductivity,
     Map<String, dynamic> summaryData,
@@ -357,6 +359,7 @@ class _$ExecutiveDashboardStateCopyWithImpl<
     Object? error = freezed,
     Object? averageNdvi = null,
     Object? overdueOccurrencesCount = null,
+    Object? criticalAreasCount = null,
     Object? todayEventsCount = null,
     Object? teamProductivity = null,
     Object? summaryData = null,
@@ -383,6 +386,10 @@ class _$ExecutiveDashboardStateCopyWithImpl<
             overdueOccurrencesCount: null == overdueOccurrencesCount
                 ? _value.overdueOccurrencesCount
                 : overdueOccurrencesCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            criticalAreasCount: null == criticalAreasCount
+                ? _value.criticalAreasCount
+                : criticalAreasCount // ignore: cast_nullable_to_non_nullable
                       as int,
             todayEventsCount: null == todayEventsCount
                 ? _value.todayEventsCount
@@ -421,6 +428,7 @@ abstract class _$$ExecutiveDashboardStateImplCopyWith<$Res>
     String? error,
     double averageNdvi,
     int overdueOccurrencesCount,
+    int criticalAreasCount,
     int todayEventsCount,
     List<Map<String, dynamic>> teamProductivity,
     Map<String, dynamic> summaryData,
@@ -451,6 +459,7 @@ class __$$ExecutiveDashboardStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? averageNdvi = null,
     Object? overdueOccurrencesCount = null,
+    Object? criticalAreasCount = null,
     Object? todayEventsCount = null,
     Object? teamProductivity = null,
     Object? summaryData = null,
@@ -477,6 +486,10 @@ class __$$ExecutiveDashboardStateImplCopyWithImpl<$Res>
         overdueOccurrencesCount: null == overdueOccurrencesCount
             ? _value.overdueOccurrencesCount
             : overdueOccurrencesCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        criticalAreasCount: null == criticalAreasCount
+            ? _value.criticalAreasCount
+            : criticalAreasCount // ignore: cast_nullable_to_non_nullable
                   as int,
         todayEventsCount: null == todayEventsCount
             ? _value.todayEventsCount
@@ -508,6 +521,7 @@ class _$ExecutiveDashboardStateImpl implements _ExecutiveDashboardState {
     this.error = null,
     this.averageNdvi = 0.0,
     this.overdueOccurrencesCount = 0,
+    this.criticalAreasCount = 0,
     this.todayEventsCount = 0,
     final List<Map<String, dynamic>> teamProductivity = const [],
     final Map<String, dynamic> summaryData = const {},
@@ -541,6 +555,9 @@ class _$ExecutiveDashboardStateImpl implements _ExecutiveDashboardState {
   final int overdueOccurrencesCount;
   @override
   @JsonKey()
+  final int criticalAreasCount;
+  @override
+  @JsonKey()
   final int todayEventsCount;
   final List<Map<String, dynamic>> _teamProductivity;
   @override
@@ -572,7 +589,7 @@ class _$ExecutiveDashboardStateImpl implements _ExecutiveDashboardState {
 
   @override
   String toString() {
-    return 'ExecutiveDashboardState(alerts: $alerts, isLoading: $isLoading, error: $error, averageNdvi: $averageNdvi, overdueOccurrencesCount: $overdueOccurrencesCount, todayEventsCount: $todayEventsCount, teamProductivity: $teamProductivity, summaryData: $summaryData, goals: $goals)';
+    return 'ExecutiveDashboardState(alerts: $alerts, isLoading: $isLoading, error: $error, averageNdvi: $averageNdvi, overdueOccurrencesCount: $overdueOccurrencesCount, criticalAreasCount: $criticalAreasCount, todayEventsCount: $todayEventsCount, teamProductivity: $teamProductivity, summaryData: $summaryData, goals: $goals)';
   }
 
   @override
@@ -591,6 +608,8 @@ class _$ExecutiveDashboardStateImpl implements _ExecutiveDashboardState {
                   overdueOccurrencesCount,
                 ) ||
                 other.overdueOccurrencesCount == overdueOccurrencesCount) &&
+            (identical(other.criticalAreasCount, criticalAreasCount) ||
+                other.criticalAreasCount == criticalAreasCount) &&
             (identical(other.todayEventsCount, todayEventsCount) ||
                 other.todayEventsCount == todayEventsCount) &&
             const DeepCollectionEquality().equals(
@@ -612,6 +631,7 @@ class _$ExecutiveDashboardStateImpl implements _ExecutiveDashboardState {
     error,
     averageNdvi,
     overdueOccurrencesCount,
+    criticalAreasCount,
     todayEventsCount,
     const DeepCollectionEquality().hash(_teamProductivity),
     const DeepCollectionEquality().hash(_summaryData),
@@ -637,6 +657,7 @@ abstract class _ExecutiveDashboardState implements ExecutiveDashboardState {
     final String? error,
     final double averageNdvi,
     final int overdueOccurrencesCount,
+    final int criticalAreasCount,
     final int todayEventsCount,
     final List<Map<String, dynamic>> teamProductivity,
     final Map<String, dynamic> summaryData,
@@ -653,6 +674,8 @@ abstract class _ExecutiveDashboardState implements ExecutiveDashboardState {
   double get averageNdvi;
   @override
   int get overdueOccurrencesCount;
+  @override
+  int get criticalAreasCount;
   @override
   int get todayEventsCount;
   @override

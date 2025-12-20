@@ -32,6 +32,7 @@ class ExecutiveDashboardState with _$ExecutiveDashboardState {
     // Add KPI data holders here if we want them dynamic later
     @Default(0.0) double averageNdvi,
     @Default(0) int overdueOccurrencesCount,
+    @Default(0) int criticalAreasCount,
     @Default(0) int todayEventsCount,
     @Default([]) List<Map<String, dynamic>> teamProductivity,
     @Default({}) Map<String, dynamic> summaryData,
