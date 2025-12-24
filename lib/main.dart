@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'dart:io';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite/sqflite.dart';
 import 'firebase_options.dart';
 import 'core/theme/app_theme.dart';
 import 'core/router.dart';
-import 'core/services/push_notification_service.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n/generated/app_localizations.dart';
 
@@ -15,31 +18,13 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Initialize Push Notifications
-  await PushNotificationService().initialize();
+  // await PushNotificationService().initialize();
 
-  /*
-  await SentryFlutter.init((options) {
-    // Use EnvConfig for DSN
-    options.dsn = EnvConfig.sentryDsn;
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
 
-    // Environment from EnvConfig
-    options.environment = EnvConfig.environment;
-
-    // Performance monitoring
-    options.tracesSampleRate = 1.0;
-    options.enableAutoPerformanceTracing = true;
-
-    // Screenshots on errors
-    options.attachScreenshot = true;
-    options.screenshotQuality = SentryScreenshotQuality.medium;
-
-    // User interaction tracking
-    options.enableUserInteractionTracing = true;
-
-    // Debug mode
-    options.debug = false;
-  }, appRunner: () => runApp(const ProviderScope(child: SoloForteApp())));
-  */
   runApp(const ProviderScope(child: SoloForteApp()));
 }
 

@@ -73,8 +73,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           } else {
             await SecureStorageService.clearRememberedEmail();
           }
-
-          context.go('/dashboard');
         }
       } catch (e) {
         if (mounted) {
@@ -108,7 +106,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             behavior: SnackBarBehavior.floating,
           ),
         );
-        context.go('/dashboard');
       }
     } catch (e) {
       if (mounted) {
@@ -361,7 +358,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       .read(authControllerProvider)
                                       .signInWithGoogle();
                                   if (mounted) {
-                                    context.go('/dashboard');
+                                    // context.go('/dashboard'); // Handled by Router
                                   }
                                 } catch (e) {
                                   if (mounted) {
@@ -420,7 +417,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       .read(authControllerProvider)
                                       .signInWithApple();
                                   if (mounted) {
-                                    context.go('/dashboard');
+                                    // context.go('/dashboard'); // Handled by Router
                                   }
                                 } catch (e) {
                                   if (mounted) {

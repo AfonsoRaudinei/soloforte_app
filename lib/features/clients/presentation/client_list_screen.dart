@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/clients/domain/client_model.dart';
+import 'package:soloforte_app/shared/widgets/empty_state_widget.dart';
 
 class MockClientDisplay {
   final Client client;
@@ -159,22 +160,31 @@ class _ClientListScreenState extends State<ClientListScreen> {
 
           // List
           Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: _clients.length + 1, // +1 for "Load more"
-              separatorBuilder: (c, i) => const SizedBox(height: 16),
-              itemBuilder: (context, index) {
-                if (index == _clients.length) {
-                  return Center(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text('Carregar mais...'),
-                    ),
-                  );
-                }
-                return _buildProducerCard(_clients[index]);
-              },
-            ),
+            child: _clients.isEmpty
+                ? EmptyStateWidget(
+                    title: 'Nenhum produtor encontrado',
+                    message:
+                        'Tente ajustar os filtros ou cadastre um novo produtor.',
+                    icon: Icons.person_off_outlined,
+                    actionLabel: 'Cadastrar Produtor',
+                    onAction: () => context.push('/dashboard/clients/new'),
+                  )
+                : ListView.separated(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: _clients.length + 1, // +1 for "Load more"
+                    separatorBuilder: (c, i) => const SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      if (index == _clients.length) {
+                        return Center(
+                          child: TextButton(
+                            onPressed: () {},
+                            child: const Text('Carregar mais...'),
+                          ),
+                        );
+                      }
+                      return _buildProducerCard(_clients[index]);
+                    },
+                  ),
           ),
         ],
       ),

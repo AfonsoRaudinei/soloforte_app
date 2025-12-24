@@ -7,6 +7,7 @@ import 'package:soloforte_app/features/reports/application/date_filter_provider.
 import 'package:soloforte_app/features/reports/domain/report_models.dart';
 import 'package:soloforte_app/features/reports/presentation/widgets/date_filter_dropdown.dart';
 import 'package:soloforte_app/shared/widgets/app_card.dart';
+import 'package:soloforte_app/shared/widgets/empty_state_widget.dart';
 
 class WeeklyReportTab extends ConsumerStatefulWidget {
   const WeeklyReportTab({super.key});
@@ -75,7 +76,14 @@ class _WeeklyReportTabState extends ConsumerState<WeeklyReportTab> {
               }
               if (snapshot.hasError) {
                 return Center(
-                  child: Text('Erro ao carregar dados: ${snapshot.error}'),
+                  child: EmptyStateWidget(
+                    title: 'Falha ao carregar relatório',
+                    message:
+                        'Não foi possível gerar o relatório semanal.\n${snapshot.error}',
+                    icon: Icons.error_outline,
+                    actionLabel: 'Tentar Novamente',
+                    onAction: _refreshReport,
+                  ),
                 );
               }
 

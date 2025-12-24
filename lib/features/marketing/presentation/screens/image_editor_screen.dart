@@ -1,12 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:soloforte_app/core/theme/app_colors.dart';
 import 'package:soloforte_app/core/theme/app_spacing.dart';
-import 'package:soloforte_app/core/theme/app_typography.dart';
 import 'package:soloforte_app/features/marketing/presentation/widgets/stamps/ndvi_chart_stamp.dart';
 
 class ImageEditorScreen extends StatefulWidget {

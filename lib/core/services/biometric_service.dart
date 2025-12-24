@@ -1,5 +1,4 @@
 import 'package:local_auth/local_auth.dart' as la;
-import 'package:flutter/services.dart';
 
 /// Biometric Authentication Service
 /// Supports Face ID, Touch ID, and Fingerprint

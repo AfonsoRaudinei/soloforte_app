@@ -11,7 +11,6 @@ import 'package:soloforte_app/features/harvests/domain/harvest_model.dart';
 import 'package:soloforte_app/features/harvests/data/firestore_harvest_repository.dart';
 import 'package:soloforte_app/features/occurrences/data/repositories/occurrence_repository_impl.dart';
 import 'package:soloforte_app/features/occurrences/domain/repositories/occurrence_repository.dart';
-import 'package:soloforte_app/features/occurrences/domain/entities/occurrence.dart';
 import 'package:soloforte_app/features/visits/data/repositories/visit_repository_impl.dart';
 import 'package:soloforte_app/features/visits/domain/repositories/visit_repository.dart';
 

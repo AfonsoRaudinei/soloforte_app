@@ -6,6 +6,7 @@ import 'package:soloforte_app/features/dashboard/presentation/executive_dashboar
 import 'package:soloforte_app/features/dashboard/presentation/widgets/kpi_stats_card.dart';
 import 'package:soloforte_app/features/dashboard/presentation/widgets/dashboard_charts.dart';
 import 'package:soloforte_app/shared/widgets/touch_scale_wrapper.dart';
+import 'package:soloforte_app/shared/widgets/empty_state_widget.dart';
 import 'package:soloforte_app/shared/widgets/modal_handle_bar.dart';
 
 class ExecutiveDashboardScreen extends ConsumerStatefulWidget {
@@ -33,178 +34,196 @@ class _ExecutiveDashboardScreenState
     final dashboardState = ref.watch(executiveDashboardControllerProvider);
     final controller = ref.read(executiveDashboardControllerProvider.notifier);
 
-    return Scaffold(
-      backgroundColor: AppColors.backgroundSecondary,
-      appBar: AppBar(
-        title: const Text('Dashboard Executivo'),
-        centerTitle: true,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(
-              Icons.menu,
-            ), // [☰] Mock menu or use Scaffold drawer
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
+    if (dashboardState.error != null) {
+      return Center(
+        child: EmptyStateWidget(
+          title: 'Não foi possível carregar',
+          message:
+              'Ocorreu um erro ao buscar os dados do painel.\nVerifique sua conexão.',
+          icon: Icons.cloud_off,
+          actionLabel: 'Tentar Novamente',
+          onAction: () => controller.refresh(),
         ),
-        actions: [
-          IconButton(
-            icon: Stack(
+      );
+    }
+
+    // Loading overlay handled inside RefreshIndicator if needed,
+    // or we can block interaction. For now, let's keep it simple. If it's initial loading:
+    /* if (dashboardState.isLoading && dashboardState.summaryData.isEmpty) {
+       return const Center(child: CircularProgressIndicator());
+    } */
+
+    return RefreshIndicator(
+      onRefresh: () async {
+        controller.refresh();
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Row with Title and Actions
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.filter_list),
-                if (_selectedCrop != null || _selectedField != null)
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: const BoxDecoration(
-                        color: AppColors.primary,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-            onPressed: _showFilterBottomSheet,
-            tooltip: 'Filtros Globais',
-          ),
-          IconButton(
-            icon: const Icon(Icons.tune),
-            onPressed: _showCustomizeLayoutSheet,
-            tooltip: 'Personalizar Dashboard',
-          ),
-          IconButton(
-            icon: const Icon(Icons.calendar_month), // [📅]
-            onPressed: _showDateFilterModal,
-            tooltip: 'Selecionar Período',
-          ),
-        ],
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          controller.refresh();
-        },
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 1. Period Segmented Control [Hoje] [Semana] [Mês] [Safra]
-              _buildPeriodSegmentedControl(controller),
-              const SizedBox(height: 24),
-
-              // 2. Visão Geral Summary Box
-              _buildSummaryBox(dashboardState.summaryData),
-              const SizedBox(height: 24),
-
-              // 3. KPIs Principais (2 rows of 2)
-              if (_showFinancial) ...[
-                Text('KPIs Principais', style: AppTypography.label),
-                const SizedBox(height: 12),
-                _buildMainKPIs(dashboardState),
-                const SizedBox(height: 24),
-              ],
-
-              // 4. Produtividade Section
-              if (_showOperational) ...[
-                _buildProductivitySection(),
-                const SizedBox(height: 24),
-              ],
-
-              // 5. Gráfico Evolução NDVI
-              if (_showCharts) ...[
-                DashboardChartCard(
-                  title: 'Evolução NDVI',
-                  subtitle: 'Comparativo Safra Atual vs Anterior',
-                  child: const NdviLineChart(),
+                Text(
+                  'Dashboard Executivo',
+                  style: AppTypography.h3.copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 24),
-              ],
-
-              // 6. Alertas e Atenções (Grouped)
-              if (_showAttention) ...[
-                _buildGroupedAlerts(dashboardState.alerts),
-                const SizedBox(height: 24),
-              ],
-
-              // 7. Distribuição Culturas
-              if (_showCharts) ...[
-                DashboardChartCard(
-                  title: 'Distribuição Culturas',
-                  subtitle: 'Área plantada por cultura',
-                  child: const CropPieChart(), // Using existing widget
-                ),
-                const SizedBox(height: 24),
-              ],
-
-              // 8. Ocorrências por Tipo
-              if (_showCharts) ...[
-                DashboardChartCard(
-                  title: 'Ocorrências por Tipo',
-                  subtitle: 'Classificação de problemas',
-                  child: const OccurrencesBarChart(),
-                ),
-                const SizedBox(height: 24),
-              ],
-
-              // 9. Custos e Investimentos
-              if (_showFinancial) ...[
-                _buildCostSection(),
-                const SizedBox(height: 24),
-              ],
-
-              // 10. Equipe - Produtividade
-              if (_showOperational) ...[
-                _buildTeamSection(dashboardState.teamProductivity),
-                const SizedBox(height: 24),
-              ],
-
-              // 11. Próximas Atividades (Agenda)
-              DashboardChartCard(
-                title: 'Próximas Atividades',
-                subtitle: 'Agenda da semana',
-                child: Column(
+                Row(
                   children: [
-                    ListTile(
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: 4,
+                    IconButton(
+                      icon: Stack(
+                        children: [
+                          const Icon(Icons.filter_list),
+                          if (_selectedCrop != null || _selectedField != null)
+                            Positioned(
+                              right: 0,
+                              top: 0,
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: const BoxDecoration(
+                                  color: AppColors.primary,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
-                      title: const Text('Visita Técnica T5'),
-                      subtitle: const Text('Hoje, 14:00 - Carlos Silva'),
-                      visualDensity: VisualDensity.compact,
-                      contentPadding: EdgeInsets.zero,
+                      onPressed: _showFilterBottomSheet,
+                      tooltip: 'Filtros Globais',
                     ),
-                    ListTile(
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.green,
-                        radius: 4,
-                      ),
-                      title: const Text('Aplicação Defensivo T2'),
-                      subtitle: const Text('Amanhã, 08:00 - Equipe A'),
-                      visualDensity: VisualDensity.compact,
-                      contentPadding: EdgeInsets.zero,
+                    IconButton(
+                      icon: const Icon(Icons.tune),
+                      onPressed: _showCustomizeLayoutSheet,
+                      tooltip: 'Personalizar Dashboard',
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Ver Agenda Completa'),
+                    IconButton(
+                      icon: const Icon(Icons.calendar_month),
+                      onPressed: _showDateFilterModal,
+                      tooltip: 'Selecionar Período',
                     ),
                   ],
                 ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // 1. Period Segmented Control [Hoje] [Semana] [Mês] [Safra]
+            _buildPeriodSegmentedControl(controller),
+            const SizedBox(height: 24),
+
+            // 2. Visão Geral Summary Box
+            _buildSummaryBox(dashboardState.summaryData),
+            const SizedBox(height: 24),
+
+            // 3. KPIs Principais (2 rows of 2)
+            if (_showFinancial) ...[
+              Text('KPIs Principais', style: AppTypography.label),
+              const SizedBox(height: 12),
+              _buildMainKPIs(dashboardState),
+              const SizedBox(height: 24),
+            ],
+
+            // 4. Produtividade Section
+            if (_showOperational) ...[
+              _buildProductivitySection(),
+              const SizedBox(height: 24),
+            ],
+
+            // 5. Gráfico Evolução NDVI
+            if (_showCharts) ...[
+              DashboardChartCard(
+                title: 'Evolução NDVI',
+                subtitle: 'Comparativo Safra Atual vs Anterior',
+                child: const NdviLineChart(),
               ),
               const SizedBox(height: 24),
-
-              // 12. Metas da Safra
-              _buildGoalsSection(dashboardState.goals),
-              const SizedBox(height: 32),
-
-              // 13. Bottom Buttons
-              _buildBottomButtons(),
-              const SizedBox(height: 48),
             ],
-          ),
+
+            // 6. Alertas e Atenções (Grouped)
+            if (_showAttention) ...[
+              _buildGroupedAlerts(dashboardState.alerts),
+              const SizedBox(height: 24),
+            ],
+
+            // 7. Distribuição Culturas
+            if (_showCharts) ...[
+              DashboardChartCard(
+                title: 'Distribuição Culturas',
+                subtitle: 'Área plantada por cultura',
+                child: const CropPieChart(), // Using existing widget
+              ),
+              const SizedBox(height: 24),
+            ],
+
+            // 8. Ocorrências por Tipo
+            if (_showCharts) ...[
+              DashboardChartCard(
+                title: 'Ocorrências por Tipo',
+                subtitle: 'Classificação de problemas',
+                child: const OccurrencesBarChart(),
+              ),
+              const SizedBox(height: 24),
+            ],
+
+            // 9. Custos e Investimentos
+            if (_showFinancial) ...[
+              _buildCostSection(),
+              const SizedBox(height: 24),
+            ],
+
+            // 10. Equipe - Produtividade
+            if (_showOperational) ...[
+              _buildTeamSection(dashboardState.teamProductivity),
+              const SizedBox(height: 24),
+            ],
+
+            // 11. Próximas Atividades (Agenda)
+            DashboardChartCard(
+              title: 'Próximas Atividades',
+              subtitle: 'Agenda da semana',
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const CircleAvatar(
+                      backgroundColor: Colors.blue,
+                      radius: 4,
+                    ),
+                    title: const Text('Visita Técnica T5'),
+                    subtitle: const Text('Hoje, 14:00 - Carlos Silva'),
+                    visualDensity: VisualDensity.compact,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  ListTile(
+                    leading: const CircleAvatar(
+                      backgroundColor: Colors.green,
+                      radius: 4,
+                    ),
+                    title: const Text('Aplicação Defensivo T2'),
+                    subtitle: const Text('Amanhã, 08:00 - Equipe A'),
+                    visualDensity: VisualDensity.compact,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('Ver Agenda Completa'),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // 12. Metas da Safra
+            _buildGoalsSection(dashboardState.goals),
+            const SizedBox(height: 32),
+
+            // 13. Bottom Buttons
+            _buildBottomButtons(),
+            const SizedBox(height: 48),
+          ],
         ),
       ),
     );

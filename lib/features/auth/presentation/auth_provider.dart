@@ -10,17 +10,7 @@ final authServiceProvider = Provider<AuthService>((ref) {
 // Auth State Provider
 final authStateProvider = StreamProvider<app.AuthState?>((ref) {
   final authService = ref.watch(authServiceProvider);
-
-  return authService.authStateChanges.asyncMap((user) async {
-    if (user == null) return null;
-
-    // Get user data from Firestore
-    try {
-      return await authService.checkAuth();
-    } catch (e) {
-      return null;
-    }
-  });
+  return authService.authStateChanges;
 });
 
 // Auth Controller Provider

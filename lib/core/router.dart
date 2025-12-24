@@ -5,7 +5,7 @@ import '../features/auth/presentation/auth_provider.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/dashboard/presentation/dashboard_layout.dart';
 import '../features/dashboard/presentation/home_screen.dart';
-import '../features/map/presentation/map_screen.dart';
+// import '../features/map/presentation/map_screen.dart';
 import '../features/landing/presentation/landing_screen.dart';
 import '../features/dashboard/presentation/executive_dashboard_screen.dart';
 
@@ -54,12 +54,13 @@ import 'package:soloforte_app/features/agenda/presentation/event_detail_screen.d
 
 import 'package:soloforte_app/features/agenda/presentation/event_form_screen.dart';
 import 'package:soloforte_app/features/agenda/domain/event_model.dart';
-import 'package:latlong2/latlong.dart';
+// import 'package:latlong2/latlong.dart';
 
 import '../features/settings/presentation/settings_screen.dart';
 import '../features/feedback/presentation/feedback_screen.dart';
 import 'package:soloforte_app/features/scanner/presentation/scan_result_screen.dart';
 import 'package:soloforte_app/features/scanner/domain/scan_result_model.dart';
+import 'package:soloforte_app/features/marketing/presentation/marketing_screen.dart';
 import 'package:soloforte_app/features/scanner/presentation/scan_history_screen.dart';
 import 'package:soloforte_app/features/scanner/presentation/pest_library_screen.dart';
 import 'package:soloforte_app/features/scanner/presentation/scanner_home_screen.dart';
@@ -123,14 +124,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         routes: [
           GoRoute(
             path: '/dashboard',
-            builder: (context, state) => const HomeScreen(),
+            builder: (context, state) => const ExecutiveDashboardScreen(),
           ),
           GoRoute(
             path: '/dashboard/map',
-            builder: (context, state) {
-              final LatLng? location = state.extra as LatLng?;
-              return MapScreen(initialLocation: location);
-            },
+            builder: (context, state) => const HomeScreen(),
           ),
           GoRoute(
             path: '/dashboard/occurrences',
@@ -164,6 +162,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/dashboard/integrations',
             builder: (context, state) => const IntegrationsScreen(),
+          ),
+          GoRoute(
+            path: '/dashboard/marketing',
+            builder: (context, state) => const MarketingScreen(),
           ),
           GoRoute(
             path: '/dashboard/support',

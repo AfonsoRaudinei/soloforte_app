@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,6 +9,9 @@ import '../../../core/services/secure_storage_service.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // Stream Controller for unified Auth State (valid for both Firebase and Mock)
+  final _authStateController = StreamController<app.AuthState?>.broadcast();
 
   // Mock users for development/demo
   final Map<String, Map<String, String>> _mockUsers = {
@@ -23,6 +27,59 @@ class AuthService {
     },
   };
 
+  AuthService() {
+    // Listen to Firebase Auth changes and propagate
+    _auth.authStateChanges().listen((User? user) {
+      _checkAndEmitFirebaseUser(user);
+    });
+
+    // Check initial state (could be mock or firebase)
+    checkAuth().then((state) {
+      _authStateController.add(state);
+    });
+  }
+
+  Future<void> _checkAndEmitFirebaseUser(User? user) async {
+    if (user == null) {
+      // If Firebase user is null, checking if there is a persistent mock session
+      final mockState = await _checkMockSession();
+      _authStateController.add(mockState);
+    } else {
+      // It is a Firebase user
+      try {
+        final state = await _getFirebaseAuthState(user);
+        _authStateController.add(state);
+      } catch (e) {
+        _authStateController.add(null);
+      }
+    }
+  }
+
+  Future<app.AuthState?> _checkMockSession() async {
+    final token = await SecureStorageService.getAuthToken();
+    if (token != null && token.startsWith('mock-token-')) {
+      final userId = await SecureStorageService.getUserId();
+      final email = await SecureStorageService.getUserEmail();
+
+      if (userId != null && email != null) {
+        final mockUser = _mockUsers[email];
+        // If the specific mock user details are not found in the map (e.g. removed from code),
+        // we can still return a generic auth state if we trust the token
+        // But safer to check the map.
+        final name = mockUser?['name'] ?? 'Usuário Mock';
+
+        return app.AuthState.authenticated(
+          userId: userId,
+          email: email,
+          name: name,
+          token: token,
+          refreshToken: 'mock-refresh-token',
+        );
+      }
+    }
+    return null;
+  }
+
   // Login with email and password
   Future<app.AuthState> login(String email, String password) async {
     try {
@@ -34,25 +91,9 @@ class AuthService {
       final user = credential.user;
       if (user == null) throw Exception('Login failed');
 
-      // Get user data from Firestore
-      final userData = await _firestore.collection('users').doc(user.uid).get();
-      final name = userData.data()?['name'] ?? user.displayName ?? 'User';
-
-      // Get token
-      final token = await user.getIdToken();
-
-      // Save to secure storage
-      await SecureStorageService.saveAuthToken(token ?? '');
-      await SecureStorageService.saveUserId(user.uid);
-      await SecureStorageService.saveUserEmail(user.email ?? '');
-
-      return app.AuthState.authenticated(
-        userId: user.uid,
-        email: user.email ?? '',
-        name: name,
-        token: token ?? '',
-        refreshToken: user.refreshToken ?? '',
-      );
+      final state = await _getFirebaseAuthState(user);
+      _authStateController.add(state);
+      return state;
     } on FirebaseAuthException {
       // Try mock login as fallback
       return _mockLogin(email, password);
@@ -60,6 +101,28 @@ class AuthService {
       // Try mock login as fallback
       return _mockLogin(email, password);
     }
+  }
+
+  Future<app.AuthState> _getFirebaseAuthState(User user) async {
+    // Get user data from Firestore
+    final userData = await _firestore.collection('users').doc(user.uid).get();
+    final name = userData.data()?['name'] ?? user.displayName ?? 'User';
+
+    // Get token
+    final token = await user.getIdToken();
+
+    // Save to secure storage
+    await SecureStorageService.saveAuthToken(token ?? '');
+    await SecureStorageService.saveUserId(user.uid);
+    await SecureStorageService.saveUserEmail(user.email ?? '');
+
+    return app.AuthState.authenticated(
+      userId: user.uid,
+      email: user.email ?? '',
+      name: name,
+      token: token ?? '',
+      refreshToken: user.refreshToken ?? '',
+    );
   }
 
   // Register new user
@@ -88,21 +151,24 @@ class AuthService {
         'role': 'user',
       });
 
-      // Get token
-      final token = await user.getIdToken();
+      // Force token refresh to get new claims if any
+      final token = await user.getIdToken(true);
 
       // Save to secure storage
       await SecureStorageService.saveAuthToken(token ?? '');
       await SecureStorageService.saveUserId(user.uid);
       await SecureStorageService.saveUserEmail(email);
 
-      return app.AuthState.authenticated(
+      final state = app.AuthState.authenticated(
         userId: user.uid,
         email: email,
         name: name,
         token: token ?? '',
         refreshToken: user.refreshToken ?? '',
       );
+
+      _authStateController.add(state);
+      return state;
     } on FirebaseAuthException {
       // Try mock register as fallback
       return _mockRegister(name, email, password);
@@ -164,21 +230,9 @@ class AuthService {
       name = snapshot.data()?['name'] ?? name;
     }
 
-    // Get token
-    final token = await user.getIdToken();
-
-    // Save to secure storage
-    await SecureStorageService.saveAuthToken(token ?? '');
-    await SecureStorageService.saveUserId(user.uid);
-    await SecureStorageService.saveUserEmail(user.email ?? '');
-
-    return app.AuthState.authenticated(
-      userId: user.uid,
-      email: user.email ?? '',
-      name: name,
-      token: token ?? '',
-      refreshToken: user.refreshToken ?? '',
-    );
+    final state = await _getFirebaseAuthState(user);
+    _authStateController.add(state);
+    return state;
   }
 
   Future<app.AuthState> _mockLogin(String email, String password) async {
@@ -201,13 +255,16 @@ class AuthService {
     await SecureStorageService.saveUserId(mockUser['userId']!);
     await SecureStorageService.saveUserEmail(email);
 
-    return app.AuthState.authenticated(
+    final state = app.AuthState.authenticated(
       userId: mockUser['userId']!,
       email: email,
       name: mockUser['name']!,
       token: 'mock-token-${mockUser['userId']}',
       refreshToken: 'mock-refresh-token',
     );
+
+    _authStateController.add(state);
+    return state;
   }
 
   // Mock register (fallback)
@@ -230,13 +287,16 @@ class AuthService {
     await SecureStorageService.saveUserId(userId);
     await SecureStorageService.saveUserEmail(email);
 
-    return app.AuthState.authenticated(
+    final state = app.AuthState.authenticated(
       userId: userId,
       email: email,
       name: name,
       token: 'mock-token-$userId',
       refreshToken: 'mock-refresh-token',
     );
+
+    _authStateController.add(state);
+    return state;
   }
 
   // Logout
@@ -247,53 +307,19 @@ class AuthService {
       // Ignore Firebase errors on logout
     }
     await SecureStorageService.clearSession();
+    _authStateController.add(null);
   }
 
   // Check current auth status
   Future<app.AuthState?> checkAuth() async {
     try {
       final user = _auth.currentUser;
-      if (user == null) {
-        // Check mock auth
-        final token = await SecureStorageService.getAuthToken();
-        if (token != null && token.startsWith('mock-token-')) {
-          final userId = await SecureStorageService.getUserId();
-          final email = await SecureStorageService.getUserEmail();
-
-          if (userId != null && email != null) {
-            // Find mock user
-            final mockUser = _mockUsers[email];
-            if (mockUser != null) {
-              return app.AuthState.authenticated(
-                userId: userId,
-                email: email,
-                name: mockUser['name']!,
-                token: token,
-                refreshToken: 'mock-refresh-token',
-              );
-            }
-          }
-        }
-        return null;
+      if (user != null) {
+        return _getFirebaseAuthState(user);
       }
-
-      // Refresh token
-      await user.reload();
-      final token = await user.getIdToken(true);
-
-      // Get user data
-      final userData = await _firestore.collection('users').doc(user.uid).get();
-      final name = userData.data()?['name'] ?? user.displayName ?? 'User';
-
-      return app.AuthState.authenticated(
-        userId: user.uid,
-        email: user.email ?? '',
-        name: name,
-        token: token ?? '',
-        refreshToken: user.refreshToken ?? '',
-      );
+      return _checkMockSession();
     } catch (e) {
-      return null;
+      return _checkMockSession();
     }
   }
 
@@ -342,5 +368,5 @@ class AuthService {
   }
 
   // Listen to auth state changes
-  Stream<User?> get authStateChanges => _auth.authStateChanges();
+  Stream<app.AuthState?> get authStateChanges => _authStateController.stream;
 }

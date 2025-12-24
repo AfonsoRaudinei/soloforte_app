@@ -89,12 +89,6 @@ class SideMenu extends StatelessWidget {
                           onTap: () => context.go('/dashboard'),
                         ),
                         _DrawerItem(
-                          icon: Icons.analytics_outlined,
-                          label: 'Dash. Executivo',
-                          isSelected: location == '/dashboard/executive',
-                          onTap: () => context.go('/dashboard/executive'),
-                        ),
-                        _DrawerItem(
                           icon: Icons.map_outlined,
                           label: 'Mapa',
                           isSelected: location.startsWith('/dashboard/map'),
@@ -148,6 +142,14 @@ class SideMenu extends StatelessWidget {
                               ),
                             ),
                           ),
+                        ),
+                        _DrawerItem(
+                          icon: Icons.campaign_outlined,
+                          label: 'Marketing',
+                          isSelected: location.startsWith(
+                            '/dashboard/marketing',
+                          ),
+                          onTap: () => context.go('/dashboard/marketing'),
                         ),
                         _DrawerItem(
                           icon: Icons.settings_outlined,

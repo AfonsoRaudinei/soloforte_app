@@ -103,9 +103,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             _passwordController.text,
           );
 
-      if (mounted) {
-        context.go('/dashboard');
-      }
+      if (mounted) {}
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
